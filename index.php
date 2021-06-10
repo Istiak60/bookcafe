@@ -22,7 +22,7 @@ $user_data = check_login($con);
     <!-- FontAwesome CSS -->
     <link rel="stylesheet" href="assets/css/all.min.css">
     <!-- Main CSS -->
-    <link rel="stylesheet" href="dashboard.css">
+    <link rel="stylesheet" href="index.css">
     <!-- Responsive CSS -->
     <link rel="stylesheet" href="responsive.css">
 </head>
@@ -51,7 +51,7 @@ $user_data = check_login($con);
                             <a href="signup.php">Sign Up</a>
                         </div>
                         <div class="btn_right">
-                            <a href="signin.html">Sign In</a>
+                            <a href="login.php">Sign In</a>
                         </div>
                     </div>
                 </div>
