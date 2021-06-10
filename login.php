@@ -1,5 +1,51 @@
 <?php
+session_start();
+include("connection.php");
+include("functions.php");
 
+
+if($_SERVER['REQUEST_METHOD']== "POST")
+{
+  //somthing was posted
+  $user_name = $_POST['user_name'];
+  $password = $_POST['password'];
+    if(!empty($user_name)&&!empty($password)  &&  !is_numeric(user_name))
+    {
+        
+       
+        $query="select * from users where user_name = '$user_name' limit 1";
+        
+        $result = mysqli_query($con, $query);
+        if($result)
+        {
+            
+            if($result && mysqli_num_rows($result) > 0)
+            {
+  
+              $user_data =  mysqli_fetch_assoc($result);
+              if($user_data['password']===$password)
+              {
+                  $_SESSION['user_id']=$user_data['user_id'];
+                header("Location: index.php");
+                die;
+
+              }
+            } 
+
+        }
+
+       echo "Wrong password or user id ";
+    }
+   
+    else{
+
+        echo "please enter some correct data ";
+    }
+
+
+
+
+}
 
 ?>
 <!DOCTYPE html>
@@ -21,12 +67,13 @@
             <form method="post">
 
                 <h1>Sign In </h1>
-                <label for="Email" style="color: white;"><b>Email</b></label>
+                <label for="Email" style="color: white;"><b>User_name</b></label>
                 <br>
-                <input type="text" placeholder="Enter Email" name="Email"  required><br><br>
+                <input type="text" placeholder="Enter user_name" name="user_name"required><br><br>
 
-                <label for="Password" style="color: white;"><b>Password</b></label>
-                <input type="password" placeholder="Enter Password" name="Password"  required><br><br>
+                <label for="password" style="color: white;"><b>password</b></label>
+                <!-- <input type="password" placeholder="Enter password" name="password"  required><br><br> -->
+                <input id="text" type="password" name="password"><br><br>
                 <br>
                 <input type="Submit" value="Sign In"
                     style="background-color: rgb(233, 38, 80);color:rgb(243, 236, 236);border-radius: 5px;margin-top:10px; font-size: 25px;margin-top: 15px;" />

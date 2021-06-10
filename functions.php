@@ -9,7 +9,7 @@ function check_login($con)
         $query = "select * from users where user_id = '$id' limit 1";
 
         $result = mysqli_query($con,$query);
-        if($result && my_sqli_num_rows($result) > 0)
+        if($result && mysqli_num_rows($result) > 0)
           {
 
             $user_data =  mysqli_fetch_assoc($result);
