@@ -25,6 +25,7 @@ $user_data = check_login($con);
     <link rel="stylesheet" href="index.css">
     <!-- Responsive CSS -->
     <link rel="stylesheet" href="responsive.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css" rel="stylesheet">
 </head>
 
 <body>
