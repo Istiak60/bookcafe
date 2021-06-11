@@ -8,14 +8,17 @@ session_start();
     {
       //somthing was posted
      $user_name = $_POST['user_name'];
-    $password = $_POST['password'];
+     $password = $_POST['password'];
+     $email = $_POST['email'];
+     $contact = $_POST['contact'];
+     $address = $_POST['address'];
 
         if(!empty($user_name)&&!empty($password)  &&  !is_numeric(user_name))
         {
             
             //save to database
             $user_id = random_num(20);
-            $query ="insert into users (user_id,user_name,password)  values ('$user_id','$user_name','$password') ";
+            $query ="insert into users (user_id,user_name,password,email,contact,address)  values ('$user_id','$user_name','$password','$email','$contact','$address') ";
             mysqli_query($con, $query);
         
             header("Location: login.php");
@@ -63,7 +66,7 @@ session_start();
                         <input type="text" id="text" name ="user_name" style="width: 200px; height: 20px;" />
                     </div>
 
-                    <!-- EMAIL
+                    <!-- EMAIL-->
                     <div class="email">
                         <div class="form-elements">
                             <label for="email"></label>
@@ -71,8 +74,8 @@ session_start();
                         </div>
                     </div>
                     <div class="fields">
-                        <input type="email" id="email" style="width: 200px; height: 20px;" />
-                    </div> -->
+                        <input type="email" id="text" name ="email" style="width: 200px; height: 20px;" />
+                    </div> 
 
                     <!-- PASSWORD -->
                     <div class="password">
@@ -85,7 +88,7 @@ session_start();
                         <input type="password" id="text" name ="password" style="width: 200px; height: 20px;" />
                     </div>
 
-                    <!-- confirm password
+                    <!-- confirm password 
                     <div class="cpassword">
                         <div class="form-elements">
                             <label for="cpassword"></label>
@@ -95,19 +98,22 @@ session_start();
 
                     <div class="fields">
                         <input type="text" id="cpassword" style="width: 200px; height: 20px;" />
-                    </div> -->
+                    </div> 
+                   -->
+                    
 
-                    <!-- contact
+                    <!-- contact -->
                     <div class="contact">
                         <div class="form-elements">
                             <label for="contact"></label>
-                            contact
+                            Contact
                         </div>
                     </div>
                     <div class="fields">
-                        <input type="[number]" id="contact" style="width: 200px; height: 20px;" />
-                    </div>
-                    <!-- address
+                        <input type="text" id="contact" name ="contact" style="width: 200px; height: 20px;" />
+                    </div> 
+                    
+                    <!-- address -->
 
                     <div class="address">
                         <div class="form-elements">
@@ -117,9 +123,10 @@ session_start();
                         </div>
                     </div>
                     <div class="fields">
-                        <textarea name="experience" id="experience" cols="20" rows="5" style="width: 200px;">
+                        <textarea name="address" id="address" cols="20" rows="5" style="width: 200px;">
                         </textarea>
                     </div>
+                    
                     <!--usertype
                     
                     <div class="ut">
