@@ -1,3 +1,15 @@
+<?php 
+session_start();
+
+	include("connection.php");
+	include("functions.php");
+
+	$user_data = check_login($con);
+
+?>
+
+
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -11,6 +23,8 @@
       type="text/css"
       href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"
     />
+    <!-- <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css" rel="stylesheet"> -->
+
   <!-- <link rel="stylesheet" href=" https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"> -->
 </head>
 <body>
@@ -27,7 +41,7 @@
               <li><a href="">CONTACT</a></li>
               <li><a href="">CATAGORIES</a></li>
               <li><a href="">PROFILE</a></li>
-              <li><a href="">LOG OUT</a></li>
+              <li><a href="logout.php">LOG OUT</a></li>
             </ul>
           </div>
           <i class="fa fa-bars" onclick="showmenu()"></i>
@@ -35,10 +49,11 @@
   
         <div class="text-box">
           <h1>Book Cafee</h1>
-          <p>
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. <br />
-            Unde nostrum quia ullam sequi. Expedita error velit ullam numquam
-            ipsum voluptates.
+          
+           <p1> Hello </p1> <br />
+           <p> 
+
+            <?php echo $user_data['user_name']; ?>
           </p>
           <a href="" class="hero-btn">Visit US To Know More</a>
         </div>
@@ -48,40 +63,39 @@
       <section class="books">
         <h1>SOME BOOKS</h1>
         <p>
-          Lorem ipsum dolor sit amet consectetur, adipisicing elit. Eum,
-          doloremque!
+        Some of Best Selling & Reviewed Books
         </p>
         <div class="row1">
           <div class="book-col">
-            <img src="/img/humaun-1.jpg" />
+            <img src="img/humaun-1.jpg" />
             <h3>Devi</h3>
             <p>
               Humayun Ahmed
             </p>
           </div>
           <div class="book-col">
-            <img src="/img/rabindra-1.jpg" />
+            <img src="img/rabindra-1.jpg" />
             <h3>Geetanjali</h3>
             <p>
               Rabindranath Tagore
             </p>
           </div>
           <div class="book-col">
-            <img src="/img/kazi-1.jpg" />
+            <img src="img/kazi-1.jpg" />
             <h3>Ghumer Ghore</h3>
             <p>
               Kazi Nazrul Islam
             </p>
           </div>
           <div class="book-col">
-            <img src="/img/english-1.jpg" />
+            <img src="img/english-1.jpg" />
             <h3>The Girl With <br>No Name  </h3>
             <p>
               Lisa Regan
             </p>
           </div>
           <div class="book-col">
-            <img src="/img/english-2.jpg" />
+            <img src="img/english-2.jpg" />
             <h3>the ocean at the end of the lane</h3>
             <p>
               Neil Gaiman
@@ -90,35 +104,35 @@
         </div>
         <div class="row2">
           <div class="book-col">
-            <img src="/img/english-3.jpg" />
+            <img src="img/english-3.jpg" />
             <h3>The Dark Road</h3>
             <p>
               Ma Jian
             </p>
           </div>
           <div class="book-col">
-            <img src="/img/kazi-2.jpg" />
+            <img src="img/kazi-2.jpg" />
             <h3>Sanchita</h3>
             <p>
               Kazi Nazrul Islam
             </p>
           </div>
           <div class="book-col">
-            <img src="/img/rabindra-2.jpg" />
+            <img src="img/rabindra-2.jpg" />
             <h3>Chaturanga</h3>
             <p>
               Rabindranath Tagore
             </p>
           </div>
           <div class="book-col">
-            <img src="/img/humaun-2.jpg" />
+            <img src="img/humaun-2.jpg" />
             <h3>Himu Samagera</h3>
             <p>
               Humayun Ahmed
             </p>
           </div>
           <div class="book-col">
-            <img src="/img/rabindra-3.jpg" />
+            <img src="img/rabindra-3.jpg" />
             <h3>Kabuliwala</h3>
             <p>
               Rabindranath Tagore
@@ -131,8 +145,9 @@
   <section class="footer">
     <h4>About Us</h4>
     <p>
-      Lorem ipsum dolor sit, amet consectetur adipisicing elit. Praesentium <br>
-      aliquam laudantium tempore tenetur consequatur nobis.
+    We are trying to give books from our book cafe very easily and at low cost.<br> Since people are
+     not interested in reading books now, we have taken this initiative.<br> Hopefully we will be
+                    able to deliver books to everyone's doorsteps
     </p>
     <div class="icons">
       <i class="fa fa-facebook"></i>
@@ -140,7 +155,7 @@
       <i class="fa fa-instagram"></i>
       <i class="fa fa-linkedin"></i>
     </div>
-    <p>made with <i class="fa fa-heart-o"></i> by BOOKS</p>
+    <p>made with <i class="fa fa-heart-o"></i> by BOOKS & SOULS</p>
   </section>
 
 
