@@ -56,6 +56,15 @@ session_start();
     <li><a class="dropdown-item" href="#">Nobels</a></li>
     <li><a class="dropdown-item" href="#">Poems</a></li>
     <li><a class="dropdown-item" href="#">Story</a></li>
+    <li><a class="dropdown-item"  href="#">Fantasy</a></li>
+    <li><a class="dropdown-item" href="#">Horror</a></li>
+    <li><a class="dropdown-item" href="#">Advanture</a></li>
+    <li><a class="dropdown-item" href="#">Comics</a></li>
+    <li><a class="dropdown-item" href="#">Cookings</a></li>
+    <li><a class="dropdown-item" href="#">Journals</a></li>
+  
+  
+  
   </ul></li>
   
             </ul>
@@ -80,7 +89,37 @@ session_start();
           <a href="" class="hero-btn">Visit US To Know More</a>
         </div>
       </section>
+      <br>
+<!-- start -->
+<center>
+<div id="carouselExampleIndicators" class="carousel slide" data-bs-ride="carousel"style="max-width:700px;max-height:700px;">
+  <div class="carousel-indicators">
+    <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+    <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1" aria-label="Slide 2"></button>
+    <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="2" aria-label="Slide 3"></button>
+  </div>
+  <div class="carousel-inner">
+    <div class="carousel-item active">
+      <img src="img/BookCafee.jpg" class="d-block w-100" alt="..."style="width:30px">
+    </div>
+    <div class="carousel-item">
+      <img src="img/Books.jpg" class="d-block w-100" alt="...">
+    </div>
+    <div class="carousel-item">
+      <img src="img/offer.png" class="d-block w-100" alt="...">
+    </div>
+  </div>
+  <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
+    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+    <span class="visually-hidden">Previous</span>
+  </button>
+  <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="next">
+    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+    <span class="visually-hidden">Next</span>
+  </button>
+</div>
 
+</center>
       <!-- DEMO BOOK -->
       <section class="books">
         <h1>SOME BOOKS</h1>
@@ -118,7 +157,7 @@ session_start();
           </div>
           <div class="book-col">
             <img src="img/english-2.jpg" />
-            <h3>the ocean at the end of the lane</h3>
+            <h3>The ocean at the end of the lane</h3>
             <p>
               Neil Gaiman
             </p>
