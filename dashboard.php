@@ -46,7 +46,7 @@ session_start();
               <li><a href="">ABOUT</a></li>
               <li><a href="">CONTACT</a></li>
              
-              <li><a href="">PROFILE</a></li>
+              <li><a href="profile.php">PROFILE</a></li>
               <li><a href="logout.php">LOG OUT</a></li>
                <li><a class="btn btn-secondary dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false" style ="background-color:rgba(0,0,0,0.01);border: 0px">CATEGORIES
   </a>
@@ -91,8 +91,9 @@ session_start();
       </section>
       <br>
 <!-- start -->
+
 <center>
-<div id="carouselExampleIndicators" class="carousel slide" data-bs-ride="carousel"style="max-width:700px;max-height:393x;">
+<div id="carouselExampleIndicators" class="carousel slide" data-bs-ride="carousel" style="max-width:700px;max-height:393x;">
   <div class="carousel-indicators">
     <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
     <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1" aria-label="Slide 2"></button>
