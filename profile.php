@@ -22,6 +22,7 @@ session_start();
   
 </head>
 <body>
+<center>
     <div class="page-content page-container" id="page-content">
         <div class="padding">
             <div class="row container d-flex justify-content-center">
@@ -74,5 +75,6 @@ session_start();
             </div>
         </div>
     </div>
+    </center>
 </body>
 </html>
