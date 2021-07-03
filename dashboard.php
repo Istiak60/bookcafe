@@ -67,7 +67,7 @@ session_start();
   
   
   </ul></li>
-  <li><a href="adlog.php" data-toggle="tooltip" data-placement="bottom" title="" data-original-title="instagram" data-abc="true"><i class="mdi mdi-wrench" aria-hidden="true"></i></a></li>
+  <li><a href="bookupload.php" data-toggle="tooltip" data-placement="bottom" title="" data-original-title="instagram" data-abc="true"><i class="mdi mdi-wrench" aria-hidden="true"></i></a></li>
 
   
             </ul>

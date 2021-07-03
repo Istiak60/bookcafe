@@ -26,7 +26,7 @@ if($_SERVER['REQUEST_METHOD']== "POST")
               if($user_data['password']===$password)
               {
                   $_SESSION['user_id']=$user_data['user_id'];
-                header("Location:dashboard.php");
+                header("Location:bookupload.php");
                 die;
 
               }
@@ -41,9 +41,6 @@ if($_SERVER['REQUEST_METHOD']== "POST")
 
         echo "please enter some correct data ";
     }
-
-
-
 
 }
 
