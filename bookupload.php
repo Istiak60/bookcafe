@@ -54,15 +54,15 @@
                     <option name="Story" >Story</option>
                     <option name="CATEGORIES" selected>CATEGORIES</option>
                     </select>
+               <br><br>
+    <div class="mywork1">
+    <label>PRICE</label>
+    <br><br>
+    <input  type="text" name="price" style="width: 200px; height: 20px:">
+    <br>
+    
+    </div>
 
-
-
-                  
-
-
-
-
-                    <br><br>
     <div class="mywork1">
     <label>DESCRIPTION</label>
     <br><br>
@@ -99,6 +99,7 @@ if (isset($_POST["submit"]))
  $t=$_POST['title'];
  $a=$_POST['author'];
  $c =$_POST['Categories'];
+ $p =$_POST['price'];
  $d =$_POST['description'];
 $fn=$_FILES['image']['name'];
 $tm=$_FILES['image']['tmp_name']; 
@@ -107,7 +108,7 @@ $tm1=$_FILES['pdf']['tmp_name1'];
 move_uploaded_file($tm,"bookimg/".$fn);
 move_uploaded_file($tm1,"bookimg/".$fn1);
 
-$sql ="insert into books (book_name,author_name,image,pdf,Categories,description)  values ('$t','$a','$fn','$fn1','$c','$d') ";
+$sql ="insert into books (book_name,author_name,image,pdf,Categories,price,description)  values ('$t','$a','$fn','$fn1','$c','$p','$d') ";
 
 
     if(mysqli_query($conn,$sql)){
