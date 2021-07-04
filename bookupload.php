@@ -12,42 +12,71 @@
  <div class="details">
 <form method="post" enctype="multipart/form-data">
 <h1><b1>Book Details</b1></h3>
-<div class="mywork">
-    <label>BOOOK NAME</label>
-    <input type="text" name="title"style="width: 200px; height: 20px:">
-    </div>
 
-    <div class="mywork">
+<div class="mywork">
+    <div class="mywork1">
+    <label>BOOK NAME</label>
+    <br><br>
+    <input type="text" name="title" style="width: 200px; height: 20px:margin-left:20px">
+    <br>
+</div>
+
+    <div class="mywork1">
     <label>ATHOUR</label>
-    <input type="text" name="author"style="width: 200px; height: 20px:">
+    <br><br>
+    <input  type="text" name="author" style="width: 200px; height: 20px:">
+    <br>
     
     </div>
-    <div class="mywork">
+    <div class="mywork1">
      <label>BOOK IMAGE</label>
-    <input type="File" name="image"style="width: 200px; height: 20px:">
+     <br><br>
+    <input type="File" name="image" style="width: 200px; height: 20px:">
+    <br>
     </div>
-    <div class="mywork">
+    <div class="mywork1">
     <label>BOOK PDF</label>
+    <br><br>
     <input type="File" name="pdf"style="width: 200px; height: 20px:">
+    <br>
     </div>
     <select id="Categories" name="Categories" style="width: 220px; height: 35px;" />
-                    <option name="Comedy">Comedy</option>
+                   
+                    <option name="Bangla Literature">Bangla Literature</option>
+                    <option name="Nobels">Nobels</option>
+                    <option name="Poems">Poems</option> 
+                    <option name="Fantasy">Fantasy</option>
                     <option name="Horror">Horror</option>
-                    <option name="Action">Action</option>
-                    <option name="Melodramas" selected>Melodramas</option>
-                    <option name="Sports">Sports</option></select>
-<br>
-                    <div class="mywork">
+                    <option name="Advanture">Advanture</option>
+                    <option name="Comics">Comics</option>
+                    <option name="Cookings">Cookings</option>
+                    <option name="Journals">Journals</option>
+                    <option name="Story" >Story</option>
+                    <option name="CATEGORIES" selected>CATEGORIES</option>
+                    </select>
+
+
+
+                  
+
+
+
+
+                    <br><br>
+    <div class="mywork1">
     <label>DESCRIPTION</label>
+    <br><br>
     <input type="text" name="description"style="width: 200px; height: 20px:">
     
     </div>
-                    
+    <br>              
+   
 
 
+    <input type="submit" name="submit" value="upload" style="background-color: rgb(114, 12, 76);color:white; border-radius: 5px;">
+   
 
-    <input type="submit" name="submit">
- 
+    </div>
     </div> 
 </form>
 </div>
@@ -77,7 +106,7 @@ $fn1=$_FILES['pdf']['name'];
 $tm1=$_FILES['pdf']['tmp_name1']; 
 move_uploaded_file($tm,"bookimg/".$fn);
 move_uploaded_file($tm1,"bookimg/".$fn1);
-//$sql = "INSERT into books ('book_name',image) VALUES('$t','$fn')";
+
 $sql ="insert into books (book_name,author_name,image,pdf,Categories,description)  values ('$t','$a','$fn','$fn1','$c','$d') ";
 
 
