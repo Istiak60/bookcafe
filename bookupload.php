@@ -85,7 +85,7 @@
 </html>
  
 <?php 
-$localhost = "localhost"; #localhost
+$localhost = "localhost"; #localho
 $dbusername = "root"; #username of phpmyadmin
 $dbpassword = "";  #password of phpmyadmin
 $dbname = "bookcafe1_db";  #database name
