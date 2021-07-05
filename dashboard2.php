@@ -88,7 +88,7 @@
         <div class="row-2">
             <h2>Books</h2>
             <select>
-                <option>Default Shorting</option>
+                <option>Default Sorting</option>
                 <option>Short by Author</option>
                 <option>Short by Popularity</option>
                 <option>Short by Rating</option>
@@ -100,7 +100,7 @@
             <p>Some of Best Selling & Reviewed Books</p>
             <div class="row1">
                 <div class="book-col">
-                    <img src="/img/1.jpg" />
+                    <img src="img/1.jpg" />
                     <h3>Desh Bideshe</h3>
                     <p>Sayed Muztaba Ali</p>
                 </div>
@@ -110,24 +110,24 @@
                     <p>Bivutivushan Bandhapadhay</p>
                 </div>
                 <div class="book-col">
-                    <img src="/img/3.jpg" />
+                    <img src="img/3.jpg" />
                     <h3>Duniyar Ghonada</h3>
                     <p>Premedra Mitra</p>
                 </div>
                 <div class="book-col">
-                    <img src="/img/4.jpg" />
+                    <img src="img/4.jpg" />
                     <h3>Bener Meye</h3>
                     <p>Haraprasad Shasri</p>
                 </div>
                 <div class="book-col">
-                    <img src="/img/5.jpg" />
+                    <img src="img/5.jpg" />
                     <h3>Chawthupir Charjapad</h3>
                     <p>Pritom Basu</p>
                 </div>
             </div>
             <div class="row1">
                 <div class="book-col">
-                    <img src="/img/6.jpg" />
+                    <img src="img/6.jpg" />
                     <h3>History of Bangali Literature</h3>
                     <p>Sushil Kumar De</p>
                 </div>
@@ -155,7 +155,7 @@
 
             <div class="row1">
                 <div class="book-col">
-                    <img src="/img/9.jpg" />
+                    <img src="img/9.jpg" />
                     <h3>UralPankhi</h3>
                     <p>Humayum Ahmed</p>
                 </div>
@@ -165,17 +165,17 @@
                     <p>Humayum Ahmed</p>
                 </div>
                 <div class="book-col">
-                    <img src="/img/11.jpg" />
+                    <img src="img/11.jpg" />
                     <h3>Duniyar Ghonada</h3>
                     <p>Humayum Ahmed</p>
                 </div>
                 <div class="book-col">
-                    <img src="/img/12.jpg" />
+                    <img src="img/12.jpg" />
                     <h3>Himur Nil Jochona</h3>
                     <p>Humayum Ahmed</p>
                 </div>
                 <div class="book-col">
-                    <img src="/img/16.jpeg" />
+                    <img src="img/16.jpeg" />
                     <h3>Pather Panchali</h3>
                     <p>Bivutivushan Bandhapadhay</p>
                 </div>
