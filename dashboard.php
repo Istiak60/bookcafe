@@ -16,7 +16,7 @@ session_start();
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Dashboard2</title>
+    <title>Dashboard</title>
     <link rel="stylesheet" href="style.css">
     <link
       rel="stylesheet"
@@ -53,7 +53,7 @@ session_start();
   </a>
 
   <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="dropdownMenuLink">
-    <li><a class="dropdown-item"  href="#">Bangla Literature</a></li>
+    <li><a class="dropdown-item"  href="dashboard2.php">Bangla Literature</a></li>
     <li><a class="dropdown-item" href="#">Nobels</a></li>
     <li><a class="dropdown-item" href="#">Poems</a></li>
     <li><a class="dropdown-item" href="#">Story</a></li>
