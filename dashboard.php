@@ -36,6 +36,13 @@ session_start();
 </head>
 <body>
     <section class="header">
+    <!-- if condition to check user type--> 
+      
+     
+    
+   
+    
+    
         <nav>
             <div class="book_icon">
                 <i class="fas fa-book-open"></i>
@@ -49,6 +56,7 @@ session_start();
              
               <li><a href="profile.php">PROFILE</a></li>
               <li><a href="logout.php">LOG OUT</a></li>
+            
                <li><a class="btn btn-secondary dropdown-toggle" href="" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false" style ="background-color:rgba(0,0,0,0.01);border: 0px">CATEGORIES
   </a>
 
@@ -67,10 +75,22 @@ session_start();
   
   
   </ul></li>
-  <li><a href="bookupload.php" data-toggle="tooltip" data-placement="bottom" title="" data-original-title="instagram" data-abc="true"><i class="mdi mdi-wrench" aria-hidden="true"></i></a></li>
+  <li> 
+  
+  <!-- if($user_data['user_type']=='Admin')  -->
+  
+ 
+    <?php if($user_data['user_type'] =="Admin"){ ?> 
+     <a href="bookupload.php" data-toggle="tooltip" data-placement="bottom" title="" data-original-title="instagram" data-abc="true" style="witdh:50px"><i class="mdi mdi-cloud-upload" aria-hidden="true"></i></a></li>
+    <?php} ?>
+    <?php }else{
+	
+} ?>
 
   
-            </ul>
+            </ul> 
+           
+
           </div>
           
           

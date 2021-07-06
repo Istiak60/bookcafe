@@ -11,6 +11,7 @@ session_start();
      $password = $_POST['password'];
      $email = $_POST['email'];
      $contact = $_POST['contact'];
+     $user_type =$_POST['user_type'];
      $address = $_POST['address'];
 
         if(!empty($user_name)&&!empty($password)  &&  !is_numeric(user_name))
@@ -18,7 +19,7 @@ session_start();
             
             //save to database
             $user_id = random_num(20);
-            $query ="insert into users (user_id,user_name,password,email,contact,address)  values ('$user_id','$user_name','$password','$email','$contact','$address') ";
+            $query ="insert into users (user_id,user_name,password,email,contact,user_type,address)  values ('$user_id','$user_name','$password','$email','$contact','$user_type','$address') ";
             mysqli_query($con, $query);
         
             header("Location: login.php");
@@ -109,10 +110,23 @@ session_start();
                             Contact
                         </div>
                     </div>
+
+                    <!-- user type -->
                     <div class="fields">
                         <input type="text" id="contact" name ="contact" style="width: 200px; height: 20px;" />
                     </div> 
-                    
+                    <select id="user_type" name="user_type" style="width: 220px; height: 35px;" />
+                   
+               
+                   <option name="Admin">Admin</option>
+                   <option name="User" >User</option>
+                   <option name="user_type" selected>User type</option>
+                   </select>
+
+
+
+
+
                     <!-- address -->
 
                     <div class="address">
@@ -137,6 +151,10 @@ session_start();
                     <div class="fields-radio">
                         <input type="radio" id="usertype" name="user" value="usertype" />
                         <label class="usertype" for="usertype">User</label> <br>
+                       
+                       
+                       
+                       
                         <input type="radio" id="admintype" name="user" value="admintype" />
                         <label class="admintype" for="admintype">Admin</label> <br>
 
