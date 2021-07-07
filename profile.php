@@ -25,8 +25,9 @@ session_start();
 <center>
     <div class="page-content page-container" id="page-content">
         <div class="padding">
+            <div class="h-100 d-inline-block">
             <div class="row container d-flex justify-content-center">
-                <div class="col-xl-6 col-md-12">
+                <div class="col-xl-12 col-md-12">
                     <div class="card user-card-full">
                         <div class="row m-l-0 m-r-0">
                             <div class="col-sm-4 bg-c-lite-green user-profile">
@@ -66,6 +67,8 @@ session_start();
                                         <li><a href="#!" data-toggle="tooltip" data-placement="bottom" title="" data-original-title="instagram" data-abc="true"><i class="mdi mdi-instagram feather icon-instagram instagram" aria-hidden="true"></i></a></li>
                                         <!-- <button a herf="dashboard.php" type="button" class="btn btn-danger">Dashboard</button> -->
                                         <a class="btn btn-primary" href="dashboard.php" role="button">Dashboard</a>
+                                        <a class="btn btn-danger" href="dashboard.php" role="button">Edit profile</a>
+
                                     </ul>
                                 </div>
                             </div>
@@ -74,6 +77,7 @@ session_start();
                 </div>
             </div>
         </div>
+    </div>
     </div>
     </center>
 </body>

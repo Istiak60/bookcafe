@@ -7,13 +7,13 @@ include("functions.php");
 if($_SERVER['REQUEST_METHOD']== "POST")
 {
   //somthing was posted
-  $user_name = $_POST['user_name'];
+  $email = $_POST['email'];
   $password = $_POST['password'];
-    if(!empty($user_name)&&!empty($password)  &&  !is_numeric(user_name))
+    if(!empty($email)&&!empty($password)  &&  !is_numeric($email))
     {
         
        
-        $query="select * from users where user_name = '$user_name' limit 1";
+        $query="select * from users where email = '$email' limit 1";
         
         $result = mysqli_query($con, $query);
         if($result)
@@ -34,12 +34,12 @@ if($_SERVER['REQUEST_METHOD']== "POST")
 
         }
 
-       echo "Wrong password or user id ";
+       function_alert("wrong password or email");
+       
     }
-   
     else{
 
-        echo "please enter some correct data ";
+        function_alert("wrong password or email");
     }
 
 
@@ -67,11 +67,11 @@ if($_SERVER['REQUEST_METHOD']== "POST")
             <form method="post">
 
                 <h1>Sign In </h1>
-                <label for="Email" style="color: white;"><b>User_name</b></label>
+                <label for="Email" style="color: white;"><b>Email</b></label>
                 <br>
-                <input type="text" placeholder="Enter user_name" name="user_name"required><br><br>
+                <input type="text" placeholder="Enter email" name="email"required><br><br>
 
-                <label for="password" style="color: white;"><b>password</b></label>
+                <label for="password" style="color: white;"><b>Password</b></label>
                 <!-- <input type="password" placeholder="Enter password" name="password"  required><br><br> -->
                 <input id="text" type="password" name="password"><br><br>
                 <br>
