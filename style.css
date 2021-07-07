@@ -50,8 +50,10 @@ nav img {
   position: relative;
 }
 
+
+
 .nav-links ul li a {
-  color: #fff;
+  color: rgb(248, 248, 248);
   text-decoration: none;
   font-size: 13px;
 }
@@ -227,7 +229,7 @@ nav .fa {
   color: #f44336;
 }
 
-.nav mdi {
+nav mdi-cloud-upload {
 
-  color: aqua;
+  color: rgb(255, 0, 0);
 }

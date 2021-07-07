@@ -36,7 +36,7 @@ session_start();
 </head>
 <body>
     <section class="header">
-    <!-- if condition to check user type--> 
+    
       
      
     
@@ -77,11 +77,11 @@ session_start();
   </ul></li>
   <li> 
   
-  <!-- if($user_data['user_type']=='Admin')  -->
   
+  <!-- if condition to check user type--> 
  
     <?php if($user_data['user_type'] =="Admin"){ ?> 
-     <a href="bookupload.php" data-toggle="tooltip" data-placement="bottom" title="" data-original-title="instagram" data-abc="true" style="witdh:50px"><i class="mdi mdi-cloud-upload" aria-hidden="true"></i></a></li>
+     <a href="bookupload.php" data-toggle="tooltip" data-placement="bottom" title="" data-original-title="instagram" data-abc="true" style="witdh:50px"><i class="mdi mdi-cloud-upload" aria-hidden="true"style ="color:rgb(6, 209, 245);font-size:30px"></i></a></li>
     <?php} ?>
     <?php }else{
 	
