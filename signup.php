@@ -14,7 +14,7 @@ session_start();
      $user_type =$_POST['user_type'];
      $address = $_POST['address'];
 
-        if(!empty($user_name)&&!empty($password)  &&  !is_numeric(user_name))
+        if(!empty($user_name)&&!empty($password)  &&  !is_numeric($user_name))
         {
             
             //save to database
