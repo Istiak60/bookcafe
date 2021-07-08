@@ -79,6 +79,7 @@ if($_SERVER['REQUEST_METHOD']== "POST")
 </head>
 
 <body>
+<<<<<<< HEAD
 <section class="header">
     
       
@@ -99,6 +100,33 @@ if($_SERVER['REQUEST_METHOD']== "POST")
           <li><a href="">CONTACT</a></li>
          
         </li></ul> 
+=======
+    <center>
+       
+        <div class="container">
+            <form method="post">
+
+                <h1>Admin log in </h1>
+                <label for="Email" style="color: white;"><b>Admin name</b></label>
+                <br>
+                <input type="text" placeholder="Enter Admin name" name="user_name"required><br><br>
+
+                <label for="password" style="color: white;"><b>password</b></label>
+                <!-- <input type="password" placeholder="Enter password" name="password"  required><br><br> -->
+                <input id="text" type="password" name="password"><br><br>
+                <br>
+                <input type="Submit" value="Get In"
+                    style="background-color: rgb(233, 38, 80);color:rgb(243, 236, 236);border-radius: 5px;margin-top:10px; font-size: 25px;margin-top: 15px;" />
+
+<!-- for git test -->
+<label for="password" style="color: white;"><b>password</b></label>
+                <!-- <input type="password" placeholder="Enter password" name="password"  required><br><br> -->
+                <input id="text" type="password" name="password"><br><br>
+
+
+
+            </form>
+>>>>>>> 0155bd30d6872fb99746913867258a61f2c135e4
        
 
       </div>
