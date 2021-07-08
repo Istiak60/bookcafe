@@ -75,6 +75,13 @@ if($_SERVER['REQUEST_METHOD']== "POST")
                 <input type="Submit" value="Get In"
                     style="background-color: rgb(233, 38, 80);color:rgb(243, 236, 236);border-radius: 5px;margin-top:10px; font-size: 25px;margin-top: 15px;" />
 
+<!-- for git test -->
+<label for="password" style="color: white;"><b>password</b></label>
+                <!-- <input type="password" placeholder="Enter password" name="password"  required><br><br> -->
+                <input id="text" type="password" name="password"><br><br>
+
+
+
             </form>
        
         </div>
