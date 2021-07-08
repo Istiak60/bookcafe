@@ -37,22 +37,71 @@ session_start();
 
 
 ?>
-
-
 <!DOCTYPE html>
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8" />
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Sign Up</title>
-    <link rel="stylesheet" href="signup.css" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="signup.css">
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"
+    />
+    <!-- <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css" rel="stylesheet"> -->
+
+  <!-- <link rel="stylesheet" href=" https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"> -->
+<!-- CSS only -->
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+<!-- JavaScript Bundle with Popper -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/MaterialDesign-Webfont/3.6.95/css/materialdesignicons.css">
+
+    <title>Sign up</title>
 </head>
 
 <body>
-    <center>
-        <div class="card">
+<section class="header">
+    
+      
+     
+    
+   
+    
+    
+    <nav>
+        <div class="book_icon">
+            <i class="fas fa-book-open"></i>
+            <h2>Book Cafee</h2>
+          </div>
+      <div class="nav-links" id="navlinks">
+        <i class="fa fa-times" onclick="hidemenu()"></i>
+        <ul>
+          <li><a href="">ABOUT</a></li>
+          <li><a href="">CONTACT</a></li>
+         
+          
+
+
+<!-- if condition to check user type--> 
+
+
+
+        </li></ul> 
+       
+
+      </div>
+      
+      
+      <i class="fa fa-bars" onclick="showmenu()"></i>
+    </nav>
+    <center >
+        <div class="card" style="background-color:rgb(255,255,255,0.5);width:500px">
             <form method="post">
                 <h1><b>Create Your Account</b></h3>
 
@@ -89,18 +138,7 @@ session_start();
                         <input type="password" id="text" name ="password" style="width: 200px; height: 20px;" />
                     </div>
 
-                    <!-- confirm password 
-                    <div class="cpassword">
-                        <div class="form-elements">
-                            <label for="cpassword"></label>
-                            Confirm Password
-                        </div>
-                    </div>
-
-                    <div class="fields">
-                        <input type="text" id="cpassword" style="width: 200px; height: 20px;" />
-                    </div> 
-                   -->
+                   
                     
 
                     <!-- contact -->
@@ -115,17 +153,13 @@ session_start();
                     <div class="fields">
                         <input type="text" id="contact" name ="contact" style="width: 200px; height: 20px;" />
                     </div> 
-                    <select id="user_type" name="user_type" style="width: 220px; height: 35px;" />
+                    <select id="user_type" name="user_type" style="width: 200px; height: 35px;margin:7px 0px 5px 0px" />
                    
                
                    <option name="Admin">Admin</option>
                    <option name="User" >User</option>
                    <option name="user_type" selected>User type</option>
                    </select>
-
-
-
-
 
                     <!-- address -->
 
@@ -141,27 +175,7 @@ session_start();
                         </textarea>
                     </div>
                     
-                    <!--usertype
-                    
-                    <div class="ut">
-                        <div class="form-elements">
-                            <label for="">User Type</label>
-                        </div>
-                    </div>
-                    <div class="fields-radio">
-                        <input type="radio" id="usertype" name="user" value="usertype" />
-                        <label class="usertype" for="usertype">User</label> <br>
-                       
-                       
-                       
-                       
-                        <input type="radio" id="admintype" name="user" value="admintype" />
-                        <label class="admintype" for="admintype">Admin</label> <br>
-
-                    </div> -->
-
-
-
+                
                     <!-- SUBMIT -->
                     <div class="labels">
                         
@@ -177,6 +191,22 @@ session_start();
             </form>
         </div>
     </center>
+
+
+
+
+    <!-- <div class="text-box">
+      <h1>Book Cafee</h1>
+      
+       <p1> Hello </p1> <br>
+       <p> 
+
+        Md.Istiak Sharif          </p>
+      <a href="" class="hero-btn">Visit US To Know More</a>
+    </div> -->
+  </section>
+
+
 </body>
 
 </html>

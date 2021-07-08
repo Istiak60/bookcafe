@@ -35,9 +35,9 @@ label {
 .container {
   box-shadow: 0 4px 8px 0 rgb(133, 122, 122);
   transition: 0.3s;
-  width: 30%;
+  width: 10%;
   margin-top: 100px;
   padding-top: 15px;
   padding-bottom: 30px;
-  background: rgb(0, 0, 0)
+  background: rgb(252, 4, 4)
 }
