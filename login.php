@@ -75,7 +75,7 @@ if($_SERVER['REQUEST_METHOD']== "POST")
 
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/MaterialDesign-Webfont/3.6.95/css/materialdesignicons.css">
 
-    <title>Admin log in</title>
+    <title>Sign in</title>
 </head>
 
 <body>
@@ -97,6 +97,7 @@ if($_SERVER['REQUEST_METHOD']== "POST")
         <ul>
           <li><a href="">ABOUT</a></li>
           <li><a href="">CONTACT</a></li>
+          <li><a href="signup.php">SIGN UP</a></li>
          
         </li></ul> 
        

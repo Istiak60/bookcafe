@@ -1,12 +1,13 @@
-.main_section{
-	background-image: url('BookCafee.jpg');
+.main_section {
+	background-image: url('img/banner.jfif');
 	background-repeat: no-repeat;
 	background-size: cover;
 	height: 100vh;
 	position: relative;
 	z-index: 1;
 }
-.main_section:after{
+
+.main_section:after {
 	content: '';
 	position: absolute;
 	left: 0;
@@ -17,39 +18,47 @@
 	opacity: .5;
 	z-index: -1;
 }
-.book_icon{
+
+.book_icon {
 	display: flex;
 	margin-top: 50px;
 }
-.book_icon .fas{
+
+.book_icon .fas {
 	color: red;
 	font-size: 50px;
 	margin-right: 10px;
 }
-.book_icon h2{
+
+.book_icon h2 {
 	color: #fff;
 }
-.book_content{
+
+.book_content {
 	color: #fff;
 	text-align: center;
 	margin-top: 10%;
 }
-.book_content h2{
+
+.book_content h2 {
 	text-transform: uppercase;
 	font-size: 50px;
-	color:white;
+	color: white;
 }
-.book_content p{
+
+.book_content p {
 	font-size: 20px;
 	line-height: 1.5em;
-	color:cornsilk;
+	color: cornsilk;
 }
- .book_btn{
+
+.book_btn {
 	display: flex;
 	justify-content: center;
 	margin-top: 50px;
-} 
-.book_btn a{
+}
+
+.book_btn a {
 	display: inline-block;
 	background-color: #fff;
 	color: #000;
@@ -58,36 +67,39 @@
 	margin-right: 20px;
 	text-decoration: none;
 }
-.btn_left a:hover{
-   background-color:pink;
+
+.btn_left a:hover {
+	background-color: pink;
 }
-.btn_right a:hover{
-	background-color:pink;
+
+.btn_right a:hover {
+	background-color: pink;
 }
+
 /* Medium Layout: 1280px. */
-@media only screen and (min-width: 992px) and (max-width: 1200px) {
-}
+@media only screen and (min-width: 992px) and (max-width: 1200px) {}
 
 /* Tablet Layout: 768px. */
-@media only screen and (min-width: 768px) and (max-width: 991px){
-}
+@media only screen and (min-width: 768px) and (max-width: 991px) {}
 
 /* Mobile Layout: 320px. */
-@media only screen and (max-width: 767px){
-	.book_icon{
-	justify-content: center;
-}
-.book_content h2{
-	font-size: 40px;
-}
-.book_content p{
-	font-size: 18px;
-}
-.book_btn a{
-	padding: 15px 30px;
-}
+@media only screen and (max-width: 767px) {
+	.book_icon {
+		justify-content: center;
+	}
+
+	.book_content h2 {
+		font-size: 40px;
+	}
+
+	.book_content p {
+		font-size: 18px;
+	}
+
+	.book_btn a {
+		padding: 15px 30px;
+	}
 }
 
 /* Wide Mobile Layout: 480px. */
-@media only screen and (max-width: 480px){
-}
+@media only screen and (max-width: 480px) {}

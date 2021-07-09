@@ -101,7 +101,7 @@ session_start();
       <i class="fa fa-bars" onclick="showmenu()"></i>
     </nav>
     <center >
-        <div class="card" style="background-color:rgb(255,255,255,0.5);width:500px">
+        <div class="card" style="background-color:rgba(255,255,255,0.5);width:500px">
             <form method="post">
                 <h1><b>Create Your Account</b></h3>
 
@@ -192,18 +192,6 @@ session_start();
         </div>
     </center>
 
-
-
-
-    <!-- <div class="text-box">
-      <h1>Book Cafee</h1>
-      
-       <p1> Hello </p1> <br>
-       <p> 
-
-        Md.Istiak Sharif          </p>
-      <a href="" class="hero-btn">Visit US To Know More</a>
-    </div> -->
   </section>
 
 

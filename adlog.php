@@ -1,52 +1,40 @@
-<?php
-session_start();
-include("connection.php");
-include("functions.php");
+<?php 
+$localhost = "localhost"; #localho
+$dbusername = "root"; #username of phpmyadmin
+$dbpassword = "";  #password of phpmyadmin
+$dbname = "bookcafe1_db";  #database name
+ 
+#connection string
+$conn = mysqli_connect($localhost,$dbusername,$dbpassword,$dbname);
+ 
+if (isset($_POST["submit"]))
+ {
+
+ $t=$_POST['title'];
+ $a=$_POST['author'];
+ $c =$_POST['Categories'];
+ $p =$_POST['price'];
+ $d =$_POST['description'];
+$fn=$_FILES['image']['name'];
+$tm=$_FILES['image']['tmp_name']; 
+$fn1=$_FILES['pdf']['name'];
+$tm1=$_FILES['pdf']['tmp_name1']; 
+move_uploaded_file($tm,"bookimg/".$fn);
+move_uploaded_file($tm1,"bookimg/".$fn1);
+
+$sql ="insert into books (book_name,author_name,image,pdf,Categories,price,description)  values ('$t','$a','$fn','$fn1','$c','$p','$d') ";
 
 
-if($_SERVER['REQUEST_METHOD']== "POST")
-{
-  //somthing was posted
-  $email = $_POST['email'];
-  $password = $_POST['password'];
-    if(!empty($email)&&!empty($password)  &&  !is_numeric($email))
-    {
-        
-       
-        $query="select * from users where email = '$email' limit 1";
-        
-        $result = mysqli_query($con, $query);
-        if($result)
-        {
-            
-            if($result && mysqli_num_rows($result) > 0)
-            {
-  
-              $user_data =  mysqli_fetch_assoc($result);
-              if($user_data['password']===$password)
-              {
-                  $_SESSION['user_id']=$user_data['user_id'];
-                header("Location: dashboard.php");
-                die;
-
-              }
-            } 
-
-        }
-
-       function_alert("wrong password or email");
-       
+    if(mysqli_query($conn,$sql)){
+ 
+        header("Location: dashboard.php");
     }
     else{
-
-        function_alert("wrong password or email");
+        echo "Error";
     }
-
-
-
-
 }
-
+ 
+ 
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -57,7 +45,8 @@ if($_SERVER['REQUEST_METHOD']== "POST")
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     
-    <link rel="stylesheet" href="signin.css">
+    <link rel="stylesheet" type="text/css" href="bookupload.css">
+
     <link rel="stylesheet" href="style.css">
     
     <link
@@ -75,98 +64,126 @@ if($_SERVER['REQUEST_METHOD']== "POST")
 
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/MaterialDesign-Webfont/3.6.95/css/materialdesignicons.css">
 
-    <title>Admin log in</title>
+    <title>Testing page</title>
 </head>
 
 <body>
-<<<<<<< HEAD
-<section class="header">
-    
-      
-     
-    
-   
-    
-    
-    <nav>
+
+<section class="header"style="height:180vh">
+   <nav>
         <div class="book_icon">
             <i class="fas fa-book-open"></i>
             <h2>Book Cafee</h2>
           </div>
-      <div class="nav-links" id="navlinks">
+      <div class="nav-links" id="navlinks" >
         <i class="fa fa-times" onclick="hidemenu()"></i>
         <ul>
-          <li><a href="">ABOUT</a></li>
-          <li><a href="">CONTACT</a></li>
-         
-        </li></ul> 
-=======
-    <center>
-       
-        <div class="container">
-            <form method="post">
+           <li><a href="">ABOUT</a></li>
+           <li><a href="">CONTACT</a></li>
+           <li><a href="profile.php">PROFILE</a></li>
+            <li><a href="logout.php">LOG OUT</a></li>
+            <li><a class="btn btn-secondary dropdown-toggle" href="" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false" style ="background-color:rgba(0,0,0,0.01);border: 0px">CATEGORIES
+                </a>
 
-                <h1>Admin log in </h1>
-                <label for="Email" style="color: white;"><b>Admin name</b></label>
-                <br>
-                <input type="text" placeholder="Enter Admin name" name="user_name"required><br><br>
+          <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="dropdownMenuLink">
+            <li><a class="dropdown-item"  href="dashboard2.php">Bangla Literature</a></li>
+            <li><a class="dropdown-item" href="#">Nobels</a></li>
+            <li><a class="dropdown-item" href="#">Poems</a></li>
+            <li><a class="dropdown-item" href="#">Story</a></li>
+            <li><a class="dropdown-item"  href="#">Fantasy</a></li>
+            <li><a class="dropdown-item" href="#">Horror</a></li>
+            <li><a class="dropdown-item" href="#">Advanture</a></li>
+            <li><a class="dropdown-item" href="#">Comics</a></li>
+            <li><a class="dropdown-item" href="#">Cookings</a></li>
+            <li><a class="dropdown-item" href="#">Journals</a></li> 
+         </ul></li>     
+    </li></ul> 
 
-                <label for="password" style="color: white;"><b>password</b></label>
-                <!-- <input type="password" placeholder="Enter password" name="password"  required><br><br> -->
-                <input id="text" type="password" name="password"><br><br>
-                <br>
-                <input type="Submit" value="Get In"
-                    style="background-color: rgb(233, 38, 80);color:rgb(243, 236, 236);border-radius: 5px;margin-top:10px; font-size: 25px;margin-top: 15px;" />
-
-<!-- for git test -->
-<label for="password" style="color: white;"><b>password</b></label>
-                <!-- <input type="password" placeholder="Enter password" name="password"  required><br><br> -->
-                <input id="text" type="password" name="password"><br><br>
-
-
-
-            </form>
->>>>>>> 0155bd30d6872fb99746913867258a61f2c135e4
-       
-
-      </div>
+    
+      
+    </div>
       
       
       <i class="fa fa-bars" onclick="showmenu()"></i>
     </nav>
     <center>
+ <div class="details"style="height:1100px;width:550px; background-color:rgba(255,255,255,0.5)">
+<form method="post" enctype="multipart/form-data">
+<h1><b1>Book Details</b1></h3>
 
-<div class="container" style="background-color:rgb(0,0,0,0.5);width:500px" >
-    <form method="post">
-
-        <h1>Sign In </h1>
-        <label for="Email" style="color: white;"><b>Email</b></label>
-        <br>
-        <input type="text" placeholder="Enter email" name="email"required style="padding:20px"><br><br>
-
-        <label for="password" style="color: white;"><b>Password</b></label>
-        <!-- <input type="password" placeholder="Enter password" name="password"  required><br><br> -->
-        <input id="text" placeholder="Enter password" type="password" name="password"required style="padding:20px"><br><br>
-        <br>
-        <input type="Submit" value="Sign In"
-            style="background-color: rgb(233, 38, 80);color:rgb(243, 236, 236);border-radius: 5px;margin-top:10px; font-size: 25px;margin-top: 15px;" />
-
-    </form>
+<div class="mywork">
+    <div class="mywork1">
+    <label>BOOK NAME</label>
+    <br><br>
+    <input type="text" name="title" style="width: 300px; height: 20px:margin-left:20px">
+    <br>
 </div>
 
+    <div class="mywork1">
+    <label>ATHOUR</label>
+    <br><br>
+    <input  type="text" name="author" style="width: 300px; height: 20px:">
+    <br>
+    
+    </div>
+    <div class="mywork1">
+     <label>BOOK IMAGE</label>
+     <br><br>
+    <input type="File" name="image" style="width: 300px; height: 20px:">
+    <br>
+    </div>
+    <div class="mywork1">
+    <label>BOOK PDF</label>
+    <br><br>
+    <input type="File" name="pdf"style="width: 300px; height: 20px:">
+    <br>
+    </div>
+    <select id="Categories" name="Categories" style="width: 300px; height: 35px;" />
+                   
+                    <option name="Bangla Literature">Bangla Literature</option>
+                    <option name="Nobels">Nobels</option>
+                    <option name="Poems">Poems</option> 
+                    <option name="Fantasy">Fantasy</option>
+                    <option name="Horror">Horror</option>
+                    <option name="Advanture">Advanture</option>
+                    <option name="Comics">Comics</option>
+                    <option name="Cookings">Cookings</option>
+                    <option name="Journals">Journals</option>
+                    <option name="Story" >Story</option>
+                    <option name="CATEGORIES" selected>CATEGORIES</option>
+                    </select>
+               <br><br>
+    <div class="mywork1">
+    <label>PRICE</label>
+    <br><br>
+    <input  type="text" name="price" style="width: 300px; height: 20px:">
+    <br>
+    
+    </div>
+
+    <div class="mywork1">
+    <label>DESCRIPTION</label>
+    <br><br>
+    <input type="text" name="description"style="width: 300px; height: 20px:">
+    
+    </div>
+    <br>              
+   
+
+
+    <input type="submit" name="submit" value="upload" style="background-color: rgb(114, 12, 76);color:white; border-radius: 5px;">
+   
+
+    </div>
+    </div> 
+</form>
+</div>
 </center>
+  
 
 
 
-    <!-- <div class="text-box">
-      <h1>Book Cafee</h1>
-      
-       <p1> Hello </p1> <br>
-       <p> 
-
-        Md.Istiak Sharif          </p>
-      <a href="" class="hero-btn">Visit US To Know More</a>
-    </div> -->
+  
   </section>
 
 
