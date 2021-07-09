@@ -15,6 +15,7 @@ session_start();
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Profile</title>
     <link rel="stylesheet" href="profile.css">
+    <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.bundle.min.js">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/MaterialDesign-Webfont/3.6.95/css/materialdesignicons.css">
@@ -22,12 +23,49 @@ session_start();
   
 </head>
 <body>
-<center>
+<section class="header"style="height:120vh">
+   <nav>
+        <div class="book_icon">
+            <i class="fas fa-book-open"></i>
+            <h2>Book Cafee</h2>
+          </div>
+      <div class="nav-links" id="navlinks" >
+        <i class="fa fa-times" onclick="hidemenu()"></i>
+        <ul>
+           <li><a href="">ABOUT</a></li>
+           <li><a href="">CONTACT</a></li>
+           <li><a href="profile.php">PROFILE</a></li>
+            <li><a href="logout.php">LOG OUT</a></li>
+            <li><a class="btn btn-secondary dropdown-toggle" href="" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false" style ="background-color:rgba(0,0,0,0.01);border: 0px">CATEGORIES
+                </a>
+
+          <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="dropdownMenuLink">
+            <li><a class="dropdown-item"  href="dashboard2.php">Bangla Literature</a></li>
+            <li><a class="dropdown-item" href="#">Nobels</a></li>
+            <li><a class="dropdown-item" href="#">Poems</a></li>
+            <li><a class="dropdown-item" href="#">Story</a></li>
+            <li><a class="dropdown-item"  href="#">Fantasy</a></li>
+            <li><a class="dropdown-item" href="#">Horror</a></li>
+            <li><a class="dropdown-item" href="#">Advanture</a></li>
+            <li><a class="dropdown-item" href="#">Comics</a></li>
+            <li><a class="dropdown-item" href="#">Cookings</a></li>
+            <li><a class="dropdown-item" href="#">Journals</a></li> 
+         </ul></li>     
+    </li></ul> 
+
+    
+      
+    </div>
+      
+      
+      <i class="fa fa-bars" onclick="showmenu()"></i>
+    </nav>
+    <center>
     <div class="page-content page-container" id="page-content">
         <div class="padding">
             <div class="h-100 d-inline-block">
             <div class="row container d-flex justify-content-center">
-                <div class="col-xl-12 col-md-12">
+                <div class="col-xl-12 col-md-18"style=" opacity: 0.85;">
                     <div class="card user-card-full">
                         <div class="row m-l-0 m-r-0">
                             <div class="col-sm-4 bg-c-lite-green user-profile">
@@ -38,7 +76,7 @@ session_start();
                                 </div>
                             </div>
                             <div class="col-sm-8">
-                                <div class="card-block">
+                                <div class="card-block"style="width:550px;padding-right:60px;height:auto;">
                                     <h6 class="m-b-20 p-b-5 b-b-default f-w-600">Information</h6>
                                     <div class="row">
                                         <div class="col-sm-6">
@@ -80,5 +118,9 @@ session_start();
     </div>
     </div>
     </center>
+  </section>
+
+
 </body>
+
 </html>

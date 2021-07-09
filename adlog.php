@@ -63,13 +63,17 @@ $sql ="insert into books (book_name,author_name,image,pdf,Categories,price,descr
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
 
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/MaterialDesign-Webfont/3.6.95/css/materialdesignicons.css">
-
+<link rel="stylesheet" href="profile.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.bundle.min.js">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/MaterialDesign-Webfont/3.6.95/css/materialdesignicons.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js">
     <title>Testing page</title>
 </head>
 
 <body>
 
-<section class="header"style="height:180vh">
+<section class="header"style="height:120vh">
    <nav>
         <div class="book_icon">
             <i class="fas fa-book-open"></i>
@@ -106,84 +110,7 @@ $sql ="insert into books (book_name,author_name,image,pdf,Categories,price,descr
       
       <i class="fa fa-bars" onclick="showmenu()"></i>
     </nav>
-    <center>
- <div class="details"style="height:1100px;width:550px; background-color:rgba(255,255,255,0.5)">
-<form method="post" enctype="multipart/form-data">
-<h1><b1>Book Details</b1></h3>
-
-<div class="mywork">
-    <div class="mywork1">
-    <label>BOOK NAME</label>
-    <br><br>
-    <input type="text" name="title" style="width: 300px; height: 20px:margin-left:20px">
-    <br>
-</div>
-
-    <div class="mywork1">
-    <label>ATHOUR</label>
-    <br><br>
-    <input  type="text" name="author" style="width: 300px; height: 20px:">
-    <br>
-    
-    </div>
-    <div class="mywork1">
-     <label>BOOK IMAGE</label>
-     <br><br>
-    <input type="File" name="image" style="width: 300px; height: 20px:">
-    <br>
-    </div>
-    <div class="mywork1">
-    <label>BOOK PDF</label>
-    <br><br>
-    <input type="File" name="pdf"style="width: 300px; height: 20px:">
-    <br>
-    </div>
-    <select id="Categories" name="Categories" style="width: 300px; height: 35px;" />
-                   
-                    <option name="Bangla Literature">Bangla Literature</option>
-                    <option name="Nobels">Nobels</option>
-                    <option name="Poems">Poems</option> 
-                    <option name="Fantasy">Fantasy</option>
-                    <option name="Horror">Horror</option>
-                    <option name="Advanture">Advanture</option>
-                    <option name="Comics">Comics</option>
-                    <option name="Cookings">Cookings</option>
-                    <option name="Journals">Journals</option>
-                    <option name="Story" >Story</option>
-                    <option name="CATEGORIES" selected>CATEGORIES</option>
-                    </select>
-               <br><br>
-    <div class="mywork1">
-    <label>PRICE</label>
-    <br><br>
-    <input  type="text" name="price" style="width: 300px; height: 20px:">
-    <br>
-    
-    </div>
-
-    <div class="mywork1">
-    <label>DESCRIPTION</label>
-    <br><br>
-    <input type="text" name="description"style="width: 300px; height: 20px:">
-    
-    </div>
-    <br>              
-   
-
-
-    <input type="submit" name="submit" value="upload" style="background-color: rgb(114, 12, 76);color:white; border-radius: 5px;">
-   
-
-    </div>
-    </div> 
-</form>
-</div>
-</center>
-  
-
-
-
-  
+   <!-- TEST THERE -->
   </section>
 
 
