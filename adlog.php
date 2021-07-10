@@ -1,40 +1,52 @@
-<?php 
-$localhost = "localhost"; #localho
-$dbusername = "root"; #username of phpmyadmin
-$dbpassword = "";  #password of phpmyadmin
-$dbname = "bookcafe1_db";  #database name
- 
-#connection string
-$conn = mysqli_connect($localhost,$dbusername,$dbpassword,$dbname);
- 
-if (isset($_POST["submit"]))
- {
+<?php
+session_start();
 
- $t=$_POST['title'];
- $a=$_POST['author'];
- $c =$_POST['Categories'];
- $p =$_POST['price'];
- $d =$_POST['description'];
-$fn=$_FILES['image']['name'];
-$tm=$_FILES['image']['tmp_name']; 
-$fn1=$_FILES['pdf']['name'];
-$tm1=$_FILES['pdf']['tmp_name1']; 
-move_uploaded_file($tm,"bookimg/".$fn);
-move_uploaded_file($tm1,"bookimg/".$fn1);
+include("connection.php");
+include("functions.php");
 
-$sql ="insert into books (book_name,author_name,image,pdf,Categories,price,description)  values ('$t','$a','$fn','$fn1','$c','$p','$d') ";
+$user_data = check_login($con);
 
 
-    if(mysqli_query($conn,$sql)){
- 
-        header("Location: dashboard.php");
+    if($_SERVER['REQUEST_METHOD']== "POST")
+    {
+      //somthing was posted
+     $nuser_name = $_POST['new_user_name'];
+     $npassword = $_POST['new_password'];
+     $nemail = $_POST['new_email'];
+     $naddress = $_POST['new_address'];
+//new things added
+     $cp=$_POST['cpassword'];
+     $ce=$_POST['cemail'];
+
+    
+
+       // if(!empty($user_name)&&!empty($password)  &&  !is_numeric($user_name))//change
+       if($npassword==$cp) 
+       
+       {
+            
+            //save to database
+            //$user_id = random_num(20); changes in query
+            //$sql=mysql_query("UPDATE user_info SET password='$newpassword' where user_id='$username'");
+           // $query ="insert into users (new_user_name,new_email,new_password,new_address)  values ('$nuser_name','$nemail','$npassword','$naddress') ";
+            $query = "UPDATE users SET email = '$nemail' where user_name='$user_name";
+           
+            mysqli_query($con, $query);
+        
+            header("Location: login.php");
+            die;
+        }
+        else{
+
+            echo "please enter some correct data ";
+        }
+
+
+
+
     }
-    else{
-        echo "Error";
-    }
-}
- 
- 
+
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -47,7 +59,14 @@ $sql ="insert into books (book_name,author_name,image,pdf,Categories,price,descr
     
     <link rel="stylesheet" type="text/css" href="bookupload.css">
 
+
+ 
+
+
+
+    
     <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="signup.css">
     
     <link
       rel="stylesheet"
@@ -73,7 +92,7 @@ $sql ="insert into books (book_name,author_name,image,pdf,Categories,price,descr
 
 <body>
 
-<section class="header"style="height:120vh">
+<section class="header"style="height:160vh">
    <nav>
         <div class="book_icon">
             <i class="fas fa-book-open"></i>
@@ -102,15 +121,107 @@ $sql ="insert into books (book_name,author_name,image,pdf,Categories,price,descr
             <li><a class="dropdown-item" href="#">Journals</a></li> 
          </ul></li>     
     </li></ul> 
-
-    
-      
-    </div>
-      
-      
+    </div>  
       <i class="fa fa-bars" onclick="showmenu()"></i>
     </nav>
-   <!-- TEST THERE -->
+    
+<!-- TEST THERE -->
+
+<center >
+        <div class="card" style="background-color:rgba(255,255,255,0.5);width:500px">
+            <form method="post">
+                <h1><b>Edit Your Account</b></h3>
+
+                    <!-- NAME -->
+                    <div class="name">
+                        <div class="form-elements">
+                            <label for="name" style="margin-right:80px"></label>
+                            Name
+                        </div>
+                    </div>
+                    <div class="fields">
+                        <input type="text" id="text" name ="new_user_name" style="width: 200px; height: 20px;" />
+                    </div>
+
+                    <!-- EMAIL-->
+                    <div class="email">
+                        <div class="form-elements">
+                            <label for="email"style="margin-right:80px"></label>
+                            Email
+                        </div>
+                    </div>
+                    <div class="fields">
+                        <input type="email" id="text" name ="new_email" style="width: 200px; height: 20px;" />
+                    </div> 
+                     <!--Confirm  EMAIL-->
+                     <div class="email">
+                        <div class="form-elements">
+                            <label for="email"style="margin-right:80px"></label>
+                           Confirm Email
+                        </div>
+                    </div>
+                    <div class="fields">
+                        <input type="email" id="text" name ="cemail" required style="width: 200px; height: 20px;" />
+                    </div> 
+
+                    <!-- PASSWORD -->
+                    <div class="password">
+                        <div class="form-elements">
+                            <label for="password"style="margin-right:70px"></label>
+                            Password
+                        </div>
+                    </div>
+                    <div class="fields">
+                        <input type="password" id="text" name ="new_password" style="width: 200px; height: 20px;" />
+                    </div>
+                    <!-- CONFIRM PASSWORD -->
+                    <div class="password">
+                        <div class="form-elements">
+                            <label for="password"style="margin-right:70px"></label>
+                             Confirm Password
+                        </div>
+                    </div>
+                    <div class="fields">
+                        <input type="password" id="text" name ="cpassword" required style="width: 200px; height: 20px;" />
+                    </div>
+                    
+
+                    <!-- address -->
+
+                    <div class="address">
+                        <div class="form-elements">
+                            <label for="address"style="margin-left:150px">
+                                Address
+                            </label>
+                        </div>
+                    </div>
+                    <div class="fields">
+                        <textarea name="new_address" id="address" cols="20" rows="5" style="width: 200px;">
+                        </textarea>
+                    </div>
+                    
+                
+                    <!-- SUBMIT -->
+                    <div class="labels">
+                        
+                            
+                            <input id="button" type="submit" value="Update"style="background-color: rgb(114, 12, 76);color:white; border-radius: 5px;" /><br><br>
+                    
+                    
+                    </div>
+                    
+            </form>
+        </div>
+    </center>
+
+
+
+
+
+
+
+
+   
   </section>
 
 

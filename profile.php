@@ -122,7 +122,7 @@ session_start();
                                         <li><a href="#!" data-toggle="tooltip" data-placement="bottom" title="" data-original-title="instagram" data-abc="true"><i class="mdi mdi-instagram feather icon-instagram instagram" aria-hidden="true"></i></a></li>
                                         <!-- <button a herf="dashboard.php" type="button" class="btn btn-danger">Dashboard</button> -->
                                         <a class="btn btn-primary" href="dashboard.php" role="button">Dashboard</a>
-                                        <a class="btn btn-danger" href="dashboard.php" role="button">Edit profile</a>
+                                        <a class="btn btn-danger" href="adlog.php" role="button">Edit profile</a>
 
                                     </ul>
                                 </div>
