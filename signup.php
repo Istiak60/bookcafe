@@ -149,10 +149,11 @@ session_start();
                         </div>
                     </div>
 
-                    <!-- user type -->
+                  
                     <div class="fields">
                         <input type="text" id="contact" name ="contact" style="width: 200px; height: 20px;" />
                     </div> 
+                      <!-- user type -->
                     <select id="user_type" name="user_type" style="width: 200px; height: 35px;margin:7px 0px 5px 0px" />
                    
                
