@@ -86,7 +86,7 @@ if($_SERVER['REQUEST_METHOD']== "POST")
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.bundle.min.js">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/MaterialDesign-Webfont/3.6.95/css/materialdesignicons.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js">
-    <title>Testing page</title>
+    <title>Profile Edit</title>
 </head>
 
 <body>
@@ -131,11 +131,6 @@ if($_SERVER['REQUEST_METHOD']== "POST")
       <i class="fa fa-bars" onclick="showmenu()"></i>
     </nav>
     
-<!-- TEST THERE -->
-
-
-
-
 <center >
 <p1 style="font-size:40px;color:white;"> Hello </p1> <br />
            <p style="font-size:40px;color:white;margin-bottom:-50px;"> 
@@ -206,15 +201,7 @@ if($_SERVER['REQUEST_METHOD']== "POST")
                         
                         ?>" style="width: 200px; height: 20px;" />
                     </div> 
-                      <!-- user type
-                    <select id="user_type" name="user_type" style="width: 200px; height: 35px;margin:7px 0px 5px 0px" />
-                   
-               
-                   <option name="Admin">Admin</option>
-                   <option name="User" >User</option>
-                   <option name="user_type" selected>User type</option>
-                   </select>  -->
-
+                      
                     <!-- address -->
 
                     <div class="address">
@@ -230,13 +217,6 @@ if($_SERVER['REQUEST_METHOD']== "POST")
                         
                         ?>" style="width: 200px; height: 20px;" />
                     </div> 
-
-                    <!-- <div class="fields">
-                        <textarea name="address"value="" id="address" cols="20" rows="5" style="width: 200px;">
-                        </textarea> -->
-                    </div>
-                    
-                
                     <!-- SUBMIT -->
                     <div class="labels">
                         
