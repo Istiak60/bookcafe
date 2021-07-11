@@ -30,13 +30,13 @@ session_start();
 <body>
 <section class="header"style="height:120vh">
    <nav>
-        <div class="book_icon">
-            <i class="fas fa-book-open"></i>
-            <h2>Book Cafee</h2>
-          </div>
-      <div class="nav-links" id="navlinks" >
-        <i class="fa fa-times" onclick="hidemenu()"></i>
-        <ul>
+   <div class="book_icon">
+                <i class="fas fa-book-open"></i>
+                <h2 style="margin-bottom: 50px">Book Cafee</h2>
+              </div>
+          <div class="nav-links" id="navlinks">
+            <i class="fa fa-times" onclick="hidemenu()"></i>
+            <ul style="margin-top: -100px" >
            <li><a href="">ABOUT</a></li>
            <li><a href="">CONTACT</a></li>
            <li><a href="profile.php">PROFILE</a></li>

@@ -42,19 +42,10 @@ if($_SERVER['REQUEST_METHOD']== "POST")
 
     function_alert("Enter some Correct Data");
  }
-
-
-
-
-
-  
-
-
+ 
 }
 
 ?>
-
-
 
 <!DOCTYPE html>
 <html lang="en">
@@ -95,11 +86,11 @@ if($_SERVER['REQUEST_METHOD']== "POST")
         <nav>
             <div class="book_icon">
                 <i class="fas fa-book-open"></i>
-                <h2>Book Cafee</h2>
+                <h2 style="margin-bottom: 50px">Book Cafee</h2>
               </div>
           <div class="nav-links" id="navlinks">
             <i class="fa fa-times" onclick="hidemenu()"></i>
-            <ul>
+            <ul style="margin-top: -100px" >
           
               <li><a href="">ABOUT</a></li>
               <li><a href="">CONTACT</a></li>
@@ -137,7 +128,7 @@ if($_SERVER['REQUEST_METHOD']== "POST")
 
             <?php echo $user_data['user_name']; ?>
           </p>
-        <div class="card" style="background-color:rgba(255,255,255,0.5);width:500px">
+        <div class="card" style="background-color:rgba(255,255,255,0.5);width:500px;margin-bottom:-10px;">
             <form method="post">
                 <h1><b>Update Your Profile</b></h3>
 
