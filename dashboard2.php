@@ -1,3 +1,13 @@
+<?php 
+session_start();
+
+	include("connection.php");
+	include("functions.php");
+
+	$user_data = check_login($con);
+
+?>
+
 <!DOCTYPE html>
 <html lang="en">
     <head>
@@ -15,6 +25,16 @@
 
         <!-- <link rel="stylesheet" href=" https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"> -->
         <!-- CSS only -->
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.bundle.min.js">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/MaterialDesign-Webfont/3.6.95/css/materialdesignicons.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+<!-- JavaScript Bundle with Popper -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/MaterialDesign-Webfont/3.6.95/css/materialdesignicons.css">
+
         <link
             href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css"
             rel="stylesheet"
@@ -27,6 +47,20 @@
             integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
             crossorigin="anonymous"
         ></script>
+
+<style>
+img{
+    height:120px;
+    
+    width:100px;
+  
+}
+
+
+</style>
+
+
+
     </head>
     <body>
         <section class="header">
@@ -83,104 +117,58 @@
                 <h4>Bangali Literature</h4>
             </div>
         </section>
-
+          
         <!-- DEMO BOOK -->
         <div class="row-2">
             <h2>Books</h2>
             <select>
                 <option>Default Sorting</option>
-                <option>Short by Author</option>
-                <option>Short by Popularity</option>
-                <option>Short by Rating</option>
-                <option>Short by Sale</option>
+                <option>Sort by Author</option>
+                <option>Sort by Popularity</option>
+                <option>Sort by Rating</option>
+                <option>Sort by Sale</option>
             </select>
-        </div>
-        <section class="books">
-            <h1>Bangla Literature</h1>
-            <p>Some of Best Selling & Reviewed Books</p>
-            <div class="row1">
-                <div class="book-col">
-                    <img src="img/1.jpg" />
-                    <h3>Desh Bideshe</h3>
-                    <p>Sayed Muztaba Ali</p>
-                </div>
-                <div class="book-col">
-                    <img src="img/2.jpeg" />
-                    <h3>Chander Pahar</h3>
-                    <p>Bivutivushan Bandhapadhay</p>
-                </div>
-                <div class="book-col">
-                    <img src="img/3.jpg" />
-                    <h3>Duniyar Ghonada</h3>
-                    <p>Premedra Mitra</p>
-                </div>
-                <div class="book-col">
-                    <img src="img/4.jpg" />
-                    <h3>Bener Meye</h3>
-                    <p>Haraprasad Shasri</p>
-                </div>
-                <div class="book-col">
-                    <img src="img/5.jpg" />
-                    <h3>Chawthupir Charjapad</h3>
-                    <p>Pritom Basu</p>
-                </div>
-            </div>
-            <div class="row1">
-                <div class="book-col">
-                    <img src="img/6.jpg" />
-                    <h3>History of Bangali Literature</h3>
-                    <p>Sushil Kumar De</p>
-                </div>
-                <div class="book-col">
-                    <img src="img/7.jpg" />
-                    <h3>Bangla Rangalayer Itihas</h3>
-                    <p>Shankar Bhattachariya</p>
-                </div>
-                <div class="book-col">
-                    <img src="img/8.jpg" />
-                    <h3>Ekjon Mayabati</h3>
-                    <p>Humayum Ahmed</p>
-                </div>
-                <div class="book-col">
-                    <img src="img/humaun-2.jpg" />
-                    <h3>Himu Samagera</h3>
-                    <p>Humayun Ahmed</p>
-                </div>
-                <div class="book-col">
-                    <img src="img/rabindra-3.jpg" />
-                    <h3>Kabuliwala</h3>
-                    <p>Rabindranath Tagore</p>
-                </div>
-            </div>
+         </div>
+        <h3>List of books</h3>
+        <form action=""method="POST" ecntype="multipart/form-data">
+        <?php
+        
+        $res=mysqli_query($con,"SELECT * FROM `books`;");
+        echo "<table class='table table-bordered table-hover'>";
+        echo "<tr style='background-color:red;'>";
+        //table header
+        echo "<th>";  echo "Image";          echo "</th>";
+        echo "<th>";  echo "Book Name";      echo "</th>";
+        echo "<th>";  echo "Author Name";    echo "</th>";
+        echo "<th>";  echo "Categories";     echo "</th>";
+        echo "<th>";  echo "Price";          echo "</th>";
+        echo "<th>";  echo "Description";    echo "</th>";
+        echo"</tr>";
+        while($row= mysqli_fetch_array($res))
+        {
+            echo "<tr>";     
+            
+                       
+        echo "<td >"; echo '<img src="data:image;base64,'.base64_encode($row['image']).' " >';echo "</td>";
+        echo "<td >";  echo $row['book_name'];       echo "</td>"; 
+        echo "<td>";  echo $row['author_name'];   echo "</td>";
+        echo "<td>";  echo $row['categories'];     echo "</td>";
+        echo "<td>";  echo $row['price'];          echo "</td>";
+        echo "<td>";  echo $row['description'];    echo "</td>";
+// testing part   
 
-            <div class="row1">
-                <div class="book-col">
-                    <img src="img/9.jpg" />
-                    <h3>UralPankhi</h3>
-                    <p>Humayum Ahmed</p>
-                </div>
-                <div class="book-col">
-                    <img src="img/10.jpg" />
-                    <h3>Mahapurush</h3>
-                    <p>Humayum Ahmed</p>
-                </div>
-                <div class="book-col">
-                    <img src="img/11.jpg" />
-                    <h3>Duniyar Ghonada</h3>
-                    <p>Humayum Ahmed</p>
-                </div>
-                <div class="book-col">
-                    <img src="img/12.jpg" />
-                    <h3>Himur Nil Jochona</h3>
-                    <p>Humayum Ahmed</p>
-                </div>
-                <div class="book-col">
-                    <img src="img/16.jpeg" />
-                    <h3>Pather Panchali</h3>
-                    <p>Bivutivushan Bandhapadhay</p>
-                </div>
-            </div>
-        </section>
+        echo "</tr>";
+           
+         
+         
+
+        }
+      
+        echo "</table>";
+  ?>
+
+
+    </form>
 
         <!-- Footer -->
         <section class="footer">
