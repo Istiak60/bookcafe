@@ -152,7 +152,7 @@ img{
         echo "<td >"; echo '<img src="data:image;base64,'.base64_encode($row['image']).' " >';echo "</td>";
         echo "<td >";  echo $row['book_name'];       echo "</td>"; 
         echo "<td>";  echo $row['author_name'];   echo "</td>";
-        echo "<td>";  echo $row['Categories'];     echo "</td>";
+        echo "<td>";  echo $row['categories'];     echo "</td>";
         echo "<td>";  echo $row['price'];          echo "</td>";
         echo "<td>";  echo $row['description'];    echo "</td>";
 // testing part   
