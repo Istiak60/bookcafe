@@ -3,6 +3,7 @@ session_start();
 
 	include("connection.php");
 	include("functions.php");
+    
 
 	$user_data = check_login($con);
 
@@ -90,17 +91,17 @@ img{height:70px;width:50px;}
                                 class="dropdown-menu dropdown-menu-dark"
                                 aria-labelledby="dropdownMenuLink"
                             >
-                                 <li><a class="dropdown-item"  href="#">Bangla Literature</a></li>
-    <li><a class="dropdown-item" href="#">Nobels</a></li>
-    <li><a class="dropdown-item" href="#">Poems</a></li>
-    <li><a class="dropdown-item" href="#">Story</a></li>
-    <li><a class="dropdown-item"  href="#">Fantasy</a></li>
-    <li><a class="dropdown-item" href="#">Horror</a></li>
-    <li><a class="dropdown-item" href="#">Advanture</a></li>
-    <li><a class="dropdown-item" href="#">Comics</a></li>
-    <li><a class="dropdown-item" href="#">Cookings</a></li>
-    <li><a class="dropdown-item" href="#">Journals</a></li>
-                            </ul>
+                                        <li><a class="dropdown-item"  href="#"><?php echo $user_data['Categories']; ?></a></li>
+                                        <li><a class="dropdown-item" href="#">Nobels</a></li>
+                                        <li><a class="dropdown-item" href="#">Poems</a></li>
+                                        <li><a class="dropdown-item" href="#">Story</a></li>
+                                        <li><a class="dropdown-item"  href="#">Fantasy</a></li>
+                                        <li><a class="dropdown-item" href="#">Horror</a></li>
+                                        <li><a class="dropdown-item" href="#">Advanture</a></li>
+                                        <li><a class="dropdown-item" href="#">Comics</a></li>
+                                        <li><a class="dropdown-item" href="#">Cookings</a></li>
+                                        <li><a class="dropdown-item" href="#">Journals</a></li>
+                                                                </ul>
                         </li>
                     </ul>
                 </div>
@@ -135,25 +136,29 @@ img{height:70px;width:50px;}
         echo "<th>";  echo "Image";          echo "</th>";
         echo "<th>";  echo "Book Name";      echo "</th>";
         echo "<th>";  echo "Author Name";    echo "</th>";
-        echo "<th>";  echo "Categories";     echo "</th>";
+        echo "<th>";  echo "Categories";     echo "</th>";  
         echo "<th>";  echo "Price";          echo "</th>";
         echo "<th>";  echo "Description";    echo "</th>";
+        echo "<th>";  echo "Add to cart";    echo "</th>";
         echo"</tr>";
         while($row= mysqli_fetch_array($res))
-        {
+        { //if($row['categories']=="Nobels")
+             {    
             echo "<tr>";     
             
-                       
+                 
       echo "<td >"; echo '<img src="data:image;base64,'.base64_encode($row['image']).' " >';echo "</td>";
-         echo "<td >";  echo $row['book_name'];       echo "</td>"; 
-        echo "<td>";  echo $row['author_name'];   echo "</td>";
+         echo "<td >";  echo $row['book_name'];    echo "</td>";
+        echo "<td>";  echo $row['author_name'];    echo "</td>";
         echo "<td>";  echo $row['categories'];     echo "</td>";
         echo "<td>";  echo $row['price'];          echo "</td>";
         echo "<td>";  echo $row['description'];    echo "</td>";
+        
+        echo "<td>";  echo '<input type="submit" name="submit" value="Add to cart" class="btn btn-success">';echo "</td>";
 // testing part   
 
         echo "</tr>";
-           
+            } 
          
          
 

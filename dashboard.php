@@ -62,7 +62,7 @@ session_start();
 
   <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="dropdownMenuLink">
     <li><a class="dropdown-item"  href="dashboard2.php">Bangla Literature</a></li>
-    <li><a class="dropdown-item" href="#">Nobels</a></li>
+    <li><a class="dropdown-item" href="adlog.php">Nobels</a></li>
     <li><a class="dropdown-item" href="#">Poems</a></li>
     <li><a class="dropdown-item" href="#">Story</a></li>
     <li><a class="dropdown-item"  href="#">Fantasy</a></li>
