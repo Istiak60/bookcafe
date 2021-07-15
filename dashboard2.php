@@ -50,7 +50,15 @@ session_start();
         ></script>
 
 <style>
-img{height:70px;width:50px;}
+td {
+  height: 30vh;
+  width: 10vh;
+  padding: 0;
+}
+img{height:100%;
+    width:100%;
+    display:block;
+}
 
 
 </style>
@@ -134,7 +142,7 @@ img{height:70px;width:50px;}
         echo "<tr style='background-color:red;'>";
         //table header
         echo "<th>";  echo "Image";          echo "</th>";
-        echo "<th>";  echo "Book Name";      echo "</th>";
+        echo "<th style='margin-right:20px;'>";  echo "Book Name";      echo "</th>";
         echo "<th>";  echo "Author Name";    echo "</th>";
         echo "<th>";  echo "Categories";     echo "</th>";  
         echo "<th>";  echo "Price";          echo "</th>";
