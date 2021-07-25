@@ -152,6 +152,7 @@ img{height:100%;
         echo "<th>";  echo "Categories";     echo "</th>";  
         echo "<th>";  echo "Price";          echo "</th>";
         echo "<th>";  echo "Description";    echo "</th>";
+        echo "<th>";  echo "Quantity";    echo "</th>";
         echo "<th>";  echo "Add to cart";    echo "</th>";
         echo"</tr>";
         while($row= mysqli_fetch_array($res))
@@ -166,6 +167,8 @@ img{height:100%;
         echo "<td>";  echo $row['categories'];     echo "</td>";
         echo "<td>";  echo $row['price'];          echo "</td>";
         echo "<td>";  echo $row['description'];    echo "</td>";
+        echo "<td>";  echo '<input  type="number" name="quantity" style="width: 70px; height: 20px:">';echo "</td>";
+       
         
         echo "<td>";  echo '<input type="submit" name="submit" value="Add to cart" class="btn btn-success">';echo "</td>";
 // testing part   

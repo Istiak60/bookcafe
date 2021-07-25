@@ -14,6 +14,7 @@ if (isset($_POST["submit"]))
  $a=$_POST['author'];
  $c =$_POST['Categories'];
  $p =$_POST['price'];
+ $q =$_POST['quantity'];
  $d =$_POST['description'];
 //$fn=$_FILES['image']['name'];
 $fn=addslashes(file_get_contents($_FILES["image"]['tmp_name']));
@@ -24,7 +25,7 @@ $tm1=$_FILES['pdf']['tmp_name1'];
 move_uploaded_file($tm,"bookimg/".$fn);
 move_uploaded_file($tm1,"bookimg/".$fn1);
 
-$sql ="insert into books (book_name,author_name,image,pdf,Categories,price,description)  values ('$t','$a','$fn','$fn1','$c','$p','$d') ";
+$sql ="insert into books (book_name,author_name,image,pdf,Categories,price,quantity,description)  values ('$t','$a','$fn','$fn1','$c','$p','$q','$d') ";
 
 
     if(mysqli_query($conn,$sql)){
@@ -71,7 +72,7 @@ $sql ="insert into books (book_name,author_name,image,pdf,Categories,price,descr
 
 <body>
 
-<section class="header"style="height:180vh">
+<section class="header"style="height:200vh">
    <nav>
         <div class="book_icon">
             <i class="fas fa-book-open"></i>
@@ -110,7 +111,7 @@ $sql ="insert into books (book_name,author_name,image,pdf,Categories,price,descr
       <i class="fa fa-bars" onclick="showmenu()"></i>
     </nav>
     <center>
- <div class="details"style="height:1100px;width:550px; background-color:rgba(255,255,255,0.5)">
+ <div class="details"style="height:1200px;width:550px; background-color:rgba(255,255,255,0.5)">
 <form method="post" enctype="multipart/form-data">
 <h1><b1>Book Details</b1></h3>
 
@@ -160,6 +161,13 @@ $sql ="insert into books (book_name,author_name,image,pdf,Categories,price,descr
     <label>PRICE</label>
     <br><br>
     <input  type="text" name="price" style="width: 300px; height: 20px:">
+    <br>
+    
+    </div>
+    <div class="mywork1">
+    <label>QUANTITY</label>
+    <br><br>
+    <input  type="number" name="quantity" style="width: 300px; height: 20px:">
     <br>
     
     </div>
