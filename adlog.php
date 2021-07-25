@@ -1,12 +1,34 @@
 <?php 
-session_start();
+$localhost = "localhost"; #localho
+$dbusername = "root"; #username of phpmyadmin
+$dbpassword = "";  #password of phpmyadmin
+$dbname = "bookcafe1_db";  #database name
+ 
+#connection string
+$conn = mysqli_connect($localhost,$dbusername,$dbpassword,$dbname);
+ 
+if($_SERVER['REQUEST_METHOD']== "POST")
+ {
 
-	include("connection.php");
-	include("functions.php");
-    
+ $t=$_POST['book_name'];
+ $p =$_POST['price'];
+ $q =$_POST['quantity'];
+ 
 
-	$user_data = check_login($con);
 
+$sql ="insert into orders (book_name,price,quantity)  values ('$t','$p','$q') ";
+
+
+    if(mysqli_query($conn,$sql)){
+ 
+        
+    }
+    else{
+        echo "Error";
+    }
+}
+ 
+ 
 ?>
 
 <!DOCTYPE html>
@@ -127,10 +149,12 @@ img{height:70px;width:50px;}
             </select>
          </div>
         <h3>List of books</h3>
-        <form action=""method="POST" ecntype="multipart/form-data">
+        
         <?php
         
-        $res=mysqli_query($con,"SELECT * FROM `books`;");
+         $res=mysqli_query($conn,"SELECT * FROM `books`;");
+       
+
         echo "<table class='table table-bordered table-hover'>";
         echo "<tr style='background-color:red;'>";
         //table header
@@ -140,25 +164,36 @@ img{height:70px;width:50px;}
         echo "<th>";  echo "Categories";     echo "</th>";  
         echo "<th>";  echo "Price";          echo "</th>";
         echo "<th>";  echo "Description";    echo "</th>";
+        echo "<th>";  echo "Quantity";    echo "</th>";
         echo "<th>";  echo "Add to cart";    echo "</th>";
         echo"</tr>";
         while($row= mysqli_fetch_array($res))
-        { //if($row['categories']=="Nobels")
+        { 
              {    
-            echo "<tr>";     
-            
-                 
-      echo "<td >"; echo '<img src="data:image;base64,'.base64_encode($row['image']).' " >';echo "</td>";
-         echo "<td >";  echo $row['book_name'];    echo "</td>";
-        echo "<td>";  echo $row['author_name'];    echo "</td>";
-        echo "<td>";  echo $row['categories'];     echo "</td>";
-        echo "<td>";  echo $row['price'];          echo "</td>";
-        echo "<td>";  echo $row['description'];    echo "</td>";
-        
-        echo "<td>";  echo '<input type="submit" name="submit" value="Add to cart" class="btn btn-success">';echo "</td>";
-// testing part   
+                 ?>
+            <form action=""method="POST" ecntype="multipart/form-data">
+            <tr>     
+               <td > <?php echo '<img src="data:image;base64,'.base64_encode($row['image']).' " >';?>    </td>
+       
 
-        echo "</tr>";
+               <td><input type="text" id="country" name="book_name" value=<?php echo $row['book_name'];?> readonly><br><br></td>
+         <td > <?php echo $row['author_name'];?>    </td>
+         <td > <?php echo $row['categories'];?>    </td>
+         
+         <td><input type="text" id="country" name="price" value=<?php echo $row['price'];?> readonly><br><br></td>
+         <td > <?php echo $row['description'];?>    </td>
+         <td > <?php echo '<input  type="number" name="quantity" style="width: 70px; height: 20px:">';?>    </td>
+         <td > <?php echo'<input type="submit" name="submit" value="Add to cart" class="btn btn-success">';?>    </td>
+       
+       
+       
+        
+
+       
+ 
+
+        </tr>
+        <?php
             } 
          
          
