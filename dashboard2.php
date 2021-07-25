@@ -94,14 +94,14 @@ img{height:100%;
                     <ul>
                         <li><a href="">ABOUT</a></li>
                         <li><a href="">CONTACT</a></li>
-                        <li><a href="">PROFILE</a></li>
+                        <li><a href="profile.php">PROFILE</a></li>
                         <li><a href="logout.php">LOG OUT</a></li>
                         <li><a class="btn btn-secondary dropdown-toggle" href="" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false" style ="background-color:rgba(0,0,0,0.01);border: 0px">CATEGORIES
   </a>
 
   <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="dropdownMenuLink">
     <li><a class="dropdown-item"  href="dashboard2.php?item=Bangla Literature">Bangla Literature</a></li>
-    <li><a class="dropdown-item" href="dashboard2.php?item=Novels">Nobels</a></li>
+    <li><a class="dropdown-item" href="dashboard2.php?item=Nobels">Nobels</a></li>
     <li><a class="dropdown-item" href="dashboard2.php?item=Poems">Poems</a></li>
     <li><a class="dropdown-item" href="dashboard2.php?item=Story">Story</a></li>
     <li><a class="dropdown-item"  href="dashboard2.php?item=Fantasy">Fantasy</a></li>

@@ -75,7 +75,8 @@ $sql ="insert into books (book_name,author_name,image,pdf,Categories,price,descr
    <nav>
         <div class="book_icon">
             <i class="fas fa-book-open"></i>
-            <h2>Book Cafee</h2>
+            <a style="text-decoration:none;" href="dashboard.php"><h2>Book Cafee</h2></a>
+
           </div>
       <div class="nav-links" id="navlinks" >
         <i class="fa fa-times" onclick="hidemenu()"></i>

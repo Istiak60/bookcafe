@@ -32,7 +32,9 @@ session_start();
    <nav>
    <div class="book_icon">
                 <i class="fas fa-book-open"></i>
-                <h2 style="margin-bottom: 50px">Book Cafee</h2>
+                <!-- <h2 style="margin-bottom: 50px">Book Cafee</h2> -->
+                <a style="text-decoration:none;margin-bottom: 50px;" href="dashboard.php"><h2 style="margin-bottom: 50px">Book Cafee</h2></a>
+
               </div>
           <div class="nav-links" id="navlinks">
             <i class="fa fa-times" onclick="hidemenu()"></i>
