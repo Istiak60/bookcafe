@@ -6,6 +6,8 @@ session_start();
     
 
 	$user_data = check_login($con);
+    $selectedItem = $_GET['item'];
+    //var_dump($selectedItem);
 
 ?>
 
@@ -41,7 +43,21 @@ session_start();
             rel="stylesheet"
             integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC"
             crossorigin="anonymous"
-        />
+        />  <link
+      rel="stylesheet"
+      type="text/css"
+      href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"
+    />
+    <!-- <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css" rel="stylesheet"> -->
+
+  <!-- <link rel="stylesheet" href=" https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"> -->
+<!-- CSS only -->
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+<!-- JavaScript Bundle with Popper -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/MaterialDesign-Webfont/3.6.95/css/materialdesignicons.css">
+
         <!-- JavaScript Bundle with Popper -->
         <script
             src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
@@ -80,45 +96,34 @@ img{height:100%;
                         <li><a href="">CONTACT</a></li>
                         <li><a href="">PROFILE</a></li>
                         <li><a href="logout.php">LOG OUT</a></li>
-                        <li>
-                            <a
-                                class="btn btn-secondary dropdown-toggle"
-                                href="#"
-                                role="button"
-                                id="dropdownMenuLink"
-                                data-bs-toggle="dropdown"
-                                aria-expanded="false"
-                                style="
-                                    background-color: rgba(0, 0, 0, 0.01);
-                                    border: 0px;
-                                "
-                                >CATEGORIES
-                            </a>
+                        <li><a class="btn btn-secondary dropdown-toggle" href="" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false" style ="background-color:rgba(0,0,0,0.01);border: 0px">CATEGORIES
+  </a>
 
-                            <ul
-                                class="dropdown-menu dropdown-menu-dark"
-                                aria-labelledby="dropdownMenuLink"
-                            >
-                                        <li><a class="dropdown-item"  href="#"><?php echo $user_data['Categories']; ?></a></li>
-                                        <li><a class="dropdown-item" href="#">Nobels</a></li>
-                                        <li><a class="dropdown-item" href="#">Poems</a></li>
-                                        <li><a class="dropdown-item" href="#">Story</a></li>
-                                        <li><a class="dropdown-item"  href="#">Fantasy</a></li>
-                                        <li><a class="dropdown-item" href="#">Horror</a></li>
-                                        <li><a class="dropdown-item" href="#">Advanture</a></li>
-                                        <li><a class="dropdown-item" href="#">Comics</a></li>
-                                        <li><a class="dropdown-item" href="#">Cookings</a></li>
-                                        <li><a class="dropdown-item" href="#">Journals</a></li>
-                                                                </ul>
-                        </li>
-                    </ul>
+  <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="dropdownMenuLink">
+    <li><a class="dropdown-item"  href="dashboard2.php?item=Bangla Literature">Bangla Literature</a></li>
+    <li><a class="dropdown-item" href="dashboard2.php?item=Novels">Nobels</a></li>
+    <li><a class="dropdown-item" href="dashboard2.php?item=Poems">Poems</a></li>
+    <li><a class="dropdown-item" href="dashboard2.php?item=Story">Story</a></li>
+    <li><a class="dropdown-item"  href="dashboard2.php?item=Fantasy">Fantasy</a></li>
+    <li><a class="dropdown-item" href="dashboard2.php?item=Horror">Horror</a></li>
+    <li><a class="dropdown-item" href="dashboard2.php?item=Advanture">Advanture</a></li>
+    <li><a class="dropdown-item" href="dashboard2.php?item=Comics">Comics</a></li>
+    <li><a class="dropdown-item" href="dashboard2.php?item=Cookings">Cookings</a></li>
+    <li><a class="dropdown-item" href="dashboard2.php?item=Journals">Journals</a></li>
+  
+  
+  
+  </ul></li>
+  <li> 
+                       
+  
                 </div>
 
                 <i class="fa fa-bars" onclick="showmenu()"></i>
             </nav>
             <div class="text-box">
                 <h1>Book Cafee</h1>
-                <h4>Bangali Literature</h4>
+                <h4><?php echo $selectedItem; ?></h4>
             </div>
         </section>
           
@@ -137,7 +142,7 @@ img{height:100%;
         <form action=""method="POST" ecntype="multipart/form-data">
         <?php
         
-        $res=mysqli_query($con,"SELECT * FROM `books`;");
+        $res=mysqli_query($con,"SELECT * FROM `books` where categories='$selectedItem'");
         echo "<table class='table table-bordered table-hover'>";
         echo "<tr style='background-color:red;'>";
         //table header

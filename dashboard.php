@@ -61,16 +61,16 @@ session_start();
   </a>
 
   <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="dropdownMenuLink">
-    <li><a class="dropdown-item"  href="dashboard2.php">Bangla Literature</a></li>
-    <li><a class="dropdown-item" href="adlog.php">Nobels</a></li>
-    <li><a class="dropdown-item" href="#">Poems</a></li>
-    <li><a class="dropdown-item" href="#">Story</a></li>
-    <li><a class="dropdown-item"  href="#">Fantasy</a></li>
-    <li><a class="dropdown-item" href="#">Horror</a></li>
-    <li><a class="dropdown-item" href="#">Advanture</a></li>
-    <li><a class="dropdown-item" href="#">Comics</a></li>
-    <li><a class="dropdown-item" href="#">Cookings</a></li>
-    <li><a class="dropdown-item" href="#">Journals</a></li>
+    <li><a class="dropdown-item"  href="dashboard2.php?item=Bangla Literature">Bangla Literature</a></li>
+    <li><a class="dropdown-item" href="dashboard2.php?item=Novels">Nobels</a></li>
+    <li><a class="dropdown-item" href="dashboard2.php?item=Poems">Poems</a></li>
+    <li><a class="dropdown-item" href="dashboard2.php?item=Story">Story</a></li>
+    <li><a class="dropdown-item"  href="dashboard2.php?item=Fantasy">Fantasy</a></li>
+    <li><a class="dropdown-item" href="dashboard2.php?item=Horror">Horror</a></li>
+    <li><a class="dropdown-item" href="dashboard2.php?item=Advanture">Advanture</a></li>
+    <li><a class="dropdown-item" href="dashboard2.php?item=Comics">Comics</a></li>
+    <li><a class="dropdown-item" href="dashboard2.php?item=Cookings">Cookings</a></li>
+    <li><a class="dropdown-item" href="dashboard2.php?item=Journals">Journals</a></li>
   
   
   
