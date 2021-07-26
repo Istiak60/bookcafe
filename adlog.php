@@ -8,11 +8,24 @@ $dbpassword = "";  #password of phpmyadmin
 $dbname = "bookcafe1_db";  #database name
 
 
-#connection string
-$conn = mysqli_connect($localhost,$dbusername,$dbpassword,$dbname);
-$user_data = check_login($conn); 
+#conection string
+$con = mysqli_connect($localhost,$dbusername,$dbpassword,$dbname);
+$user_data = check_login($con); 
 if(isset($_POST["add_to_cart"]))
 {
+      $u =$user_data['user_name'];
+    $t=$_POST['book_name'];
+    $p =$_POST['price'];
+     $tp=($p*$q);
+    $sql ="insert into orders (user_name,book_name,price,quantity,total_price)  values ('$u','$t','$p','$q','$tp') ";
+    if(mysqli_query($con,$sql)){
+
+        header("Location: adlog.php");
+    }
+    else{
+        echo "Error";
+    }
+
 	if(isset($_SESSION["shopping_cart"]))
 	{
 		$item_array_id = array_column($_SESSION["shopping_cart"], "item_id");
@@ -26,6 +39,7 @@ if(isset($_POST["add_to_cart"]))
 				'item_quantity'		=>	$_POST["quantity"]
 			);
 			$_SESSION["shopping_cart"][$count] = $item_array;
+            
 		}
 		else
 		{
@@ -184,7 +198,7 @@ img{height:70px;width:50px;}
         
         <?php
         
-         $res=mysqli_query($conn,"SELECT * FROM `books`;");
+         $res=mysqli_query($con,"SELECT * FROM `books`;");
        
 
         echo "<table class='table table-bordered table-hover'>";
@@ -218,14 +232,6 @@ img{height:70px;width:50px;}
          <td > <?php echo $row['description'];?>    </td>
          <td > <?php echo '<input  type="number" name="quantity" style="width: 70px; height: 20px:">';?>    </td>
          <td > <?php echo'<input type="submit" name="add_to_cart" value="Add to cart" class="btn btn-success">';?>    </td>
-       
-       
-       
-        
-
-       
- 
-
         </tr>
         </form>
         <?php
@@ -255,12 +261,13 @@ img{height:70px;width:50px;}
 						$total = 0;
 						foreach($_SESSION["shopping_cart"] as $keys => $values)
 						{
+                            
 					?>
 					<tr>
 						<td><?php echo $values["item_name"]; ?></td>
 						<td><?php echo $values["item_quantity"]; ?></td>
-						<td>$ <?php echo $values["item_price"]; ?></td>
-						<td>$ <?php echo number_format($values["item_quantity"] * $values["item_price"], 2);?></td>
+						<td>৳ <?php echo $values["item_price"]; ?></td>
+						<td>৳ <?php echo number_format($values["item_quantity"] * $values["item_price"], 2);?></td>
 						<td><a href="adlog.php?action=delete&id=<?php echo $values["item_id"]; ?>"><span class="text-danger">Remove</span></a></td>
 					</tr>
 					<?php
@@ -269,7 +276,7 @@ img{height:70px;width:50px;}
 					?>
 					<tr>
 						<td colspan="3" align="right">Total</td>
-						<td align="right">$ <?php echo number_format($total, 2); ?></td>
+						<td align="right">৳ <?php echo number_format($total, 2); ?></td>
 						<td></td>
 					</tr>
 					<?php

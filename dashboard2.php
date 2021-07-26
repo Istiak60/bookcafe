@@ -3,11 +3,82 @@ session_start();
 
 	include("connection.php");
 	include("functions.php");
-    
+    $user_data = check_login($con);
+   $selectedItem = $_GET['item'];
 
-	$user_data = check_login($con);
-    $selectedItem = $_GET['item'];
     //var_dump($selectedItem);
+
+ 
+$localhost = "localhost"; #localho
+$dbusername = "root"; #username of phpmyadmin
+$dbpassword = "";  #password of phpmyadmin
+$dbname = "bookcafe1_db";  #database name
+
+#conection string
+$con = mysqli_connect($localhost,$dbusername,$dbpassword,$dbname);
+$user_data = check_login($con); 
+if(isset($_POST["add_to_cart"]))
+{
+      $u =$user_data['user_id'];
+    $t=$_POST['book_name'];
+    $p =$_POST['price'];
+    $q =$_POST['quantity'];
+    $tp=($p*$q);
+    $sql ="insert into orders (user_id,book_name,price,quantity,total_price)  values ('$u','$t','$p','$q','$tp') ";
+    if(mysqli_query($con,$sql)){
+
+        header("location:".$_SERVER['HTTP_REFERER']);
+    }
+    else{
+        echo "Error";
+    }
+
+	if(isset($_SESSION["shopping_cart"]))
+	{
+		$item_array_id = array_column($_SESSION["shopping_cart"], "item_id");
+		if(!in_array($_GET["id"], $item_array_id))
+		{
+			$count = count($_SESSION["shopping_cart"]);
+			$item_array = array(
+				'item_id'			=>	$_GET["id"],
+				'item_name'			=>	$_POST["book_name"],
+				'item_price'		=>	$_POST["price"],
+				'item_quantity'		=>	$_POST["quantity"]
+			);
+			$_SESSION["shopping_cart"][$count] = $item_array;
+            
+		}
+		else
+		{
+			echo '<script>alert("Item Already Added")</script>';
+		}
+	}
+	else
+	{
+		$item_array = array(
+			'item_id'			=>	$_GET["id"],
+			'item_name'			=>	$_POST["book_name"],
+			'item_price'		=>	$_POST["price"],
+			'item_quantity'		=>	$_POST["quantity"]
+		);
+		$_SESSION["shopping_cart"][0] = $item_array;
+	}
+}
+if(isset($_GET["action"]))
+{
+	if($_GET["action"] == "delete")
+	{
+		foreach($_SESSION["shopping_cart"] as $keys => $values)
+		{
+			if($values["item_id"] == $_GET["id"])
+			{
+				unset($_SESSION["shopping_cart"][$keys]);
+				echo '<script>alert("Item Removed")</script>';
+				echo '<script>window.location="dashboard2.php"</script>';
+			}
+		}
+	}
+}
 
 ?>
 
@@ -64,18 +135,23 @@ session_start();
             integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
             crossorigin="anonymous"
         ></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
 
 <style>
 td {
   height: 30vh;
-  width: 10vh;
+  width: 30vh;
   padding: 0;
 }
 img{height:100%;
     width:100%;
     display:block;
 }
-
+.table-responsive td{
+  height: 10vh;
+  width: 30vh;
+  padding: 0;
+}
 
 </style>
 
@@ -141,7 +217,7 @@ img{height:100%;
             </select>
          </div>
         <h3>List of books</h3>
-        <form action=""method="POST" ecntype="multipart/form-data">
+ <!-- <form action=""method="POST" ecntype="multipart/form-data"> -->
         <?php
         
         $res=mysqli_query($con,"SELECT * FROM `books` where categories='$selectedItem'");
@@ -157,37 +233,41 @@ img{height:100%;
         echo "<th>";  echo "Quantity";    echo "</th>";
         echo "<th>";  echo "Add to cart";    echo "</th>";
         echo"</tr>";
-        while($row= mysqli_fetch_array($res))
-        { //if($row['categories']=="Nobels")
-             {    
-            echo "<tr>";     
-            
-                 
-      echo "<td >"; echo '<img src="data:image;base64,'.base64_encode($row['image']).' " >';echo "</td>";
-         echo "<td >";  echo $row['book_name'];    echo "</td>";
-        echo "<td>";  echo $row['author_name'];    echo "</td>";
-        echo "<td>";  echo $row['categories'];     echo "</td>";
-        echo "<td>";  echo $row['price'];          echo "</td>";
-        echo "<td>";  echo $row['description'];    echo "</td>";
-        echo "<td>";  echo '<input  type="number" name="quantity" style="width: 70px; height: 20px:">';echo "</td>";
-       
+        if(mysqli_num_rows($res)>0)
+        {
+         while($row= mysqli_fetch_array($res))
+         
+              {    
+                  ?>
+             <form method="post" action="dashboard2.php?action=add&id=<?php echo $row["id"]; ?>" ecntype="multipart/form-data">
+             <tr>     
+                <td > <?php echo '<img src="data:image;base64,'.base64_encode($row['image']).' " >';?>    </td>
         
-        echo "<td>";  echo '<input type="submit" name="submit" value="Add to cart" class="btn btn-success">';echo "</td>";
-// testing part   
+ 
+                <td><input type="text" id="country" name="book_name" value=<?php echo $row['book_name'];?> readonly><br><br></td>
+          <td > <?php echo $row['author_name'];?>    </td>
+          <td > <?php echo $row['categories'];?>    </td>
+          
+          <td><input type="text" id="country" name="price" value=<?php echo $row['price'];?> readonly><br><br></td>
+          <td > <?php echo $row['description'];?>    </td>
+          <td > <?php echo '<input  type="number" name="quantity" style="width: 70px; height: 20px:">';?>    </td>
+          <td > <?php echo'<input type="submit" name="add_to_cart" value="Add to cart" class="btn btn-success">';?>    </td>
 
-        echo "</tr>";
-            } 
-         
-         
+ 
+         </tr>
+         </form>
+         <?php
+             } 
+          
+          
+ 
+         }
+       
+         echo "</table>";
+   ?>
+   
 
-        }
-      
-        echo "</table>";
-  ?>
-
-
-    </form>
-
+ 
         <!-- Footer -->
         <section class="footer">
             <h4>About Us</h4>
