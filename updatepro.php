@@ -77,6 +77,8 @@ if($_SERVER['REQUEST_METHOD']== "POST")
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.bundle.min.js">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/MaterialDesign-Webfont/3.6.95/css/materialdesignicons.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+
     <title>Profile Edit</title>
 </head>
 
@@ -102,16 +104,16 @@ if($_SERVER['REQUEST_METHOD']== "POST")
   </a>
 
   <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="dropdownMenuLink">
-    <li><a class="dropdown-item"  href="dashboard2.php">Bangla Literature</a></li>
-    <li><a class="dropdown-item" href="#">Nobels</a></li>
-    <li><a class="dropdown-item" href="#">Poems</a></li>
-    <li><a class="dropdown-item" href="#">Story</a></li>
-    <li><a class="dropdown-item"  href="#">Fantasy</a></li>
-    <li><a class="dropdown-item" href="#">Horror</a></li>
-    <li><a class="dropdown-item" href="#">Advanture</a></li>
-    <li><a class="dropdown-item" href="#">Comics</a></li>
-    <li><a class="dropdown-item" href="#">Cookings</a></li>
-    <li><a class="dropdown-item" href="#">Journals</a></li>
+    <li><a class="dropdown-item"  href="dashboard2.php?item=Bangla Literature">Bangla Literature</a></li>
+    <li><a class="dropdown-item" href="dashboard2.php?item=Novels">Nobels</a></li>
+    <li><a class="dropdown-item" href="dashboard2.php?item=Poems">Poems</a></li>
+    <li><a class="dropdown-item" href="dashboard2.php?item=Story">Story</a></li>
+    <li><a class="dropdown-item"  href="dashboard2.php?item=Fantasy">Fantasy</a></li>
+    <li><a class="dropdown-item" href="dashboard2.php?item=Horror">Horror</a></li>
+    <li><a class="dropdown-item" href="dashboard2.php?item=Advanture">Advanture</a></li>
+    <li><a class="dropdown-item" href="dashboard2.php?item=Comics">Comics</a></li>
+    <li><a class="dropdown-item" href="dashboard2.php?item=Cookings">Cookings</a></li>
+    <li><a class="dropdown-item" href="dashboard2.php?item=Journals">Journals</a></li>
   
   
   

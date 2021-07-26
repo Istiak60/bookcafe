@@ -46,18 +46,21 @@ session_start();
             <li><a class="btn btn-secondary dropdown-toggle" href="" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false" style ="background-color:rgba(0,0,0,0.01);border: 0px">CATEGORIES
                 </a>
 
-          <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="dropdownMenuLink">
-            <li><a class="dropdown-item"  href="dashboard2.php">Bangla Literature</a></li>
-            <li><a class="dropdown-item" href="#">Nobels</a></li>
-            <li><a class="dropdown-item" href="#">Poems</a></li>
-            <li><a class="dropdown-item" href="#">Story</a></li>
-            <li><a class="dropdown-item"  href="#">Fantasy</a></li>
-            <li><a class="dropdown-item" href="#">Horror</a></li>
-            <li><a class="dropdown-item" href="#">Advanture</a></li>
-            <li><a class="dropdown-item" href="#">Comics</a></li>
-            <li><a class="dropdown-item" href="#">Cookings</a></li>
-            <li><a class="dropdown-item" href="#">Journals</a></li> 
-         </ul></li>     
+                <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="dropdownMenuLink">
+    <li><a class="dropdown-item"  href="dashboard2.php?item=Bangla Literature">Bangla Literature</a></li>
+    <li><a class="dropdown-item" href="dashboard2.php?item=Novels">Nobels</a></li>
+    <li><a class="dropdown-item" href="dashboard2.php?item=Poems">Poems</a></li>
+    <li><a class="dropdown-item" href="dashboard2.php?item=Story">Story</a></li>
+    <li><a class="dropdown-item"  href="dashboard2.php?item=Fantasy">Fantasy</a></li>
+    <li><a class="dropdown-item" href="dashboard2.php?item=Horror">Horror</a></li>
+    <li><a class="dropdown-item" href="dashboard2.php?item=Advanture">Advanture</a></li>
+    <li><a class="dropdown-item" href="dashboard2.php?item=Comics">Comics</a></li>
+    <li><a class="dropdown-item" href="dashboard2.php?item=Cookings">Cookings</a></li>
+    <li><a class="dropdown-item" href="dashboard2.php?item=Journals">Journals</a></li>
+  
+  
+  
+  </ul></li>     
     </li>
   <!-- if condition to check user type--> 
  
