@@ -1,12 +1,16 @@
 <?php 
+session_start();
+
+include("functions.php");
 $localhost = "localhost"; #localho
 $dbusername = "root"; #username of phpmyadmin
 $dbpassword = "";  #password of phpmyadmin
 $dbname = "bookcafe1_db";  #database name
- 
+
+
 #connection string
 $conn = mysqli_connect($localhost,$dbusername,$dbpassword,$dbname);
- 
+$user_data = check_login($conn); 
 if(isset($_POST["add_to_cart"]))
 {
 	if(isset($_SESSION["shopping_cart"]))
@@ -17,8 +21,8 @@ if(isset($_POST["add_to_cart"]))
 			$count = count($_SESSION["shopping_cart"]);
 			$item_array = array(
 				'item_id'			=>	$_GET["id"],
-				'item_name'			=>	$_POST["hidden_name"],
-				'item_price'		=>	$_POST["hidden_price"],
+				'item_name'			=>	$_POST["book_name"],
+				'item_price'		=>	$_POST["price"],
 				'item_quantity'		=>	$_POST["quantity"]
 			);
 			$_SESSION["shopping_cart"][$count] = $item_array;
@@ -32,8 +36,8 @@ if(isset($_POST["add_to_cart"]))
 	{
 		$item_array = array(
 			'item_id'			=>	$_GET["id"],
-			'item_name'			=>	$_POST["hidden_name"],
-			'item_price'		=>	$_POST["hidden_price"],
+			'item_name'			=>	$_POST["book_name"],
+			'item_price'		=>	$_POST["price"],
 			'item_quantity'		=>	$_POST["quantity"]
 		);
 		$_SESSION["shopping_cart"][0] = $item_array;
@@ -49,7 +53,7 @@ if(isset($_GET["action"]))
 			{
 				unset($_SESSION["shopping_cart"][$keys]);
 				echo '<script>alert("Item Removed")</script>';
-				echo '<script>window.location="index.php"</script>';
+				echo '<script>window.location="adlog.php"</script>';
 			}
 		}
 	}
@@ -201,7 +205,7 @@ img{height:70px;width:50px;}
         
              {    
                  ?>
-            <form method="post" action="index.php?action=add&id=<?php echo $row["id"]; ?>" ecntype="multipart/form-data">
+            <form method="post" action="adlog.php?action=add&id=<?php echo $row["id"]; ?>" ecntype="multipart/form-data">
             <tr>     
                <td > <?php echo '<img src="data:image;base64,'.base64_encode($row['image']).' " >';?>    </td>
        
@@ -233,7 +237,7 @@ img{height:70px;width:50px;}
       
         echo "</table>";
   ?>
-<div style="clear:both"></div>
+
 			<br />
 			<h3>Order Details</h3>
 			<div class="table-responsive">
@@ -257,7 +261,7 @@ img{height:70px;width:50px;}
 						<td><?php echo $values["item_quantity"]; ?></td>
 						<td>$ <?php echo $values["item_price"]; ?></td>
 						<td>$ <?php echo number_format($values["item_quantity"] * $values["item_price"], 2);?></td>
-						<td><a href="index.php?action=delete&id=<?php echo $values["item_id"]; ?>"><span class="text-danger">Remove</span></a></td>
+						<td><a href="adlog.php?action=delete&id=<?php echo $values["item_id"]; ?>"><span class="text-danger">Remove</span></a></td>
 					</tr>
 					<?php
 							$total = $total + ($values["item_quantity"] * $values["item_price"]);
