@@ -119,7 +119,25 @@ if($_SERVER['REQUEST_METHOD']== "POST")
   
   </ul></li>
       
-    </li></ul> 
+    </li><li> 
+  
+  
+  <!-- if condition to check user type--> 
+ 
+    <?php if($user_data['user_type'] =="Admin"){ ?> 
+     <a href="bookupload.php" data-toggle="tooltip" data-placement="bottom" title="" data-original-title="instagram" data-abc="true" style="witdh:50px"><i class="mdi mdi-cloud-upload" aria-hidden="true"style ="color:rgb(6, 209, 245);font-size:30px"></i></a></li>
+    <?php} ?>
+    <?php }else{
+} ?>
+<?php if($user_data['user_type'] =="User"){ ?> 
+     <a href="cart.php" data-toggle="tooltip" data-placement="bottom" title="" data-original-title="instagram" data-abc="true" style="witdh:50px"><i class="mdi mdi-cart" aria-hidden="true"style ="color:rgb(6, 209, 245);font-size:30px"></i></a></li>
+    <?php} ?>
+    <?php }else{
+} ?>
+
+  
+            </ul> 
+            
     </div>  
       <i class="fa fa-bars" onclick="showmenu()"></i>
     </nav>

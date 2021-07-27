@@ -13,6 +13,19 @@ $con = mysqli_connect($localhost,$dbusername,$dbpassword,$dbname);
 $user_data = check_login($con); 
 
 
+if(isset($_POST["delete"]))
+{$u =$_GET['id'];
+      
+    $sql = "DELETE FROM orders WHERE id = $u ";
+        if(mysqli_query($con,$sql)){
+            echo '<script>alert("Item Removed")</script>';
+        header("location:".$_SERVER['HTTP_REFERER']);
+       
+    }
+    else{
+        echo "Error";
+    }
+}
 
 ?>
 
@@ -26,6 +39,11 @@ $user_data = check_login($con);
     <title>Cart</title>
     <link rel="stylesheet" href="profile.css">
     <link rel="stylesheet" href="style.css">
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"
+    />
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.bundle.min.js">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/MaterialDesign-Webfont/3.6.95/css/materialdesignicons.css">
@@ -37,12 +55,16 @@ $user_data = check_login($con);
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/MaterialDesign-Webfont/3.6.95/css/materialdesignicons.css">
 <style>
 /* .cart-items */
+.small-container cart-page table{
+    width:50%;
+}
 .cart-page {
     margin: 80px auto;
 }
 table {
-    width: 100%;
+    width: 80%;
     border-collapse: collapse;
+   
     background-color:rgba(255,255,255,0.5);
 }
 .cart-info {
@@ -60,10 +82,12 @@ th {
 td {
     padding: 10px 5px;
 }
+
 td p {
     width: 100px;
     height: 30px;
-    padding: 5px;
+    /* padding: 5px 0px 50px 50px; */
+    
     
 }
 td a {
@@ -75,9 +99,10 @@ td img {
     height: 80px;
     margin-right: 10px;
 }
-.total-price td {
+.total-price table td {
     display: flex;
     justify-content: flex-end;
+    margin-left:200px;
 }
 .total-price table {
     border-top: 3px solid #ff523b;
@@ -89,6 +114,44 @@ td img {
 
 th:last-child {
     text-align:right;
+}
+h5{
+    margin-left:100px;
+    margin-top:8.5px;
+    font-size:18px;
+    color: rgb(255,0,0);
+    text-align:right;
+
+}
+.footer{
+    color:black;
+}
+.text-box1 {
+  width: 90%;
+  color: #fff;
+  position: absolute;
+  top:15%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  text-align: center;
+}
+
+.text-box1 h1 {
+  font-size: 52px;
+}
+
+.text-box1 p {
+  margin: 10px 0 40px;
+  font-size: 14px;
+  color: rgb(52, 248, 199);
+  font-size: 40px;
+}
+
+.text-box1 p1 {
+  margin: 10px 0 40px;
+  font-size: 14px;
+  color: #fff;
+  font-size: 30px;
 }
 
 
@@ -139,25 +202,39 @@ th:last-child {
 
 
 </ul> 
-
-    
-      
     </div>
-      
-      
       <i class="fa fa-bars" onclick="showmenu()"></i>
     </nav>
+    <div class="text-box1">
+          <h1>Book Cafee</h1>
+          
+           <p1> Cart of </p1> <br />
+           <p> 
 
+            <?php echo $user_data['user_name']; ?>
+          </p><br><br>
+          
+         
+        </div><br><br>
+        <br><br>
+        
+
+    
         <!-- Cart items detailes -->
+        <center>
         <div class="small-container cart-page">
             <table>
                 <tr>
+                <th >Cancle order</th>
                     <th>Product</th>
+                    <!-- <th >Cancle order</th> -->
                     <th>Quantity</th>
                     <th>Price</th>
-                    <th align="left">Subtotal</th>
+                   
+                    <th >Subtotal</th>
+                    
                 </tr>
-                <h1><?php echo $user_data['user_id']?></h1>
+               
                 <?php
         
         $res=mysqli_query($con,"SELECT * FROM `orders`;");
@@ -168,17 +245,24 @@ th:last-child {
       {$total = 0;
        while($row= mysqli_fetch_array($res))
             {    
-                if($row['user_id']==$user_data['user_id']){
+                if($row['user_id']==$user_data['user_id']){    
                 ?>
-        
+                     <form method="post" action="cart.php?action=add&id=<?php echo $row["id"]; ?>" ecntype="multipart/form-data">
+
            <tr>     
             
       
-
+           <td ><?php echo'<input type="submit" name="delete" value="Remove" class="btn btn-danger">';?></td >
         <td><p><?php echo $row['book_name'];?></p> </td>
-        <td><p><?php echo $row['quantity'];?> </p></td>
+       
+
+        <td><p><?php echo $row['rquantity'];?> </p></td>
 
         <td><p><?php echo $row['price'];?> </p></td>
+
+        
+        
+
          <td align="right"><p><?php echo $row['total_price'];?> </p></td>
          <?php
            $total = $total +$row['total_price'];
@@ -186,6 +270,7 @@ th:last-child {
          
         
        </tr>
+                </form>
        </div>
        <?php
            } 
@@ -194,11 +279,11 @@ th:last-child {
 <div class="total-price">
     <table>
         <tr>
-            <td align="right">Subtotal</td>
+            <td align="right"><h5 >Subtotal</h5></td>
             <td align="right">৳ <?php echo  $total ?></td>
         </tr>
         <tr>
-            <td align="right">Vat</td>
+            <td align="right"><h5>Vat</h5></td>
             <td align="right">৳ <?php
             $vat=0;
             $vat=($total*0.10);
@@ -207,7 +292,7 @@ th:last-child {
             </td>
         </tr>
         <tr>
-            <td align="right">Total</td>
+            <td align="right"><h5>Total</h5></td>
             <td align="right">৳ 
             <?php
             
@@ -225,55 +310,30 @@ th:last-child {
        }       
  ?>
  
-  
+    </center>
 
 
 
 
     
 
-        <!-- Footer -->
-        <div class="footer">
-            <div class="container">
-                <div class="row">
-                    <div class="footer-col-1">
-                        <h3>Download Our App</h3>
-                        <p>Download App Android and ios mobile phone</p>
-                        <div class="app-logo">
-                            <img src="/img/play-store.png" />
-                            <img src="/img/app-store.png" />
-                        </div>
-                    </div>
-                    <div class="footer-col-2">
-                        <img src="/img/logo-white.png" />
-                        <p>
-                            Our purpose is to sustainably Make the Pleasure and
-                            Benefits of Sports Accessible to the Many.
-                        </p>
-                    </div>
-                    <div class="footer-col-3">
-                        <h3>Useful Links</h3>
-                        <ul>
-                            <li>Coupons</li>
-                            <li>Blog Post</li>
-                            <li>Return Policy</li>
-                            <li>Join Affiliate</li>
-                        </ul>
-                    </div>
-                    <div class="footer-col-4">
-                        <h3>Follow us</h3>
-                        <ul>
-                            <li>Facebook</li>
-                            <li>Twitter</li>
-                            <li>Instagram</li>
-                            <li>YouTube</li>
-                        </ul>
-                    </div>
-                </div>
-                <hr />
-                <p class="copy-right">Copyrite 2020 - Easy Tutorials</p>
-            </div>
-        </div>
+         <!-- Footer -->
+  <section class="footer">
+    <h4>About Us</h4>
+    <p>
+    We are trying to give books from our book cafe very easily and at low cost.<br> Since people are
+     not interested in reading books now, we have taken this initiative.<br> Hopefully we will be
+                    able to deliver books to everyone's doorsteps
+    </p>
+    <div class="icons">
+      <i class="fa fa-facebook"></i>
+      <i class="fa fa-twitter"></i>
+      <i class="fa fa-instagram"></i>
+      <i class="fa fa-linkedin"></i>
+    </div>
+    <p>made with <i class="fa fa-heart-o"></i> by BOOKS & SOULS</p>
+  </section>
+
 
         <!-- JS for toggle menu -->
         <script>

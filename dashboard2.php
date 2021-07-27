@@ -22,9 +22,9 @@ if(isset($_POST["add_to_cart"]))
       $u =$user_data['user_id'];
     $t=$_POST['book_name'];
     $p =$_POST['price'];
-    $q =$_POST['quantity'];
-    $tp=($p*$q);
-    $sql ="insert into orders (user_id,book_name,price,quantity,total_price)  values ('$u','$t','$p','$q','$tp') ";
+    $rq =$_POST['rquantity'];
+    $tp=($p*$rq);
+    $sql ="insert into orders (user_id,book_name,price,rquantity,total_price)  values ('$u','$t','$p','$rq','$tp') ";
     if(mysqli_query($con,$sql)){
 
         header("location:".$_SERVER['HTTP_REFERER']);
@@ -43,7 +43,7 @@ if(isset($_POST["add_to_cart"]))
 				'item_id'			=>	$_GET["id"],
 				'item_name'			=>	$_POST["book_name"],
 				'item_price'		=>	$_POST["price"],
-				'item_quantity'		=>	$_POST["quantity"]
+				'item_quantity'		=>	$_POST["rquantity"]
 			);
 			$_SESSION["shopping_cart"][$count] = $item_array;
             
@@ -59,7 +59,7 @@ if(isset($_POST["add_to_cart"]))
 			'item_id'			=>	$_GET["id"],
 			'item_name'			=>	$_POST["book_name"],
 			'item_price'		=>	$_POST["price"],
-			'item_quantity'		=>	$_POST["quantity"]
+			'item_quantity'		=>	$_POST["rquantity"]
 		);
 		$_SESSION["shopping_cart"][0] = $item_array;
 	}
@@ -159,25 +159,25 @@ img{height:100%;
 
     </head>
     <body>
-        <section class="header">
-            <nav>
-                <div class="book_icon">
-                    <i class="fas fa-book-open"></i>
-                    
-                    <a style="text-decoration:none;" href="dashboard.php"><h2>Book Cafee</h2></a>
+<section class="header"style="height:120vh">
+   <nav>
+   <div class="book_icon">
+                <i class="fas fa-book-open"></i>
+                <!-- <h2 style="margin-bottom: 50px">Book Cafee</h2> -->
+                <a style="text-decoration:none;margin-bottom: 50px;" href="dashboard.php"><h2 style="margin-bottom: 50px">Book Cafee</h2></a>
 
-                </div>
-                <div class="nav-links" id="navlinks">
-                    <i class="fa fa-times" onclick="hidemenu()"></i>
-                    <ul>
-                        <li><a href="">ABOUT</a></li>
-                        <li><a href="">CONTACT</a></li>
-                        <li><a href="profile.php">PROFILE</a></li>
-                        <li><a href="logout.php">LOG OUT</a></li>
-                        <li><a class="btn btn-secondary dropdown-toggle" href="" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false" style ="background-color:rgba(0,0,0,0.01);border: 0px">CATEGORIES
-  </a>
+              </div>
+          <div class="nav-links" id="navlinks">
+            <i class="fa fa-times" onclick="hidemenu()"></i>
+            <ul style="margin-top: -100px" >
+           <li><a href="">ABOUT</a></li>
+           <li><a href="">CONTACT</a></li>
+           <li><a href="profile.php">PROFILE</a></li>
+            <li><a href="logout.php">LOG OUT</a></li>
+            <li><a class="btn btn-secondary dropdown-toggle" href="" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false" style ="background-color:rgba(0,0,0,0.01);border: 0px">CATEGORIES
+                </a>
 
-  <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="dropdownMenuLink">
+                <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="dropdownMenuLink">
     <li><a class="dropdown-item"  href="dashboard2.php?item=Bangla Literature">Bangla Literature</a></li>
     <li><a class="dropdown-item" href="dashboard2.php?item=Nobels">Nobels</a></li>
     <li><a class="dropdown-item" href="dashboard2.php?item=Poems">Poems</a></li>
@@ -191,11 +191,33 @@ img{height:100%;
   
   
   
-  </ul></li>
-  <li> 
-                       
+  </ul></li>     
+    </li>
+    <li> 
   
-                </div>
+  
+  <!-- if condition to check user type--> 
+ 
+    <?php if($user_data['user_type'] =="Admin"){ ?> 
+     <a href="bookupload.php" data-toggle="tooltip" data-placement="bottom" title="" data-original-title="instagram" data-abc="true" style="witdh:50px"><i class="mdi mdi-cloud-upload" aria-hidden="true"style ="color:rgb(6, 209, 245);font-size:30px"></i></a></li>
+    <?php} ?>
+    <?php }else{
+} ?>
+<?php if($user_data['user_type'] =="User"){ ?> 
+     <a href="cart.php" data-toggle="tooltip" data-placement="bottom" title="" data-original-title="instagram" data-abc="true" style="witdh:50px"><i class="mdi mdi-cart" aria-hidden="true"style ="color:rgb(6, 209, 245);font-size:30px"></i></a></li>
+    <?php} ?>
+    <?php }else{
+} ?>
+
+  
+            </ul> 
+           
+
+
+
+    
+      
+    </div>
 
                 <i class="fa fa-bars" onclick="showmenu()"></i>
             </nav>
@@ -217,7 +239,7 @@ img{height:100%;
             </select>
          </div>
         <h3>List of books</h3>
- <!-- <form action=""method="POST" ecntype="multipart/form-data"> -->
+ 
         <?php
         
         $res=mysqli_query($con,"SELECT * FROM `books` where categories='$selectedItem'");
@@ -230,8 +252,14 @@ img{height:100%;
         echo "<th>";  echo "Categories";     echo "</th>";  
         echo "<th>";  echo "Price";          echo "</th>";
         echo "<th>";  echo "Description";    echo "</th>";
-        echo "<th>";  echo "Quantity";    echo "</th>";
-        echo "<th>";  echo "Add to cart";    echo "</th>";
+        echo "<th>";  echo "Available quantity";    echo "</th>";
+        
+         if($user_data['user_type'] =="User"){ 
+            echo "<th>";  echo "Quantity";    echo "</th>";
+            echo "<th>";  echo "Add to cart";    echo "</th>";
+    
+     }
+
         echo"</tr>";
         if(mysqli_num_rows($res)>0)
         {
@@ -250,8 +278,19 @@ img{height:100%;
           
           <td><input type="text" id="country" name="price" value=<?php echo $row['price'];?> readonly><br><br></td>
           <td > <?php echo $row['description'];?>    </td>
-          <td > <?php echo '<input  type="number" name="quantity" style="width: 70px; height: 20px:">';?>    </td>
-          <td > <?php echo'<input type="submit" name="add_to_cart" value="Add to cart" class="btn btn-success">';?>    </td>
+          <td > <?php echo $row['quantity'];?>    </td>
+          
+            <?php if($user_data['user_type'] =="User"){ ?> 
+                <td > <?php echo '<input  type="number" name="rquantity" style="width: 70px; height: 20px:">';?></td >    
+    <?php} ?>
+    <?php }else{
+} ?>
+
+             <?php if($user_data['user_type'] =="User"){ ?> 
+                <td ><?php echo'<input type="submit" name="add_to_cart" value="Add to cart" class="btn btn-success">';?></td >
+    <?php} ?>
+    <?php }else{
+} ?>
 
  
          </tr>

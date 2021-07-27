@@ -55,6 +55,7 @@ session_start();
               <li><a href="">CONTACT</a></li>
              
               <li><a href="profile.php">PROFILE</a></li>
+
               <li><a href="logout.php">LOG OUT</a></li>
             
                <li><a class="btn btn-secondary dropdown-toggle" href="" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false" style ="background-color:rgba(0,0,0,0.01);border: 0px">CATEGORIES
@@ -84,7 +85,11 @@ session_start();
      <a href="bookupload.php" data-toggle="tooltip" data-placement="bottom" title="" data-original-title="instagram" data-abc="true" style="witdh:50px"><i class="mdi mdi-cloud-upload" aria-hidden="true"style ="color:rgb(6, 209, 245);font-size:30px"></i></a></li>
     <?php} ?>
     <?php }else{
-	
+} ?>
+<?php if($user_data['user_type'] =="User"){ ?> 
+     <a href="cart.php" data-toggle="tooltip" data-placement="bottom" title="" data-original-title="instagram" data-abc="true" style="witdh:50px"><i class="mdi mdi-cart" aria-hidden="true"style ="color:rgb(6, 209, 245);font-size:30px"></i></a></li>
+    <?php} ?>
+    <?php }else{
 } ?>
 
   
