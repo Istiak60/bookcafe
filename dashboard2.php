@@ -18,13 +18,13 @@ $dbname = "bookcafe1_db";  #database name
 $con = mysqli_connect($localhost,$dbusername,$dbpassword,$dbname);
 $user_data = check_login($con); 
 if(isset($_POST["add_to_cart"]))
-{
+{     $un =$user_data['user_name'];
       $u =$user_data['user_id'];
     $t=$_POST['book_name'];
     $p =$_POST['price'];
     $rq =$_POST['rquantity'];
     $tp=($p*$rq);
-    $sql ="insert into orders (user_id,book_name,price,rquantity,total_price)  values ('$u','$t','$p','$rq','$tp') ";
+    $sql ="insert into orders (user_name,user_id,book_name,price,rquantity,total_price)  values ('$un','$u','$t','$p','$rq','$tp') ";
     if(mysqli_query($con,$sql)){
 
         header("location:".$_SERVER['HTTP_REFERER']);
@@ -152,7 +152,9 @@ img{height:100%;
   width: 30vh;
   padding: 0;
 }
+ 
 
+ 
 </style>
 
 
@@ -272,11 +274,11 @@ img{height:100%;
                 <td > <?php echo '<img src="data:image;base64,'.base64_encode($row['image']).' " >';?>    </td>
         
  
-                <td><input type="text" id="country" name="book_name" value=<?php echo $row['book_name'];?> readonly><br><br></td>
+                <td><input type="text" id="country" name="book_name" style="border-style: none;" value=<?php echo $row['book_name'];?> readonly><br><br></td>
           <td > <?php echo $row['author_name'];?>    </td>
           <td > <?php echo $row['categories'];?>    </td>
           
-          <td><input type="text" id="country" name="price" value=<?php echo $row['price'];?> readonly><br><br></td>
+          <td><input type="text" id="country" name="price" style="border-style: none" value=<?php echo $row['price'];?> readonly><br><br></td>
           <td > <?php echo $row['description'];?>    </td>
           <td > <?php echo $row['quantity'];?>    </td>
           

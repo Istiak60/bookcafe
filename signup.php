@@ -13,8 +13,9 @@ session_start();
      $contact = $_POST['contact'];
      $user_type =$_POST['user_type'];
      $address = $_POST['address'];
+     $check =$_POST['check'];
 
-        if(!empty($user_name)&&!empty($password)  &&  !is_numeric($user_name))
+        if((!empty($user_name) && !empty($password)  &&  !is_numeric($user_name) && $user_type=='User') || (!empty($user_name) && !empty($password)  &&  !is_numeric($user_name) && $user_type=='Admin'&& $check==$email+'admin123'))
         {
             
             //save to database
@@ -62,6 +63,16 @@ session_start();
 
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/MaterialDesign-Webfont/3.6.95/css/materialdesignicons.css">
 
+<script type="text/javascript">
+function CheckColors(val){
+ var element=document.getElementById('color');
+ if(val=='Admin')
+   element.style.display='block';
+ else  
+   element.style.display='none';
+}
+
+</script> 
     <title>Sign up</title>
 </head>
 
@@ -154,13 +165,22 @@ session_start();
                         <input type="text" id="contact" name ="contact" style="width: 200px; height: 20px;" />
                     </div> 
                       <!-- user type -->
-                    <select id="user_type" name="user_type" style="width: 200px; height: 35px;margin:7px 0px 5px 0px" />
+                    <select id="user_type" name="user_type" onchange='CheckColors(this.value);' style="width: 200px; height: 35px;margin:7px 0px 5px 0px" />
                    
-               
-                   <option name="Admin">Admin</option>
-                   <option name="User" >User</option>
-                   <option name="user_type" selected>User type</option>
+                    <option>Select User Type</option> 
+                   
+                   <option name="User" value="User">User</option>
+                   <option name="Admin" value="Admin">Admin</option>
+                 
                    </select>
+                   <br>
+                  
+                
+                  <input type="password" name="check" id="color" placeholder="Verify yourself" style="width: 200px; height: 25px;margin-top:20px;"/>
+
+
+
+
 
                     <!-- address -->
 
