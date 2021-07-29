@@ -78,7 +78,11 @@ if($_SERVER['REQUEST_METHOD']== "POST")
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/MaterialDesign-Webfont/3.6.95/css/materialdesignicons.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
-
+    <style>
+    .header{
+        height:180vh;
+    }
+</style>
     <title>Profile Edit</title>
 </head>
 
@@ -94,8 +98,8 @@ if($_SERVER['REQUEST_METHOD']== "POST")
             <i class="fa fa-times" onclick="hidemenu()"></i>
             <ul style="margin-top: -100px" >
           
-              <li><a href="">ABOUT</a></li>
-              <li><a href="">CONTACT</a></li>
+              <li><a href="#footer">ABOUT</a></li>
+              <li><a href="#footer">CONTACT</a></li>
              
               <li><a href="profile.php">PROFILE</a></li>
               <li><a href="logout.php">LOG OUT</a></li>
@@ -144,7 +148,7 @@ if($_SERVER['REQUEST_METHOD']== "POST")
     
 <center >
 <p1 style="font-size:40px;color:white;"> Hello </p1> <br />
-           <p style="font-size:40px;color:white;margin-bottom:-50px;"> 
+           <p style="font-size:40px;color:aqua;margin-bottom:-50px;"> 
 
             <?php echo $user_data['user_name']; ?>
           </p>
@@ -243,7 +247,85 @@ if($_SERVER['REQUEST_METHOD']== "POST")
     </center>
 
 </section>
+ <!-- Footer -->
+  
+ <footer class="bg-dark text-center text-white"id="footer">
+ 
+ <h4 style="padding:20px;font-size:30px;font-weight:bold;" >About Us</h4>
+   <p>
+   We are trying to give books from our book cafe very easily and at low cost.<br> Since people are
+    not interested in reading books now, we have taken this initiative.<br> Hopefully we will be
+                   able to deliver books to everyone's doorsteps
+   </p>
 
+
+ <!-- Grid container -->
+ <div class="container p-4 pb-0">
+   <!-- Section: Social media -->
+   <section class="mb-4">
+     <!-- Facebook -->
+     <a
+       class="btn btn-primary btn-floating m-1"
+       style="background-color: #3b5998;"
+       href="#!"
+       role="button"
+       ><i class="fa fa-facebook-f"></i
+     ></a>
+
+     <!-- Twitter -->
+     <a
+       class="btn btn-primary btn-floating m-1"
+       style="background-color: #55acee;"
+       href="#!"
+       role="button"
+       ><i class="fa fa-twitter"></i
+     ></a>
+
+     <!-- Google -->
+     <a
+       class="btn btn-primary btn-floating m-1"
+       style="background-color: #dd4b39;"
+       href="#!"
+       role="button"
+       ><i class="fa fa-google"></i
+     ></a>
+
+     <!-- Instagram -->
+     <a
+       class="btn btn-primary btn-floating m-1"
+       style="background-color: #ac2bac;"
+       href="#!"
+       role="button"
+       ><i class="fa fa-instagram"></i
+     ></a>
+
+     <!-- Linkedin -->
+     <a
+       class="btn btn-primary btn-floating m-1"
+       style="background-color: #0082ca;"
+       href="#!"
+       role="button"
+       ><i class="fa fa-linkedin"></i
+     ></a>
+     <!-- Github -->
+     <a
+       class="btn btn-primary btn-floating m-1"
+       style="background-color:  #ac2bac;"
+       href="#!"
+       role="button"
+       ><i class="fa fa-github"></i
+     ></a>
+   </section>
+   <!-- Section: Social media -->
+ </div>
+ <!-- Grid container -->
+ <p>Made With <i class="fa fa-heart-o"></i> By Books & Souls</p>
+ <!-- Copyright -->
+ <div class="text-center p-3" style="background-color: rgba(128, 128, 128, 0.2);">
+
+   
+ <!-- Copyright -->
+</footer>
 
 
 

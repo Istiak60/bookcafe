@@ -79,14 +79,7 @@ if($_SERVER['REQUEST_METHOD']== "POST")
 </head>
 
 <body>
-<section class="header">
-    
-      
-     
-    
-   
-    
-    
+<section class="header" style="padding-bottom:30px;"> 
     <nav>
         <div class="book_icon">
             <i class="fas fa-book-open"></i>
@@ -95,8 +88,8 @@ if($_SERVER['REQUEST_METHOD']== "POST")
       <div class="nav-links" id="navlinks">
         <i class="fa fa-times" onclick="hidemenu()"></i>
         <ul>
-          <li><a href="">ABOUT</a></li>
-          <li><a href="">CONTACT</a></li>
+        <li><a href="#footer">ABOUT</a></li>
+           <li><a href="#footer">CONTACT</a></li>
           <li><a href="signup.php">SIGN UP</a></li>
          
         </li></ul> 
@@ -109,7 +102,7 @@ if($_SERVER['REQUEST_METHOD']== "POST")
     </nav>
     <center>
 
-<div class="container" style="background-color:rgb(0,0,0,0.5);width:500px" >
+<div class="container" style="background-color:rgb(0,0,0,0.5);width:500px;margin-bottom:30px;" >
     <form method="post">
 
         <h1>Sign In </h1>
@@ -131,17 +124,88 @@ if($_SERVER['REQUEST_METHOD']== "POST")
 
 
 
-    <!-- <div class="text-box">
-      <h1>Book Cafee</h1>
-      
-       <p1> Hello </p1> <br>
-       <p> 
-
-        Md.Istiak Sharif          </p>
-      <a href="" class="hero-btn">Visit US To Know More</a>
-    </div> -->
+   
   </section>
+ 
+ <!-- Footer -->
+  
+ <footer class="bg-dark text-center text-white" id="footer" style="padding-top:10px;">
+ 
+ <h4 style="padding:20px;font-size:30px;font-weight:bold;" >About Us</h4>
+   <p style="margin-bottom:-100px;">
+   We are trying to give books from our book cafe very easily and at low cost.<br> Since people are
+    not interested in reading books now, we have taken this initiative.<br> Hopefully we will be
+                   able to deliver books to everyone's doorsteps
+   </p>
 
+
+ <!-- Grid container -->
+ <div class="container p-4 pb-0"style="background-color:#212529;box-shadow:none;padding-top:1000px;">
+   <!-- Section: Social media -->
+   <section class="mb-4">
+     <!-- Facebook -->
+     <a
+       class="btn btn-primary btn-floating m-1"
+       style="background-color: #3b5998;"
+       href="#!"
+       role="button"
+       ><i class="fa fa-facebook-f"></i
+     ></a>
+
+     <!-- Twitter -->
+     <a
+       class="btn btn-primary btn-floating m-1"
+       style="background-color: #55acee;"
+       href="#!"
+       role="button"
+       ><i class="fa fa-twitter"></i
+     ></a>
+
+     <!-- Google -->
+     <a
+       class="btn btn-primary btn-floating m-1"
+       style="background-color: #dd4b39;"
+       href="#!"
+       role="button"
+       ><i class="fa fa-google"></i
+     ></a>
+
+     <!-- Instagram -->
+     <a
+       class="btn btn-primary btn-floating m-1"
+       style="background-color: #ac2bac;"
+       href="#!"
+       role="button"
+       ><i class="fa fa-instagram"></i
+     ></a>
+
+     <!-- Linkedin -->
+     <a
+       class="btn btn-primary btn-floating m-1"
+       style="background-color: #0082ca;"
+       href="#!"
+       role="button"
+       ><i class="fa fa-linkedin"></i
+     ></a>
+     <!-- Github -->
+     <a
+       class="btn btn-primary btn-floating m-1"
+       style="background-color:  #ac2bac;"
+       href="#!"
+       role="button"
+       ><i class="fa fa-github"></i
+     ></a>
+   </section>
+   <!-- Section: Social media -->
+ </div>
+ <!-- Grid container -->
+ <p>Made With <i class="fa fa-heart-o"></i> By Books & Souls</p>
+ <!-- Copyright -->
+ <div class="text-center p-3" style="background-color: rgba(128, 128, 128, 0.2);">
+
+   
+ <!-- Copyright -->
+</footer>
 
 </body>
 

@@ -1,56 +1,23 @@
 <?php 
-$localhost = "localhost"; #localho
-$dbusername = "root"; #username of phpmyadmin
-$dbpassword = "";  #password of phpmyadmin
-$dbname = "bookcafe1_db";  #database name
- 
-#connection string
-$conn = mysqli_connect($localhost,$dbusername,$dbpassword,$dbname);
- 
-if (isset($_POST["submit"]))
- {
+session_start();
 
- $t=$_POST['title'];
- $a=$_POST['author'];
- $c =$_POST['Categories'];
- $p =$_POST['price'];
- $d =$_POST['description'];
-//$fn=$_FILES['image']['name'];
-$fn=addslashes(file_get_contents($_FILES["image"]['tmp_name']));
-//$tm=$_FILES['image']['tmp_name']; 
-$fn1=$_FILES['pdf']['name'];
-//$fn1=addslashes(file_get_contents($_FILES["pdf"]['tmp_name1']));
-$tm1=$_FILES['pdf']['tmp_name1']; 
-move_uploaded_file($tm,"bookimg/".$fn);
-move_uploaded_file($tm1,"bookimg/".$fn1);
+	include("connection.php");
+	include("functions.php");
 
-$sql ="insert into books (book_name,author_name,image,pdf,Categories,price,description)  values ('$t','$a','$fn','$fn1','$c','$p','$d') ";
+	$user_data = check_login($con);
 
-
-    if(mysqli_query($conn,$sql)){
- 
-        header("Location: dashboard.php");
-    }
-    else{
-        echo "Error";
-    }
-}
- 
- 
 ?>
+
+
+
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    
-    <link rel="stylesheet" type="text/css" href="bookupload.css">
-
+    <title>Dashboard</title>
     <link rel="stylesheet" href="style.css">
-    
     <link
       rel="stylesheet"
       type="text/css"
@@ -66,129 +33,234 @@ $sql ="insert into books (book_name,author_name,image,pdf,Categories,price,descr
 
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/MaterialDesign-Webfont/3.6.95/css/materialdesignicons.css">
 
-    <title>Book Uploads</title>
 </head>
-
 <body>
+    <section class="header">
+    
+      
+     
+    
+   
+    
+    
+        <nav>
+            <div class="book_icon">
+                <i class="fas fa-book-open"></i>
+                <h2>Book Cafee</h2>
+              </div>
+          <div class="nav-links" id="navlinks">
+            <i class="fa fa-times" onclick="hidemenu()"></i>
+            <ul>
+              <li><a href="">ABOUT</a></li>
+              <li><a href="">CONTACT</a></li>
+             
+              <li><a href="profile.php">PROFILE</a></li>
+              <li><a href="logout.php">LOG OUT</a></li>
+            
+               <li><a class="btn btn-secondary dropdown-toggle" href="" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false" style ="background-color:rgba(0,0,0,0.01);border: 0px">CATEGORIES
+  </a>
 
-<section class="header"style="height:180vh">
-   <nav>
-        <div class="book_icon">
-            <i class="fas fa-book-open"></i>
-            <h2>Book Cafee</h2>
+  <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="dropdownMenuLink">
+    <li><a class="dropdown-item"  href="dashboard2.php?item=Bangla Literature">Bangla Literature</a></li>
+    <li><a class="dropdown-item" href="dashboard2.php?item=Novels">Nobels</a></li>
+    <li><a class="dropdown-item" href="dashboard2.php?item=Poems">Poems</a></li>
+    <li><a class="dropdown-item" href="dashboard2.php?item=Story">Story</a></li>
+    <li><a class="dropdown-item"  href="dashboard2.php?item=Fantasy">Fantasy</a></li>
+    <li><a class="dropdown-item" href="dashboard2.php?item=Horror">Horror</a></li>
+    <li><a class="dropdown-item" href="dashboard2.php?item=Advanture">Advanture</a></li>
+    <li><a class="dropdown-item" href="dashboard2.php?item=Comics">Comics</a></li>
+    <li><a class="dropdown-item" href="dashboard2.php?item=Cookings">Cookings</a></li>
+    <li><a class="dropdown-item" href="dashboard2.php?item=Journals">Journals</a></li>
+  
+  
+  
+  </ul></li>
+  <li> 
+  
+  
+  <!-- if condition to check user type--> 
+ 
+    <?php if($user_data['user_type'] =="Admin"){ ?> 
+     <a href="bookupload.php" data-toggle="tooltip" data-placement="bottom" title="" data-original-title="instagram" data-abc="true" style="witdh:50px"><i class="mdi mdi-cloud-upload" aria-hidden="true"style ="color:rgb(6, 209, 245);font-size:30px"></i></a></li>
+    <?php} ?>
+    <?php }else{
+	
+} ?>
+
+  
+            </ul> 
+           
+
           </div>
-      <div class="nav-links" id="navlinks" >
-        <i class="fa fa-times" onclick="hidemenu()"></i>
-        <ul>
-           <li><a href="">ABOUT</a></li>
-           <li><a href="">CONTACT</a></li>
-           <li><a href="profile.php">PROFILE</a></li>
-            <li><a href="logout.php">LOG OUT</a></li>
-            <li><a class="btn btn-secondary dropdown-toggle" href="" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false" style ="background-color:rgba(0,0,0,0.01);border: 0px">CATEGORIES
-                </a>
+          
+          
+          <i class="fa fa-bars" onclick="showmenu()"></i>
+        </nav>
+  
 
-          <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="dropdownMenuLink">
-            <li><a class="dropdown-item"  href="dashboard2.php">Bangla Literature</a></li>
-            <li><a class="dropdown-item" href="#">Nobels</a></li>
-            <li><a class="dropdown-item" href="#">Poems</a></li>
-            <li><a class="dropdown-item" href="#">Story</a></li>
-            <li><a class="dropdown-item"  href="#">Fantasy</a></li>
-            <li><a class="dropdown-item" href="#">Horror</a></li>
-            <li><a class="dropdown-item" href="#">Advanture</a></li>
-            <li><a class="dropdown-item" href="#">Comics</a></li>
-            <li><a class="dropdown-item" href="#">Cookings</a></li>
-            <li><a class="dropdown-item" href="#">Journals</a></li> 
-         </ul></li>     
-    </li></ul> 
 
+
+  
+        <div class="text-box">
+          <h1>Book Cafee</h1>
+          
+           <p1> Hello </p1> <br />
+           <p> 
+
+            <?php echo $user_data['user_name']; ?>
+          </p>
+          <a href="" class="hero-btn">Visit US To Know More</a>
+        </div>
+      </section>
+      <br>
+<!-- start -->
+
+<center>
+<div id="carouselExampleIndicators" class="carousel slide" data-bs-ride="carousel" style="max-width:700px;max-height:393x;">
+  <div class="carousel-indicators">
+    <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+    <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1" aria-label="Slide 2"></button>
+    <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="2" aria-label="Slide 3"></button>
     
-      
-    </div>
-      
-      
-      <i class="fa fa-bars" onclick="showmenu()"></i>
-    </nav>
-    <center>
- <div class="details"style="height:1100px;width:550px; background-color:rgba(255,255,255,0.5)">
-<form method="post" enctype="multipart/form-data">
-<h1><b1>Book Details</b1></h3>
+    <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="3" aria-label="Slide 4"></button>
 
-<div class="mywork">
-    <div class="mywork1">
-    <label>BOOK NAME</label>
-    <br><br>
-    <input type="text" name="title" style="width: 300px; height: 20px:margin-left:20px">
-    <br>
+  </div>
+  <div class="carousel-inner">
+    <div class="carousel-item active">
+      <img src="img/BookCafee.jpg" class="d-block w-100" alt="..."style="width:30px">
+    </div>
+    <div class="carousel-item">
+      <img src="img/comics.jpg" class="d-block w-100" alt="...">
+    </div>
+    <div class="carousel-item">
+      <img src="img/offer.png" class="d-block w-100" alt="...">
+    </div>
+   
+    <div class="carousel-item">
+      <img src="img/horror.jpg" class="d-block w-100" alt="...">
+    </div>
+     
+  </div>
+  <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
+    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+    <span class="visually-hidden">Previous</span>
+  </button>
+  <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="next">
+    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+    <span class="visually-hidden">Next</span>
+  </button>
 </div>
 
-    <div class="mywork1">
-    <label>ATHOUR</label>
-    <br><br>
-    <input  type="text" name="author" style="width: 300px; height: 20px:">
-    <br>
-    
-    </div>
-    <div class="mywork1">
-     <label>BOOK IMAGE</label>
-     <br><br>
-    <input type="File" name="image" style="width: 300px; height: 20px:">
-    <br>
-    </div>
-    <div class="mywork1">
-    <label>BOOK PDF</label>
-    <br><br>
-    <input type="File" name="pdf"style="width: 300px; height: 20px:">
-    <br>
-    </div>
-    <select id="Categories" name="Categories" style="width: 300px; height: 35px;" />
-                   
-                    <option name="Bangla Literature">Bangla Literature</option>
-                    <option name="Nobels">Nobels</option>
-                    <option name="Poems">Poems</option> 
-                    <option name="Fantasy">Fantasy</option>
-                    <option name="Horror">Horror</option>
-                    <option name="Advanture">Advanture</option>
-                    <option name="Comics">Comics</option>
-                    <option name="Cookings">Cookings</option>
-                    <option name="Journals">Journals</option>
-                    <option name="Story" >Story</option>
-                    <option name="CATEGORIES" selected>CATEGORIES</option>
-                    </select>
-               <br><br>
-    <div class="mywork1">
-    <label>PRICE</label>
-    <br><br>
-    <input  type="text" name="price" style="width: 300px; height: 20px:">
-    <br>
-    
-    </div>
-
-    <div class="mywork1">
-    <label>DESCRIPTION</label>
-    <br><br>
-    <input type="text" name="description"style="width: 300px; height: 20px:">
-    
-    </div>
-    <br>              
-   
-
-
-    <input type="submit" name="submit" value="upload" style="background-color: rgb(114, 12, 76);color:white; border-radius: 5px;">
-   
-
-    </div>
-    </div> 
-</form>
-</div>
 </center>
-  
+      <!-- DEMO BOOK -->
+      <section class="books">
+        <h1>SOME BOOKS</h1>
+        <p>
+        Some of Best Selling & Reviewed Books
+        </p>
+        <div class="row1">
+          <div class="book-col">
+          <a href="https://en.wikipedia.org/wiki/Devi"> <img src="img/humaun-1.jpg" /></a>
+            <h3>Devi</h3>
+            <p>
+              Humayun Ahmed
+            </p>
+          </div>
+          <div class="book-col">
+          <a href="https://en.wikipedia.org/wiki/Gitanjali"> <img src="img/rabindra-1.jpg" /></a>
+            <h3>Geetanjali</h3>
+            <p>
+              Rabindranath Tagore
+            </p>
+          </div>
+          <div class="book-col">
+           <a href="https://alormichilbd.com/2020/04/26/ghumer-ghore/"> <img src="img/kazi-1.jpg" /></a>
+            <h3>Ghumer Ghore</h3>
+            <p>
+              Kazi Nazrul Islam
+            </p>
+          </div>
+          <div class="book-col">
+            <a href="https://en.wikipedia.org/wiki/The_Woman_with_No_Name"><img src="img/english-1.jpg" /></a>
+            <h3>The Girl With <br>No Name  </h3>
+            <p>
+              Lisa Regan
+            </p>
+          </div>
+          <div class="book-col">
+           <a href="https://en.wikipedia.org/wiki/The_Ocean_at_the_End_of_the_Lane"><img src="img/english-2.jpg" /></a>
+            <h3>The ocean at the end of the lane</h3>
+            <p>
+              Neil Gaiman
+            </p>
+          </div>
+        </div>
+        <div class="row2">
+          <div class="book-col">
+          <a href="https://en.wikipedia.org/wiki/Dark_Road">  <img src="img/english-3.jpg" /></a>
+            <h3>The Dark Road</h3>
+            <p>
+              Ma Jian
+            </p>
+          </div>
+          <div class="book-col">
+          <a href="https://bn.wikipedia.org/wiki/%E0%A6%B8%E0%A6%9E%E0%A7%8D%E0%A6%9A%E0%A6%BF%E0%A6%A4%E0%A6%BE_(%E0%A6%95%E0%A6%BE%E0%A6%AC%E0%A7%8D%E0%A6%AF%E0%A6%97%E0%A7%8D%E0%A6%B0%E0%A6%A8%E0%A7%8D%E0%A6%A5)"> <img src="img/kazi-2.jpg" /></a>
+            <h3>Sanchita</h3>
+            <p>
+              Kazi Nazrul Islam
+            </p>
+          </div>
+          <div class="book-col">
+          <a href="https://en.wikipedia.org/wiki/Chaturanga_(Tagore_novel)"><img src="img/rabindra-2.jpg" /></a>
+            <h3>Chaturanga</h3>
+            <p>
+              Rabindranath Tagore
+            </p>
+          </div>
+          <div class="book-col">
+          <a href="https://bn.wikipedia.org/wiki/%E0%A6%B9%E0%A6%BF%E0%A6%AE%E0%A7%81_(%E0%A6%9A%E0%A6%B0%E0%A6%BF%E0%A6%A4%E0%A7%8D%E0%A6%B0)"><img src="img/humaun-2.jpg" /></a>
+            <h3>Himu Samagera</h3>
+            <p>
+              Humayun Ahmed
+            </p>
+          </div>
+          <div class="book-col">
+          <a href="https://en.wikipedia.org/wiki/Kabuliwala_(short_story)"><img src="img/rabindra-3.jpg" /></a>
+            <h3>Kabuliwala</h3>
+            <p>
+              Rabindranath Tagore
+            </p>
+          </div>
+        </div>
+      </section>
 
-
-
-  
+  <!-- Footer -->
+  <section class="footer">
+    <h4>About Us</h4>
+    <p>
+    We are trying to give books from our book cafe very easily and at low cost.<br> Since people are
+     not interested in reading books now, we have taken this initiative.<br> Hopefully we will be
+                    able to deliver books to everyone's doorsteps
+    </p>
+    <div class="icons">
+      <i class="fa fa-facebook"></i>
+      <i class="fa fa-twitter"></i>
+      <i class="fa fa-instagram"></i>
+      <i class="fa fa-linkedin"></i>
+    </div>
+    <p>made with <i class="fa fa-heart-o"></i> by BOOKS & SOULS</p>
   </section>
 
 
+      <!-- Javascript for toggole menu  -->
+    <script>
+        var navlinks = document.getElementById("navlinks");
+        function showmenu() {
+          navlinks.style.right = "0";
+        }
+        function hidemenu() {
+          navlinks.style.right = "-200px";
+        }
+      </script>
 </body>
-
 </html>

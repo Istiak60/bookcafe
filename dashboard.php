@@ -33,6 +33,10 @@ session_start();
 
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/MaterialDesign-Webfont/3.6.95/css/materialdesignicons.css">
 
+
+
+
+
 </head>
 <body>
     <section class="header">
@@ -51,8 +55,8 @@ session_start();
           <div class="nav-links" id="navlinks">
             <i class="fa fa-times" onclick="hidemenu()"></i>
             <ul>
-              <li><a href="">ABOUT</a></li>
-              <li><a href="">CONTACT</a></li>
+            <li><a href="#footer">ABOUT</a></li>
+           <li><a href="#footer">CONTACT</a></li>
              
               <li><a href="profile.php">PROFILE</a></li>
 
@@ -114,7 +118,7 @@ session_start();
 
             <?php echo $user_data['user_name']; ?>
           </p>
-          <a href="" class="hero-btn">Visit US To Know More</a>
+          <a href="#footer" class="hero-btn">Visit US To Know More</a>
         </div>
       </section>
       <br>
@@ -159,103 +163,139 @@ session_start();
 </center>
       <!-- DEMO BOOK -->
       <section class="books">
-        <h1>SOME BOOKS</h1>
-        <p>
+        <h1 style="font-size:40px;
+     font-weight:bold;">Some Books</h1>
+        <p style="padding-bottom:10px;">
         Some of Best Selling & Reviewed Books
         </p>
-        <div class="row1">
-          <div class="book-col">
-            <img src="img/humaun-1.jpg" />
-            <h3>Devi</h3>
-            <p>
-              Humayun Ahmed
-            </p>
-          </div>
-          <div class="book-col">
-            <img src="img/rabindra-1.jpg" />
-            <h3>Geetanjali</h3>
-            <p>
-              Rabindranath Tagore
-            </p>
-          </div>
-          <div class="book-col">
-            <img src="img/kazi-1.jpg" />
-            <h3>Ghumer Ghore</h3>
-            <p>
-              Kazi Nazrul Islam
-            </p>
-          </div>
-          <div class="book-col">
-            <img src="img/english-1.jpg" />
-            <h3>The Girl With <br>No Name  </h3>
-            <p>
-              Lisa Regan
-            </p>
-          </div>
-          <div class="book-col">
-            <img src="img/english-2.jpg" />
-            <h3>The ocean at the end of the lane</h3>
-            <p>
-              Neil Gaiman
-            </p>
-          </div>
-        </div>
-        <div class="row2">
-          <div class="book-col">
-            <img src="img/english-3.jpg" />
-            <h3>The Dark Road</h3>
-            <p>
-              Ma Jian
-            </p>
-          </div>
-          <div class="book-col">
-            <img src="img/kazi-2.jpg" />
-            <h3>Sanchita</h3>
-            <p>
-              Kazi Nazrul Islam
-            </p>
-          </div>
-          <div class="book-col">
-            <img src="img/rabindra-2.jpg" />
-            <h3>Chaturanga</h3>
-            <p>
-              Rabindranath Tagore
-            </p>
-          </div>
-          <div class="book-col">
-            <img src="img/humaun-2.jpg" />
-            <h3>Himu Samagera</h3>
-            <p>
-              Humayun Ahmed
-            </p>
-          </div>
-          <div class="book-col">
-            <img src="img/rabindra-3.jpg" />
-            <h3>Kabuliwala</h3>
-            <p>
-              Rabindranath Tagore
-            </p>
-          </div>
-        </div>
+
+        <!-- TEST -->
+        <?php
+        $i=0;
+        $res=mysqli_query($con,"SELECT * FROM `books`;");
+        $rows = $res->num_rows; 
+        if($rows > 0) {
+          $cols = 3;    // Define number of columns
+          $counter = 1;     // Counter used to identify if we need to start or end a row
+          $nbsp = $cols - ($rows % $cols);    // Calculate the number of blank columns
+          $run=0;
+
+          $container_class = 'container-fluid';  // Parent container class name
+          $row_class = 'row';    // Row class name
+          $col_class = 'col-sm-4'; // Column class name
+       
+              echo '<div class="'.$container_class.'">'; 
+        while($row= mysqli_fetch_array($res)) 
+             {    $run++;
+                if(($counter % $cols) == 1 ) {    // Check if it's new row
+              echo '<div class="'.$row_class.'">';	// Start a new row
+            }            
+         if($run<10)  {
+            echo '<div class="'.$col_class.'">
+            <a href="dashboard2.php?item='.$row['categories'].' "> <img src="data:image;base64,'.base64_encode($row['image']).' "width="150" height="160" ></a>
+             <h3>'.$row['book_name'].'</h3>
+                  <p3>'.$row['author_name'].'</p3>         
+                  <p3><br><br><br></p3>
+                  </div>';   
+          }
+                  // Column with content
+    if(($counter % $cols) == 0) { // If it's last column in each row then counter remainder will be zero
+                                   echo '</div>';	 //  Close the row
+                                }
+                            $counter++;    // Increase the counter
+               }
+                $res->free();
+            if($nbsp > 0) { // Adjustment to add unused column in last row if they exist
+              for ($i = 0; $i < $nbsp; $i++)	{ 
+                echo '<div class="'.$col_class.'">&nbsp;</div>';		
+                      }
+                echo '</div>';  // Close the row
+                    }
+                echo '</div>';  // Close the container
+                    }
+                    ?>
+        
       </section>
 
   <!-- Footer -->
-  <section class="footer">
-    <h4>About Us</h4>
+  
+  <footer class="bg-dark text-center text-white"id="footer">
+ 
+  <h4 style="padding:20px;font-size:30px;font-weight:bold;" >About Us</h4>
     <p>
     We are trying to give books from our book cafe very easily and at low cost.<br> Since people are
      not interested in reading books now, we have taken this initiative.<br> Hopefully we will be
                     able to deliver books to everyone's doorsteps
     </p>
-    <div class="icons">
-      <i class="fa fa-facebook"></i>
-      <i class="fa fa-twitter"></i>
-      <i class="fa fa-instagram"></i>
-      <i class="fa fa-linkedin"></i>
-    </div>
-    <p>made with <i class="fa fa-heart-o"></i> by BOOKS & SOULS</p>
-  </section>
+ 
+ 
+  <!-- Grid container -->
+  <div class="container p-4 pb-0">
+    <!-- Section: Social media -->
+    <section class="mb-4">
+      <!-- Facebook -->
+      <a
+        class="btn btn-primary btn-floating m-1"
+        style="background-color: #3b5998;"
+        href="#!"
+        role="button"
+        ><i class="fa fa-facebook-f"></i
+      ></a>
 
+      <!-- Twitter -->
+      <a
+        class="btn btn-primary btn-floating m-1"
+        style="background-color: #55acee;"
+        href="#!"
+        role="button"
+        ><i class="fa fa-twitter"></i
+      ></a>
+
+      <!-- Google -->
+      <a
+        class="btn btn-primary btn-floating m-1"
+        style="background-color: #dd4b39;"
+        href="#!"
+        role="button"
+        ><i class="fa fa-google"></i
+      ></a>
+
+      <!-- Instagram -->
+      <a
+        class="btn btn-primary btn-floating m-1"
+        style="background-color: #ac2bac;"
+        href="#!"
+        role="button"
+        ><i class="fa fa-instagram"></i
+      ></a>
+
+      <!-- Linkedin -->
+      <a
+        class="btn btn-primary btn-floating m-1"
+        style="background-color: #0082ca;"
+        href="#!"
+        role="button"
+        ><i class="fa fa-linkedin"></i
+      ></a>
+      <!-- Github -->
+      <a
+        class="btn btn-primary btn-floating m-1"
+        style="background-color:  #ac2bac;"
+        href="#!"
+        role="button"
+        ><i class="fa fa-github"></i
+      ></a>
+    </section>
+    <!-- Section: Social media -->
+  </div>
+  <!-- Grid container -->
+  <p>Made With <i class="fa fa-heart-o"></i> By Books & Souls</p>
+  <!-- Copyright -->
+  <div class="text-center p-3" style="background-color: rgba(128, 128, 128, 0.2);">
+ 
+    
+  <!-- Copyright -->
+</footer>
 
       <!-- Javascript for toggole menu  -->
     <script>

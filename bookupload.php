@@ -72,7 +72,7 @@ $sql ="insert into books (book_name,author_name,image,pdf,Categories,price,quant
 
 <body>
 
-<section class="header"style="height:200vh">
+<section class="header"style="height:220vh">
    <nav>
         <div class="book_icon">
             <i class="fas fa-book-open"></i>
@@ -82,8 +82,8 @@ $sql ="insert into books (book_name,author_name,image,pdf,Categories,price,quant
       <div class="nav-links" id="navlinks" >
         <i class="fa fa-times" onclick="hidemenu()"></i>
         <ul>
-           <li><a href="">ABOUT</a></li>
-           <li><a href="">CONTACT</a></li>
+        <li><a href="#footer">ABOUT</a></li>
+           <li><a href="#footer">CONTACT</a></li>
            <li><a href="profile.php">PROFILE</a></li>
             <li><a href="logout.php">LOG OUT</a></li>
             <li><a class="btn btn-secondary dropdown-toggle" href="" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false" style ="background-color:rgba(0,0,0,0.01);border: 0px">CATEGORIES
@@ -114,7 +114,7 @@ $sql ="insert into books (book_name,author_name,image,pdf,Categories,price,quant
       <i class="fa fa-bars" onclick="showmenu()"></i>
     </nav>
     <center>
- <div class="details"style="height:1200px;width:550px; background-color:rgba(255,255,255,0.5)">
+ <div class="details"style="height:1250px;width:550px; background-color:rgba(255,255,255,0.5)">
 <form method="post" enctype="multipart/form-data">
 <h1><b1>Book Details</b1></h3>
 
@@ -199,6 +199,88 @@ $sql ="insert into books (book_name,author_name,image,pdf,Categories,price,quant
 
   
   </section>
+
+ <!-- Footer -->
+  
+ <footer class="bg-dark text-center text-white" id="footer">
+ 
+ <h4 style="padding:20px;font-size:30px;font-weight:bold;" >About Us</h4>
+   <p>
+   We are trying to give books from our book cafe very easily and at low cost.<br> Since people are
+    not interested in reading books now, we have taken this initiative.<br> Hopefully we will be
+                   able to deliver books to everyone's doorsteps
+   </p>
+
+
+ <!-- Grid container -->
+ <div class="container p-4 pb-0">
+   <!-- Section: Social media -->
+   <section class="mb-4">
+     <!-- Facebook -->
+     <a
+       class="btn btn-primary btn-floating m-1"
+       style="background-color: #3b5998;"
+       href="#!"
+       role="button"
+       ><i class="fa fa-facebook-f"></i
+     ></a>
+
+     <!-- Twitter -->
+     <a
+       class="btn btn-primary btn-floating m-1"
+       style="background-color: #55acee;"
+       href="#!"
+       role="button"
+       ><i class="fa fa-twitter"></i
+     ></a>
+
+     <!-- Google -->
+     <a
+       class="btn btn-primary btn-floating m-1"
+       style="background-color: #dd4b39;"
+       href="#!"
+       role="button"
+       ><i class="fa fa-google"></i
+     ></a>
+
+     <!-- Instagram -->
+     <a
+       class="btn btn-primary btn-floating m-1"
+       style="background-color: #ac2bac;"
+       href="#!"
+       role="button"
+       ><i class="fa fa-instagram"></i
+     ></a>
+
+     <!-- Linkedin -->
+     <a
+       class="btn btn-primary btn-floating m-1"
+       style="background-color: #0082ca;"
+       href="#!"
+       role="button"
+       ><i class="fa fa-linkedin"></i
+     ></a>
+     <!-- Github -->
+     <a
+       class="btn btn-primary btn-floating m-1"
+       style="background-color:  #ac2bac;"
+       href="#!"
+       role="button"
+       ><i class="fa fa-github"></i
+     ></a>
+   </section>
+   <!-- Section: Social media -->
+ </div>
+ <!-- Grid container -->
+ <p>Made With <i class="fa fa-heart-o"></i> By Books & Souls</p>
+ <!-- Copyright -->
+ <div class="text-center p-3" style="background-color: rgba(128, 128, 128, 0.2);">
+
+   
+ <!-- Copyright -->
+</footer>
+
+
 
 
 </body>

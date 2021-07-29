@@ -16,6 +16,11 @@ session_start();
     <title>Profile</title>
     <link rel="stylesheet" href="profile.css">
     <link rel="stylesheet" href="style.css">
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"
+    />
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.bundle.min.js">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/MaterialDesign-Webfont/3.6.95/css/materialdesignicons.css">
@@ -25,7 +30,6 @@ session_start();
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
 
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/MaterialDesign-Webfont/3.6.95/css/materialdesignicons.css">
-
 </head>
 <body>
 <section class="header"style="height:120vh">
@@ -39,9 +43,8 @@ session_start();
           <div class="nav-links" id="navlinks">
             <i class="fa fa-times" onclick="hidemenu()"></i>
             <ul style="margin-top: -100px" >
-           <li><a href="">ABOUT</a></li>
-           <li><a href="">CONTACT</a></li>
-           <li><a href="profile.php">PROFILE</a></li>
+            <li><a href="#footer">ABOUT</a></li>
+           <li><a href="#footer">CONTACT</a></li>
             <li><a href="logout.php">LOG OUT</a></li>
             <li><a class="btn btn-secondary dropdown-toggle" href="" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false" style ="background-color:rgba(0,0,0,0.01);border: 0px">CATEGORIES
                 </a>
@@ -150,7 +153,85 @@ session_start();
     </div>
     </center>
   </section>
+ <!-- Footer -->
+  
+ <footer class="bg-dark text-center text-white" id="footer">
+ 
+ <h4 style="padding:20px;font-size:30px;font-weight:bold;" >About Us</h4>
+   <p>
+   We are trying to give books from our book cafe very easily and at low cost.<br> Since people are
+    not interested in reading books now, we have taken this initiative.<br> Hopefully we will be
+                   able to deliver books to everyone's doorsteps
+   </p>
 
+
+ <!-- Grid container -->
+ <div class="container p-4 pb-0">
+   <!-- Section: Social media -->
+   <section class="mb-4">
+     <!-- Facebook -->
+     <a
+       class="btn btn-primary btn-floating m-1"
+       style="background-color: #3b5998;"
+       href="#!"
+       role="button"
+       ><i class="fa fa-facebook-f"></i
+     ></a>
+
+     <!-- Twitter -->
+     <a
+       class="btn btn-primary btn-floating m-1"
+       style="background-color: #55acee;"
+       href="#!"
+       role="button"
+       ><i class="fa fa-twitter"></i
+     ></a>
+
+     <!-- Google -->
+     <a
+       class="btn btn-primary btn-floating m-1"
+       style="background-color: #dd4b39;"
+       href="#!"
+       role="button"
+       ><i class="fa fa-google"></i
+     ></a>
+
+     <!-- Instagram -->
+     <a
+       class="btn btn-primary btn-floating m-1"
+       style="background-color: #ac2bac;"
+       href="#!"
+       role="button"
+       ><i class="fa fa-instagram"></i
+     ></a>
+
+     <!-- Linkedin -->
+     <a
+       class="btn btn-primary btn-floating m-1"
+       style="background-color: #0082ca;"
+       href="#!"
+       role="button"
+       ><i class="fa fa-linkedin"></i
+     ></a>
+     <!-- Github -->
+     <a
+       class="btn btn-primary btn-floating m-1"
+       style="background-color:  #ac2bac;"
+       href="#!"
+       role="button"
+       ><i class="fa fa-github"></i
+     ></a>
+   </section>
+   <!-- Section: Social media -->
+ </div>
+ <!-- Grid container -->
+ <p>Made With <i class="fa fa-heart-o"></i> By Books & Souls</p>
+ <!-- Copyright -->
+ <div class="text-center p-3" style="background-color: rgba(128, 128, 128, 0.2);">
+
+   
+ <!-- Copyright -->
+</footer>
 
 </body>
 
