@@ -23,15 +23,23 @@ if(isset($_POST["add_to_cart"]))
     $t=$_POST['book_name'];
     $p =$_POST['price'];
     $rq =$_POST['rquantity'];
+    $q =$_POST['quantity'];
     $tp=($p*$rq);
+    $uq=$q-$rq;
     $sql ="insert into orders (user_name,user_id,book_name,price,rquantity,total_price)  values ('$un','$u','$t','$p','$rq','$tp') ";
+    
+    
+
     if(mysqli_query($con,$sql)){
+      
 
         header("location:".$_SERVER['HTTP_REFERER']);
     }
     else{
-        echo "Error";
+        echo 'error';
+        
     }
+    
 
 	if(isset($_SESSION["shopping_cart"]))
 	{
@@ -53,6 +61,7 @@ if(isset($_POST["add_to_cart"]))
 			echo '<script>alert("Item Already Added")</script>';
 		}
 	}
+  
 	else
 	{
 		$item_array = array(
@@ -277,16 +286,17 @@ img{height:100%;
                 <td > <?php echo '<img src="data:image;base64,'.base64_encode($row['image']).' " >';?>    </td>
         
  
-                <td><input type="text" id="country" name="book_name" style="border-style: none;" value=<?php echo $row['book_name'];?> readonly><br><br></td>
+                <td><input type="text" id="country" name="book_name" style="border-style: none;background:none;" value=<?php echo $row['book_name'];?> readonly><br><br></td>
           <td > <?php echo $row['author_name'];?>    </td>
           <td > <?php echo $row['categories'];?>    </td>
           
-          <td><input type="text" id="country" name="price" style="border-style: none" value=<?php echo $row['price'];?> readonly><br><br></td>
+          <td><input type="text" id="country" name="price" style="border-style: none;background:none;" value=<?php echo $row['price'];?> readonly><br><br></td>
           <td > <?php echo $row['description'];?>    </td>
-          <td > <?php echo $row['quantity'];?>    </td>
           
+          <td><input type="text" id="country" name="quantity" style="border-style: none;background:none;" value=<?php echo $row['quantity'];?> readonly><br><br></td>
+
             <?php if($user_data['user_type'] =="User"){ ?> 
-                <td > <?php echo '<input  type="number" name="rquantity" style="width: 70px; height: 20px:">';?></td >    
+                <td > <?php echo '<input  type="number" name="rquantity" style="width: 70px; height: 20px;background:none;">';?></td >    
     <?php} ?>
     <?php }else{
 } ?>
