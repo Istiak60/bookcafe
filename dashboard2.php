@@ -18,21 +18,24 @@ $dbname = "bookcafe1_db";  #database name
 $con = mysqli_connect($localhost,$dbusername,$dbpassword,$dbname);
 $user_data = check_login($con); 
 if(isset($_POST["add_to_cart"]))
-{     $un =$user_data['user_name'];
+{ $t=0;    
+  $un =$user_data['user_name'];
       $u =$user_data['user_id'];
-    $t=$_POST['book_name'];
+    $t=(string)$_POST['book_name'];
     $p =$_POST['price'];
     $rq =$_POST['rquantity'];
     $q =$_POST['quantity'];
     $tp=($p*$rq);
     $uq=$q-$rq;
+
     $sql ="insert into orders (user_name,user_id,book_name,price,rquantity,total_price)  values ('$un','$u','$t','$p','$rq','$tp') ";
-    
-    
+   $r1= mysqli_query($con,$sql);
+   $query ="UPDATE books SET quantity ='$uq'WHERE book_name='$t'; ";
+  $result = mysqli_query($con, $query);
 
-    if(mysqli_query($con,$sql)){
+    if($r1&&$result){
       
-
+      
         header("location:".$_SERVER['HTTP_REFERER']);
     }
     else{
@@ -49,7 +52,7 @@ if(isset($_POST["add_to_cart"]))
 			$count = count($_SESSION["shopping_cart"]);
 			$item_array = array(
 				'item_id'			=>	$_GET["id"],
-				'item_name'			=>	$_POST["book_name"],
+				'item_name'			=>(string)$_POST["book_name"],
 				'item_price'		=>	$_POST["price"],
 				'item_quantity'		=>	$_POST["rquantity"]
 			);
@@ -193,7 +196,7 @@ img{height:100%;
             <i class="fa fa-times" onclick="hidemenu()"></i>
             <ul style="margin-top: -100px" >
            <li><a href="#footer">ABOUT</a></li>
-           <li><a href="#footer">CONTACT</a></li>
+           <li><a href="https://goo.gl/maps/AqrUee1JsBt1yE2j7">CONTACT</a></li>
            <li><a href="profile.php">PROFILE</a></li>
             <li><a href="logout.php">LOG OUT</a></li>
             <li><a class="btn btn-secondary dropdown-toggle" href="" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false" style ="background-color:rgba(0,0,0,0.01);border: 0px">CATEGORIES
@@ -286,27 +289,35 @@ img{height:100%;
                 <td > <?php echo '<img src="data:image;base64,'.base64_encode($row['image']).' " >';?>    </td>
         
  
-                <td><input type="text" id="country" name="book_name" style="border-style: none;background:none;" value=<?php echo $row['book_name'];?> readonly><br><br></td>
-          <td > <?php echo $row['author_name'];?>    </td>
+                <td><input type="text" id="country" name="book_name" style="border-style: none;background:none;" value=<?php echo getFirstSentence($row['book_name']);?> readonly><br><br></td>
+                
+         
+                <td > <?php echo $row['author_name'];?>    </td>
           <td > <?php echo $row['categories'];?>    </td>
           
           <td><input type="text" id="country" name="price" style="border-style: none;background:none;" value=<?php echo $row['price'];?> readonly><br><br></td>
           <td > <?php echo $row['description'];?>    </td>
           
-          <td><input type="text" id="country" name="quantity" style="border-style: none;background:none;" value=<?php echo $row['quantity'];?> readonly><br><br></td>
+          <?php if($row['quantity']>0&&$user_data['user_type'] =="User"){ ?> 
+              <td><input type="text" id="country" name="quantity" style="border-style: none;background:none;" value=<?php echo $row['quantity'];?> readonly><br><br></td>
+              <td > <?php echo '<input  type="number" name="rquantity" style="width: 70px; height: 20px;background:none;">';?></td > 
+              <td ><?php echo'<input type="submit" name="add_to_cart" value="Add to cart" class="btn btn-success">';?></td >
+              <?php} ?>
+    <?php }else{
+} ?>
 
-            <?php if($user_data['user_type'] =="User"){ ?> 
-                <td > <?php echo '<input  type="number" name="rquantity" style="width: 70px; height: 20px;background:none;">';?></td >    
+          <?php if($row['quantity']==0){ ?> 
+                <td > <?php echo 'Out of Stock';?></td > 
+                <td > <?php echo '<input type="number" name="rquantity" style="width: 70px; height: 20px;background:none;" disabled>';?></td > 
+              <td ><?php echo'<input type="submit" name="add_to_cart" value="Unavailable " class="btn btn-danger" disabled>';?></td >   
     <?php} ?>
     <?php }else{
 } ?>
 
-             <?php if($user_data['user_type'] =="User"){ ?> 
-                <td ><?php echo'<input type="submit" name="add_to_cart" value="Add to cart" class="btn btn-success">';?></td >
-    <?php} ?>
-    <?php }else{
-} ?>
+   
 
+
+   
  
          </tr>
          </form>

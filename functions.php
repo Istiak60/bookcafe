@@ -43,3 +43,24 @@ function function_alert($message) {
   // Display the alert box 
   echo "<script>alert('$message');</script>";
 }
+function Rem($str){
+      
+    // Using str_ireplace() function 
+    // to replace the word 
+    $res = str_ireplace( array( '\'', '"',
+    '_' , ';', '<', '>' ), ' ', $str);
+      
+    // returning the result 
+    return $res;
+    }
+    function getFirstSentence($string)
+    {
+        // First remove unwanted spaces - not needed really
+        $string = str_replace(" .",".",$string);
+        $string = str_replace(" ?","?",$string);
+        $string = str_replace(" !","!",$string);
+        // Find periods, exclamation- or questionmarks with a word before but not after.
+        // Perfect if you only need/want to return the first sentence of a paragraph.
+        preg_match('/^.*[^\s](\.|\?|\!)/U', $string, $match);
+        return $string;
+    } 
