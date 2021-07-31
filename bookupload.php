@@ -53,7 +53,8 @@ $sql ="insert into books (book_name,author_name,image,pdf,Categories,price,quant
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    
+    <link rel="icon" type="image/png"  href="img/logo4.png" sizes="16x4">
+
     <link rel="stylesheet" type="text/css" href="bookupload.css">
 
     <link rel="stylesheet" href="style.css">

@@ -14,6 +14,8 @@ session_start();
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Profile</title>
+    <link rel="icon" type="image/png"  href="img/logo4.png" sizes="16x4">
+
     <link rel="stylesheet" href="profile.css">
     <link rel="stylesheet" href="style.css">
     <link

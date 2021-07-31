@@ -16,7 +16,9 @@ include("functions.php");
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Intro</title>
+    <link rel="icon" type="image/png"  href="img/logo4.png" sizes="16x4">
+
+    <title>Welcome</title>
     
     <link rel="stylesheet" href="index.css">
     <link rel="stylesheet" href="style.css">
