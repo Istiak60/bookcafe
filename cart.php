@@ -14,11 +14,17 @@ $user_data = check_login($con);
 
 
 if(isset($_POST["delete"]))
-{$u =$_GET['id'];
+{
+  $u =$_GET['id'];
+  $t =$_POST['book_name'];
+  $rq=$_POST['rquantity'];
       
     $sql = "DELETE FROM orders WHERE id = $u ";
-        if(mysqli_query($con,$sql)){
-            echo '<script>alert("Item Removed")</script>';
+    $result=mysqli_query($con,$sql);
+    $query = "UPDATE books SET quantity = quantity+'$rq' WHERE book_name='$t'; ";
+    $result1 = mysqli_query($con, $query);
+        if($result&&$result1){
+           
         header("location:".$_SERVER['HTTP_REFERER']);
        
     }
@@ -175,7 +181,7 @@ h5{
             <i class="fa fa-times" onclick="hidemenu()"></i>
             <ul style="margin-top: -100px" >
             <li><a href="#footer">ABOUT</a></li>
-           <li><a href="#footer">CONTACT</a></li>
+            <li><a href="https://goo.gl/maps/YmhKTKTKD1kPx4DP6">CONTACT</a></li>
            <li><a href="profile.php">PROFILE</a></li>
             <li><a href="logout.php">LOG OUT</a></li>
             <li><a class="btn btn-secondary dropdown-toggle" href="" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false" style ="background-color:rgba(0,0,0,0.01);border: 0px">CATEGORIES
@@ -255,10 +261,13 @@ h5{
             
       
            <td ><?php echo'<input type="submit" name="delete" value="Remove" class="btn btn-danger">';?></td >
-        <td><p><?php echo $row['book_name'];?></p> </td>
+        <td><input type="text" id="country" name="book_name" style="border-style: none;background:none;" value="<?php echo ($row['book_name']);?>" readonly><br><br></td>
+
        
 
-        <td ><p style="padding-left:25px;"><?php echo $row['rquantity'];?> </p></td>
+      
+        <td><input type="text" id="country" name="rquantity" style="border-style: none;background:none;padding-left:25px;" value=<?php echo $row['rquantity'];?> readonly><br><br></td>
+ 
 
         <td><p style="padding-left:5px;"><?php echo $row['price'];?> </p></td>
 
@@ -398,7 +407,10 @@ h5{
  <!-- Grid container -->
  <p>Made With <i class="fa fa-heart-o"></i> By Books & Souls</p>
  <!-- Copyright -->
- <div class="text-center p-3" style="background-color: rgba(128, 128, 128, 0.2);">
+ <div class="text-center p-3" style="background-color: rgba(0, 0, 0, 0.2);">
+    © 2021 Copyright : 
+    <a class="text-white" href="https://github.com/Istiak60/bookcafe">Git Hub</a>
+  </div>
 
    
  <!-- Copyright -->

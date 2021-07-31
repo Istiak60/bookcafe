@@ -101,7 +101,7 @@ function CheckColors(val){
         <i class="fa fa-times" onclick="hidemenu()"></i>
         <ul>
         <li><a href="#footer">ABOUT</a></li>
-           <li><a href="#footer">CONTACT</a></li>
+        <li><a href="https://goo.gl/maps/YmhKTKTKD1kPx4DP6">CONTACT</a></li>
          
           
 
@@ -295,7 +295,10 @@ function CheckColors(val){
  <!-- Grid container -->
  <p>Made With <i class="fa fa-heart-o"></i> By Books & Souls</p>
  <!-- Copyright -->
- <div class="text-center p-3" style="background-color: rgba(128, 128, 128, 0.2);">
+ <div class="text-center p-3" style="background-color: rgba(0, 0, 0, 0.2);">
+    © 2021 Copyright : 
+    <a class="text-white" href="https://github.com/Istiak60/bookcafe">Git Hub</a>
+  </div>
 
    
  <!-- Copyright -->

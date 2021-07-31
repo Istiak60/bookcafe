@@ -29,11 +29,22 @@ if(isset($_POST["add_to_cart"]))
     $uq=$q-$rq;
 
     $sql ="insert into orders (user_name,user_id,book_name,price,rquantity,total_price)  values ('$un','$u','$t','$p','$rq','$tp') ";
-   $r1= mysqli_query($con,$sql);
-   $query ="UPDATE books SET quantity ='$uq'WHERE book_name='$t'; ";
+   $r1 = mysqli_query($con,$sql);
+   $query = "UPDATE books SET quantity ='$uq'WHERE book_name='$t'; ";
   $result = mysqli_query($con, $query);
+ 
+  
+  
+  if(($result&&$r1))
+  {
+    
+    
+      header("location:".$_SERVER['HTTP_REFERER']);
+  }
 
-    if($r1&&$result){
+
+   else if(($r1&&$result))
+    {
       
       
         header("location:".$_SERVER['HTTP_REFERER']);
@@ -196,7 +207,7 @@ img{height:100%;
             <i class="fa fa-times" onclick="hidemenu()"></i>
             <ul style="margin-top: -100px" >
            <li><a href="#footer">ABOUT</a></li>
-           <li><a href="https://goo.gl/maps/AqrUee1JsBt1yE2j7">CONTACT</a></li>
+           <li><a href="https://goo.gl/maps/YmhKTKTKD1kPx4DP6">CONTACT</a></li>
            <li><a href="profile.php">PROFILE</a></li>
             <li><a href="logout.php">LOG OUT</a></li>
             <li><a class="btn btn-secondary dropdown-toggle" href="" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false" style ="background-color:rgba(0,0,0,0.01);border: 0px">CATEGORIES
@@ -289,7 +300,7 @@ img{height:100%;
                 <td > <?php echo '<img src="data:image;base64,'.base64_encode($row['image']).' " >';?>    </td>
         
  
-                <td><input type="text" id="country" name="book_name" style="border-style: none;background:none;" value=<?php echo getFirstSentence($row['book_name']);?> readonly><br><br></td>
+                <td><input type="text" id="country" name="book_name" style="border-style: none;background:none;" value="<?php echo ($row['book_name']);?>" readonly><br><br></td>
                 
          
                 <td > <?php echo $row['author_name'];?>    </td>
@@ -300,16 +311,34 @@ img{height:100%;
           
           <?php if($row['quantity']>0&&$user_data['user_type'] =="User"){ ?> 
               <td><input type="text" id="country" name="quantity" style="border-style: none;background:none;" value=<?php echo $row['quantity'];?> readonly><br><br></td>
-              <td > <?php echo '<input  type="number" name="rquantity" style="width: 70px; height: 20px;background:none;">';?></td > 
+              <td > <?php echo '<input  type="number" name="rquantity"max="'.$row['quantity'].'" style="width: 70px; height: 20px;background:none;">';?></td > 
               <td ><?php echo'<input type="submit" name="add_to_cart" value="Add to cart" class="btn btn-success">';?></td >
               <?php} ?>
     <?php }else{
 } ?>
 
-          <?php if($row['quantity']==0){ ?> 
-                <td > <?php echo 'Out of Stock';?></td > 
+          <?php if($row['quantity']<=0&&$user_data['user_type'] =="User"){ ?> 
+                <td style="color:red;font-weight:bold; font-size:20px;" align = "center"; > <?php echo 'Out of Stock';?></td > 
                 <td > <?php echo '<input type="number" name="rquantity" style="width: 70px; height: 20px;background:none;" disabled>';?></td > 
               <td ><?php echo'<input type="submit" name="add_to_cart" value="Unavailable " class="btn btn-danger" disabled>';?></td >   
+    <?php} ?>
+    <?php }else{
+} ?>
+</form>
+<?php if($row['quantity']>0&&$user_data['user_type'] =="Admin"){ ?> 
+              <td><input type="text" id="country" name="quantity" style="border-style: none;background:none;" value=<?php echo $row['quantity'];?> readonly><br><br></td>
+ 
+              <?php} ?>
+    <?php }else{
+} ?>
+
+          <?php if($row['quantity']<=0&&$user_data['user_type'] =="Admin"){ ?> 
+            <form method="POST" action="bookupload.php">
+       
+                <td style="color:red;font-weight:bold; font-size:20px;" align = "center";> <?php echo 'Out of Stock<br><input type="submit" ahref="bookupload.php" value="Like to Upload " class="btn btn-info">';?></td > 
+                
+     </form>
+
     <?php} ?>
     <?php }else{
 } ?>
@@ -320,7 +349,9 @@ img{height:100%;
    
  
          </tr>
-         </form>
+         
+
+
          <?php
              } 
           
@@ -408,7 +439,10 @@ img{height:100%;
  <!-- Grid container -->
  <p>Made With <i class="fa fa-heart-o"></i> By Books & Souls</p>
  <!-- Copyright -->
- <div class="text-center p-3" style="background-color: rgba(128, 128, 128, 0.2);">
+ <div class="text-center p-3" style="background-color: rgba(0, 0, 0, 0.2);">
+    © 2021 Copyright : 
+    <a class="text-white" href="https://github.com/Istiak60/bookcafe">Git Hub</a>
+  </div>
 
    
  <!-- Copyright -->
