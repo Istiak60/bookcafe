@@ -75,6 +75,11 @@ $sql ="insert into books (book_name,author_name,image,pdf,Categories,price,quant
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/MaterialDesign-Webfont/3.6.95/css/materialdesignicons.css">
 
     <title>Book Uploads</title>
+    <!-- <script src="https://kit.fontawesome.com/yourcode.js" crossorigin="anonymous"></script> -->	
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css" rel="stylesheet">	
+<!-- <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.1.0-9/css/all.min.css" rel="stylesheet"> -->	
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
+
 </head>
 
 <body>
@@ -82,7 +87,7 @@ $sql ="insert into books (book_name,author_name,image,pdf,Categories,price,quant
 <section class="header"style="height:220vh">
    <nav>
         <div class="book_icon">
-            <i class="fas fa-book-open"></i>
+            <!-- <i class="fas fa-book-open"></i> -->
             <a style="text-decoration:none;" href="dashboard.php"><h2>Book Cafee</h2></a>
 
           </div>
@@ -111,7 +116,10 @@ $sql ="insert into books (book_name,author_name,image,pdf,Categories,price,quant
   
   
   </ul></li>     
-    </li></ul> 
+    </li>
+    <li ><a href="orders.php"><i class="fas fa-dolly" style="font-size: 30px; color:rgb(6, 209, 245)"></i></a></li>	
+
+  </ul> 
 
     
       

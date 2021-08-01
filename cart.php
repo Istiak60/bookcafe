@@ -246,8 +246,10 @@ h5{
                 </tr>
                
                 <?php
-        
-        $res=mysqli_query($con,"SELECT * FROM `orders`;");
+        $ss=$user_data['user_name'];
+        $res=mysqli_query($con,"SELECT * FROM `orders` ;");
+        $res1=mysqli_query($con,"SELECT * FROM `orders` Where user_name ='$ss';");
+
       
 
        
@@ -255,7 +257,7 @@ h5{
       {$total = 0;
        while($row= mysqli_fetch_array($res))
             {    
-                if($row['user_id']==$user_data['user_id']){    
+                if(($row['user_id']==$user_data['user_id'])&&($res1==true)){    
                 ?>
                      <form method="post" action="cart.php?action=add&id=<?php echo $row["id"]; ?>" ecntype="multipart/form-data">
 

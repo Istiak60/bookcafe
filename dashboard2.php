@@ -28,6 +28,7 @@ if(isset($_POST["add_to_cart"]))
     $tp=($p*$rq);
     $uq=$q-$rq;
 
+    if(!empty($rq)){
     $sql ="insert into orders (user_name,user_id,book_name,price,rquantity,total_price)  values ('$un','$u','$t','$p','$rq','$tp') ";
    $r1 = mysqli_query($con,$sql);
    $query = "UPDATE books SET quantity ='$uq'WHERE book_name='$t'; ";
@@ -86,6 +87,14 @@ if(isset($_POST["add_to_cart"]))
 		);
 		$_SESSION["shopping_cart"][0] = $item_array;
 	}
+}
+else{
+  header("location:".$_SERVER['HTTP_REFERER']);
+
+}
+
+
+
 }
 if(isset($_GET["action"]))
 {
@@ -191,7 +200,10 @@ img{height:100%;
 
  
 </style>
-
+	<!-- <script src="https://kit.fontawesome.com/yourcode.js" crossorigin="anonymous"></script> -->	
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css" rel="stylesheet">	
+<!-- <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.1.0-9/css/all.min.css" rel="stylesheet"> -->	
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
 
 
     </head>
@@ -199,7 +211,7 @@ img{height:100%;
 <section class="header"style="height:120vh">
    <nav>
    <div class="book_icon">
-                <i class="fas fa-book-open"></i>
+                <!-- <i class="fas fa-book-open"></i> -->
                 <!-- <h2 style="margin-bottom: 50px">Book Cafee</h2> -->
                 <a style="text-decoration:none;margin-bottom: 50px;" href="dashboard.php"><h2 style="margin-bottom: 50px">Book Cafee</h2></a>
 
@@ -237,7 +249,9 @@ img{height:100%;
  
     <?php if($user_data['user_type'] =="Admin"){ ?> 
      <a href="bookupload.php" data-toggle="tooltip" data-placement="bottom" title="" data-original-title="instagram" data-abc="true" style="witdh:50px"><i class="mdi mdi-cloud-upload" aria-hidden="true"style ="color:rgb(6, 209, 245);font-size:30px"></i></a></li>
-    <?php} ?>
+     <li ><a href="orders.php"><i class="fas fa-dolly" style="font-size: 30px; color:rgb(6, 209, 245)"></i></a></li>	
+
+     <?php} ?>
     <?php }else{
 } ?>
 <?php if($user_data['user_type'] =="User"){ ?> 
@@ -312,7 +326,7 @@ img{height:100%;
           
           <?php if($row['quantity']>0&&$user_data['user_type'] =="User"){ ?> 
               <td><input type="text" id="country" name="quantity" style="border-style: none;background:none;" value=<?php echo $row['quantity'];?> readonly><br><br></td>
-              <td > <?php echo '<input  type="number" name="rquantity"max="'.$row['quantity'].'" style="width: 70px; height: 20px;background:none;">';?></td > 
+              <td > <?php echo '<input  type="number" name="rquantity"max="'.$row['quantity'].'"min="1" style="width: 70px; height: 20px;background:none;">';?></td > 
               <td ><?php echo'<input type="submit" name="add_to_cart" value="Add to cart" class="btn btn-success">';?></td >
               <?php} ?>
     <?php }else{
