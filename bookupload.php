@@ -16,6 +16,7 @@ if (isset($_POST["submit"]))
  $p =$_POST['price'];
  $q =$_POST['quantity'];
  $d =$_POST['description'];
+ $radio = $_POST["bs"];
 //$fn=$_FILES['image']['name'];
 $fn=addslashes(file_get_contents($_FILES["image"]['tmp_name']));
 //$tm=$_FILES['image']['tmp_name']; 
@@ -25,24 +26,30 @@ $tm1=$_FILES['pdf']['tmp_name1'];
 move_uploaded_file($tm,"bookimg/".$fn);
 move_uploaded_file($tm1,"bookimg/".$fn1);
 
-$query = "UPDATE books SET quantity = quantity+'$q' WHERE book_name='$t'; ";
+if($radio=="New")
+{
+  $sql ="insert into books (book_name,author_name,image,pdf,Categories,price,quantity,description)  values ('$t','$a','$fn','$fn1','$c','$p','$q','$d') ";
+
+
+  if(mysqli_query($conn,$sql)){
+
+      header("Location: dashboard.php");
+  }
+  else{
+      echo "Error";
+  }
+}
+else if($radio=="Already uploaded")
+{
+  $query = "UPDATE books SET quantity = quantity+'$q' WHERE book_name='$t'; ";
 $result = mysqli_query($conn, $query);
-if($result){
+if($result>0){
   header("Location: dashboard.php");
 }
-else{
-$sql ="insert into books (book_name,author_name,image,pdf,Categories,price,quantity,description)  values ('$t','$a','$fn','$fn1','$c','$p','$q','$d') ";
+}
+ }
 
 
-    if(mysqli_query($conn,$sql)){
- 
-        header("Location: dashboard.php");
-    }
-    else{
-        echo "Error";
-    }
-}
-}
  
 ?>
 <!DOCTYPE html>
@@ -58,7 +65,11 @@ $sql ="insert into books (book_name,author_name,image,pdf,Categories,price,quant
     <link rel="stylesheet" type="text/css" href="bookupload.css">
 
     <link rel="stylesheet" href="style.css">
-    
+      <!-- <script src="https://kit.fontawesome.com/yourcode.js" crossorigin="anonymous"></script> -->	
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css" rel="stylesheet">	
+<!-- <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.1.0-9/css/all.min.css" rel="stylesheet"> -->	
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
+
     <link
       rel="stylesheet"
       type="text/css"
@@ -75,16 +86,12 @@ $sql ="insert into books (book_name,author_name,image,pdf,Categories,price,quant
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/MaterialDesign-Webfont/3.6.95/css/materialdesignicons.css">
 
     <title>Book Uploads</title>
-    <!-- <script src="https://kit.fontawesome.com/yourcode.js" crossorigin="anonymous"></script> -->	
-  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css" rel="stylesheet">	
-<!-- <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.1.0-9/css/all.min.css" rel="stylesheet"> -->	
-<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
-
+  
 </head>
 
 <body>
 
-<section class="header"style="height:220vh">
+<section class="header"style="height:250vh">
    <nav>
         <div class="book_icon">
             <!-- <i class="fas fa-book-open"></i> -->
@@ -129,7 +136,7 @@ $sql ="insert into books (book_name,author_name,image,pdf,Categories,price,quant
       <i class="fa fa-bars" onclick="showmenu()"></i>
     </nav>
     <center>
- <div class="details"style="height:1250px;width:550px; background-color:rgba(255,255,255,0.5)">
+ <div class="details"style="height:1400px;width:550px; background-color:rgba(255,255,255,0.5)">
 <form method="post" enctype="multipart/form-data">
 <h1><b1>Book Details</b1></h3>
 
@@ -187,12 +194,21 @@ $sql ="insert into books (book_name,author_name,image,pdf,Categories,price,quant
     <br><br>
     <input  type="number" name="quantity" style="width: 300px; height: 20px:">
     <br>
+    </div>
     
+    <div class="mywork1">
+    <label>BOOK STATUS</label>
+    <br><br>
+    <input style="margin-left: -120px" type="radio" name="bs" value="New" checked>New<br> 
+    <input style="margin-left: 6px" type="radio" name="bs" value="Already uploaded">Already uploaded
+    <!-- <input  type="number" name="quantity" style="width: 300px; height: 20px:"> -->
+    <br>
     </div>
 
     <div class="mywork1">
     <label>DESCRIPTION</label>
     <br><br>
+   
     <input type="text" name="description"style="width: 300px; height: 20px:">
     
     </div>

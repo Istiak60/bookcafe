@@ -63,7 +63,7 @@ include("functions.php");
            
             <div class="row">
                 <div class="col-md-12">
-                    <div class="book_content"style="margin-top: 15px;">>
+                    <div class="book_content"style="margin-top: 15px;">
                         <h2>Book Cafee</h2>
                         <p>We are trying to give books from our book cafe very easily and at low cost. Since people are
                             not interested in reading books now, we have taken this initiative. Hopefully we will be
@@ -95,7 +95,7 @@ include("functions.php");
 
 
  <!-- Grid container -->
- <div class="container p-4 pb-0"style="box-shadow: none">>
+ <div class="container p-4 pb-0"style="box-shadow: none">
    <!-- Section: Social media -->
    <section class="mb-4">
      <!-- Facebook -->

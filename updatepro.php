@@ -60,6 +60,11 @@ if($_SERVER['REQUEST_METHOD']== "POST")
      <link rel="stylesheet" type="text/css" href="bookupload.css">
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="signup.css">
+    <!-- <script src="https://kit.fontawesome.com/yourcode.js" crossorigin="anonymous"></script> -->	
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css" rel="stylesheet">	
+<!-- <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.1.0-9/css/all.min.css" rel="stylesheet"> -->	
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
+
     <link
       rel="stylesheet"
       type="text/css"
@@ -85,10 +90,6 @@ if($_SERVER['REQUEST_METHOD']== "POST")
         height:180vh;
     }
 </style>
-<!-- <script src="https://kit.fontawesome.com/yourcode.js" crossorigin="anonymous"></script> -->	
-<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css" rel="stylesheet">	
-<!-- <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.1.0-9/css/all.min.css" rel="stylesheet"> -->	
-<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
 
     <title>Profile Edit</title>
 </head>
@@ -98,7 +99,7 @@ if($_SERVER['REQUEST_METHOD']== "POST")
 <section class="header">
         <nav>
             <div class="book_icon">
-                <i class="fas fa-book-open"></i>
+                <!-- <i class="fas fa-book-open"></i> -->
                 <a style="text-decoration:none;margin-bottom: 50px;" href="dashboard.php"><h2 style="margin-bottom: 50px">Book Cafee</h2></a>
               </div>
           <div class="nav-links" id="navlinks">
