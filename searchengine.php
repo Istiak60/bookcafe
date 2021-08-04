@@ -74,16 +74,22 @@ session_start();
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
 
 
-
+<style>
+  h1{
+    text-align: center;
+    margin-bottom: 110px;
+    margin-top: 100px;
+    
+  }
+</style>
 
     </head>
     <body>
-<section class="header"style="height:120vh">
-   <nav>
-   <div class="book_icon">
+<!-- <section class="header"style="height:5vh"> -->
+   <nav style="background-image: linear-gradient(to left top, #180e13, #24111f, #2d132d, #321740, #2f1e55, #2a2c66, #1f3977, #004786, #005a8d, #006a8c, #007887, #2b8580); height: 100px">
                 <!-- <i class="fas fa-book-open"></i> -->
                 <!-- <h2 style="margin-bottom: 50px">Book Cafee</h2> -->
-                <a style="text-decoration:none;margin-bottom: 50px;" href="dashboard.php"><h2 style="margin-bottom: 50px">Book Cafee</h2></a>
+                <a style="text-decoration:none;margin-bottom: 50px;" href="dashboard.php"><h2 style="margin-bottom: 50px;color: red">Book Cafee</h2></a>
 
               </div>
           <div class="nav-links" id="navlinks">
@@ -118,7 +124,7 @@ session_start();
   <!-- if condition to check user type--> 
  
     <?php if($user_data['user_type'] =="Admin"){ ?> 
-     <a href="bookupload.php" data-toggle="tooltip" data-placement="bottom" title="" data-original-title="instagram" data-abc="true" style="witdh:50px"><i class="mdi mdi-cloud-upload" aria-hidden="true"style ="color:rgb(6, 209, 245);font-size:30px"></i></a></li>
+     <a href="bookupload.php" data-toggle="tooltip" data-placement="bottom" title="" data-original-title="instagram" data-abc="true" style="width:50px"><i class="mdi mdi-cloud-upload" aria-hidden="true"style ="color:rgb(6, 209, 245);font-size:30px"></i></a></li>
      <li ><a href="orders.php"><i class="fas fa-dolly" style="font-size: 30px; color:rgb(6, 209, 245)"></i></a></li>	
 
      <?php} ?>
@@ -142,7 +148,7 @@ session_start();
 
                 <i class="fa fa-bars" onclick="showmenu()"></i>
             </nav>  
-      </section>
+      <!-- </section> -->
       <br>
 <!-- start -->
 <?php
@@ -191,7 +197,7 @@ session_start();
                     }
                     else{
 
-                      echo"<h1>No content found</h1>";
+                      echo"<h1>No content found &#128543</h1>";
 
                     }
                     ?>

@@ -96,21 +96,7 @@ else{
 
 
 }
-if(isset($_GET["action"]))
-{
-	if($_GET["action"] == "delete")
-	{
-		foreach($_SESSION["shopping_cart"] as $keys => $values)
-		{
-			if($values["item_id"] == $_GET["id"])
-			{
-				unset($_SESSION["shopping_cart"][$keys]);
-				echo '<script>alert("Item Removed")</script>';
-				echo '<script>window.location="dashboard2.php"</script>';
-			}
-		}
-	}
-}
+
 
 ?>
 
@@ -122,6 +108,7 @@ if(isset($_GET["action"]))
         <link rel="icon" type="image/png"  href="img/logo4.png" sizes="16x4">
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <title><?php echo $selectedItem; ?></title>
+        <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous">
         <!-- <script src="https://kit.fontawesome.com/yourcode.js" crossorigin="anonymous"></script> -->	
   <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css" rel="stylesheet">	
 <!-- <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.1.0-9/css/all.min.css" rel="stylesheet"> -->	
@@ -202,7 +189,12 @@ img{height:100%;
      color:white;
      font-size:20px;
  }
-
+ ::placeholder{
+    color: black;
+    /* border-radius:10px;
+     background-color: rgb(60,170,144,0.5);	 */
+     /* border: none; */
+  }
  
 </style>
 	
@@ -220,6 +212,12 @@ img{height:100%;
           <div class="nav-links" id="navlinks">
             <i class="fa fa-times" onclick="hidemenu()"></i>
             <ul style="margin-top: -100px" >
+            <li><form action="searchengine.php" method="GET">
+<input style="border-radius:10px;
+     background-color: rgb(60,170,144,0.5); border: none; padding:3px;	"type="text" name="query" placeholder="search here"/>
+<!-- <input type="submit" value="Search" /> -->
+<i style=" color:rgb(6, 209, 245); font-size: 20px; margin-top: -50px" class="fas fa-search"></i>
+</form></li>
            <li><a href="#footer">ABOUT</a></li>
            <li><a href="https://goo.gl/maps/YmhKTKTKD1kPx4DP6">CONTACT</a></li>
            <li><a href="profile.php">PROFILE</a></li>
