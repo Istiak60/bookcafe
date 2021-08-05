@@ -311,7 +311,7 @@ img{height:100%;
                   ?>
              <form method="post" action="dashboard2.php?action=add&id=<?php echo $row["id"]; ?>" ecntype="multipart/form-data">
              <tr>     
-                <td > <?php echo '<img src="data:image;base64,'.base64_encode($row['image']).' " >';?>    </td>
+             <td > <?php  echo '<a href="bookdetails.php?item='.$row['book_name'].' "><img src="data:image;base64,'.base64_encode($row['image']).' " ></a>';?>    </td>
         
  
                 <td><input type="text" id="country" name="book_name" style="border-style: none;background:none;" value="<?php echo ($row['book_name']);?>" readonly><br><br></td>

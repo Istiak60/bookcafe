@@ -3,12 +3,102 @@ session_start();
 
 	include("connection.php");
 	include("functions.php");
+    $user_data = check_login($con);
+   $selectedItem = $_GET['item'];
 
-	$user_data = check_login($con);
+    //var_dump($selectedItem);
+
+ 
+$localhost = "localhost"; #localho
+$dbusername = "root"; #username of phpmyadmin
+$dbpassword = "";  #password of phpmyadmin
+$dbname = "bookcafe1_db";  #database name
+
+#conection string
+$con = mysqli_connect($localhost,$dbusername,$dbpassword,$dbname);
+$user_data = check_login($con); 
+if(isset($_POST["add_to_cart"]))
+{ $t=0;    
+  $un =$user_data['user_name'];
+      $u =$user_data['user_id'];
+    $t=(string)$_POST['book_name'];
+    $p =$_POST['price'];
+    $rq =$_POST['rquantity'];
+    $q =$_POST['quantity'];
+    $tp=($p*$rq);
+    $uq=$q-$rq;
+
+    if(!empty($rq)){
+    $sql ="insert into orders (user_name,user_id,book_name,price,rquantity,total_price)  values ('$un','$u','$t','$p','$rq','$tp') ";
+   $r1 = mysqli_query($con,$sql);
+   $query = "UPDATE books SET quantity ='$uq'WHERE book_name='$t'; ";
+  $result = mysqli_query($con, $query);
+ 
+  
+  
+  if(($result&&$r1))
+  {
+    
+    
+      header("location:".$_SERVER['HTTP_REFERER']);
+  }
+
+
+   else if(($r1&&$result))
+    {
+      
+      
+        header("location:".$_SERVER['HTTP_REFERER']);
+    }
+    else{
+        echo 'error';
+        
+    }
+    
+
+	if(isset($_SESSION["shopping_cart"]))
+	{
+		$item_array_id = array_column($_SESSION["shopping_cart"], "item_id");
+		if(!in_array($_GET["id"], $item_array_id))
+		{
+			$count = count($_SESSION["shopping_cart"]);
+			$item_array = array(
+				'item_id'			=>	$_GET["id"],
+				'item_name'			=>(string)$_POST["book_name"],
+				'item_price'		=>	$_POST["price"],
+				'item_quantity'		=>	$_POST["rquantity"]
+			);
+			$_SESSION["shopping_cart"][$count] = $item_array;
+            
+		}
+		else
+		{
+			echo '<script>alert("Item Already Added")</script>';
+		}
+	}
+  
+	else
+	{
+		$item_array = array(
+			'item_id'			=>	$_GET["id"],
+			'item_name'			=>	$_POST["book_name"],
+			'item_price'		=>	$_POST["price"],
+			'item_quantity'		=>	$_POST["rquantity"]
+		);
+		$_SESSION["shopping_cart"][0] = $item_array;
+	}
+}
+else{
+  header("location:".$_SERVER['HTTP_REFERER']);
+
+}
+
+
+
+}
+
 
 ?>
-
-
 
 <!DOCTYPE html>
 <html lang="en">
@@ -17,8 +107,8 @@ session_start();
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
         <link rel="icon" type="image/png"  href="img/logo4.png" sizes="16x4">
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <title>adlog</title>
-       <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous">
+        <title><?php echo $selectedItem; ?></title>
+        <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous">
         <!-- <script src="https://kit.fontawesome.com/yourcode.js" crossorigin="anonymous"></script> -->	
   <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css" rel="stylesheet">	
 <!-- <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.1.0-9/css/all.min.css" rel="stylesheet"> -->	
@@ -72,8 +162,42 @@ session_start();
         ></script>
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
 
-
-
+<style>
+td {
+  height: 30vh;
+  width: 30vh;
+  padding: 0;
+}
+img{height:100%;
+    width:100%;
+    display:block;
+}
+.table-responsive td{
+  height: 10vh;
+  width: 30vh;
+  padding: 0;
+}
+ h3{
+     text-align:center;
+     margin-top:10px;
+     margin-bottom:20px;
+     color:red;
+     font-size:40px;
+     font-weight:bold;
+ }
+ th{
+     color:white;
+     font-size:20px;
+ }
+ ::placeholder{
+    color: black;
+    /* border-radius:10px;
+     background-color: rgb(60,170,144,0.5);	 */
+     /* border: none; */
+  }
+ 
+</style>
+	
 
     </head>
     <body>
@@ -88,9 +212,11 @@ session_start();
           <div class="nav-links" id="navlinks">
             <i class="fa fa-times" onclick="hidemenu()"></i>
             <ul style="margin-top: -100px" >
-            <li><form action="test2.php" method="GET">
-<input type="text" name="query" />
-<input type="submit" value="Search" />
+            <li><form action="searchengine.php" method="GET">
+<input style="border-radius:10px;
+     background-color: rgb(60,170,144,0.5); border: none; padding:3px;	"type="text" name="query" placeholder="search here"/>
+<!-- <input type="submit" value="Search" /> -->
+<i style=" color:rgb(6, 209, 245); font-size: 20px; margin-top: -50px" class="fas fa-search"></i>
 </form></li>
            <li><a href="#footer">ABOUT</a></li>
            <li><a href="https://goo.gl/maps/YmhKTKTKD1kPx4DP6">CONTACT</a></li>
@@ -133,7 +259,7 @@ session_start();
     <?php }else{
 } ?>
 
-
+  
             </ul> 
            
 
@@ -145,194 +271,189 @@ session_start();
 
                 <i class="fa fa-bars" onclick="showmenu()"></i>
             </nav>
-      
-
-
-
-  
-        <div class="text-box">
-         
-          <h1>Book Cafee</h1>
+            <div class="text-box">
+                <h1>Book Cafee</h1>
+                <h4><?php echo $selectedItem; ?></h4>
+            </div>
+        </section>
           
-           <p1> Hello </p1> <br />
-           <p> 
-
-            <?php echo $user_data['user_name']; ?>
-          </p>
-          <a href="#footer" class="hero-btn">Visit US To Know More</a>
-        </div>
-      </section>
-      <br>
-<!-- start -->
-
-<center>
-<div id="carouselExampleIndicators" class="carousel slide" data-bs-ride="carousel" style="max-width:700px;max-height:393x;">
-  <div class="carousel-indicators">
-    <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
-    <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1" aria-label="Slide 2"></button>
-    <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="2" aria-label="Slide 3"></button>
-    
-    <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="3" aria-label="Slide 4"></button>
-
-  </div>
-  <div class="carousel-inner">
-    <div class="carousel-item active">
-      <img src="img/BookCafee.jpg" class="d-block w-100" alt="..."style="width:30px">
-    </div>
-    <div class="carousel-item">
-      <img src="img/comics.jpg" class="d-block w-100" alt="...">
-    </div>
-    <div class="carousel-item">
-      <img src="img/offer.png" class="d-block w-100" alt="...">
-    </div>
-   
-    <div class="carousel-item">
-      <img src="img/horror.jpg" class="d-block w-100" alt="...">
-    </div>
-     
-  </div>
-  <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
-    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-    <span class="visually-hidden">Previous</span>
-  </button>
-  <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="next">
-    <span class="carousel-control-next-icon" aria-hidden="true"></span>
-    <span class="visually-hidden">Next</span>
-  </button>
-</div>
-
-</center>
-      <!-- DEMO BOOK -->
-      <section class="books">
-        <h1 style="font-size:40px;
-     font-weight:bold;">Some Books</h1>
-        <p style="padding-bottom:10px;">
-        Some of Best Selling & Reviewed Books
-        </p>
-
-        <!-- TEST -->
-        <?php
-        $i=0;
-        $res=mysqli_query($con,"SELECT * FROM `books`;");
-        $rows = $res->num_rows; 
-        if($rows > 0) {
-          $cols = 3;    // Define number of columns
-          $counter = 1;     // Counter used to identify if we need to start or end a row
-          $nbsp = $cols - ($rows % $cols);    // Calculate the number of blank columns
-          $run=0;
-
-          $container_class = 'container-fluid';  // Parent container class name
-          $row_class = 'row';    // Row class name
-          $col_class = 'col-sm-4'; // Column class name
-       
-              echo '<div class="'.$container_class.'">'; 
-        while($row= mysqli_fetch_array($res)) 
-             {    $run++;
-                if(($counter % $cols) == 1 ) {    // Check if it's new row
-              echo '<div class="'.$row_class.'">';	// Start a new row
-            }            
-            if($run<10)  {
-            echo '<div class="'.$col_class.'">
-            <a href="dashboard2.php?item='.$row['categories'].' "> <img src="data:image;base64,'.base64_encode($row['image']).' "width="150" height="160" ></a>
-             <h3>'.$row['book_name'].'</h3>
-                  <p3>'.$row['author_name'].'</p3>         
-                  <p3><br><br><br></p3>
-                  </div>';   
-            }
-                  // Column with content
-    if(($counter % $cols) == 0) { // If it's last column in each row then counter remainder will be zero
-                                   echo '</div>';	 //  Close the row
-                                }
-                            $counter++;    // Increase the counter
-               }
-                $res->free();
-            if($nbsp > 0) { // Adjustment to add unused column in last row if they exist
-              for ($i = 0; $i < $nbsp; $i++)	{ 
-                echo '<div class="'.$col_class.'">&nbsp;</div>';		
-                      }
-                echo '</div>';  // Close the row
-                    }
-                echo '</div>';  // Close the container
-                    }
-                    ?>
+        <!-- DEMO BOOK -->
         
-      </section>
+        <h3>List of Books</h3>
+        
+ 
+        <?php
+        
+        $res=mysqli_query($con,"SELECT * FROM `books` where categories='$selectedItem'");
+        echo "<table class='table table-bordered table-hover'>";
+        echo "<tr style='background-color:red;'>";
+        //table header
+        echo "<th>";  echo "Image";          echo "</th>";
+        echo "<th style='margin-right:20px;'>";  echo "Book Name";      echo "</th>";
+        echo "<th>";  echo "Author Name";    echo "</th>";
+        echo "<th>";  echo "Categories";     echo "</th>";  
+        echo "<th>";  echo "Price";          echo "</th>";
+        echo "<th>";  echo "Description";    echo "</th>";
+        echo "<th>";  echo "Available quantity";    echo "</th>";
+        
+         if($user_data['user_type'] =="User"){ 
+            echo "<th>";  echo "Quantity";    echo "</th>";
+            echo "<th>";  echo "Add to cart";    echo "</th>";
+    
+     }
 
-  <!-- Footer -->
+        echo"</tr>";
+        if(mysqli_num_rows($res)>0)
+        {
+         while($row= mysqli_fetch_array($res))
+         
+              {    
+                  ?>
+             <form method="post" action="dashboard2.php?action=add&id=<?php echo $row["id"]; ?>" ecntype="multipart/form-data">
+             <tr>     
+                <td > <?php $bkn=$row['book_name']; echo '<a href="temp.php?bk=",urlencode($bkn)," "><img src="data:image;base64,'.base64_encode($row['image']).' " ></a>';?>    </td>
+        
+ 
+                <td><input type="text" id="country" name="book_name" style="border-style: none;background:none;" value="<?php echo ($row['book_name']);?>" readonly><br><br></td>
+                
+         
+                <td > <?php echo $row['author_name'];?>    </td>
+          <td > <?php echo $row['categories'];?>    </td>
+          
+          <td><input type="text" id="country" name="price" style="border-style: none;background:none;" value=<?php echo $row['price'];?> readonly><br><br></td>
+          <td > <?php echo $row['description'];?>    </td>
+          
+          <?php if($row['quantity']>0&&$user_data['user_type'] =="User"){ ?> 
+              <td><input type="text" id="country" name="quantity" style="border-style: none;background:none;" value=<?php echo $row['quantity'];?> readonly><br><br></td>
+              <td > <?php echo '<input  type="number" name="rquantity"max="'.$row['quantity'].'"min="1" style="width: 70px; height: 20px;background:none;">';?></td > 
+              <td ><?php echo'<input type="submit" name="add_to_cart" value="Add to cart" class="btn btn-success">';?></td >
+              <?php} ?>
+    <?php }else{
+} ?>
+
+          <?php if($row['quantity']<=0&&$user_data['user_type'] =="User"){ ?> 
+                <td style="color:red;font-weight:bold; font-size:20px;" align = "center"; > <?php echo 'Out of Stock';?></td > 
+                <td > <?php echo '<input type="number" name="rquantity" style="width: 70px; height: 20px;background:none;" disabled>';?></td > 
+              <td ><?php echo'<input type="submit" name="add_to_cart" value="Unavailable " class="btn btn-danger" disabled>';?></td >   
+    <?php} ?>
+    <?php }else{
+} ?>
+</form>
+<?php if($row['quantity']>0&&$user_data['user_type'] =="Admin"){ ?> 
+              <td><input type="text" id="country" name="quantity" style="border-style: none;background:none;" value=<?php echo $row['quantity'];?> readonly><br><br></td>
+ 
+              <?php} ?>
+    <?php }else{
+} ?>
+
+          <?php if($row['quantity']<=0&&$user_data['user_type'] =="Admin"){ ?> 
+            <form method="POST" action="bookupload.php">
+       
+                <td style="color:red;font-weight:bold; font-size:20px;" align = "center";> <?php echo 'Out of Stock<br><input type="submit" ahref="bookupload.php" value="Like to Upload " class="btn btn-info">';?></td > 
+                
+     </form>
+
+    <?php} ?>
+    <?php }else{
+} ?>
+
+   
+
+
+   
+ 
+         </tr>
+         
+
+
+         <?php
+             } 
+          
+          
+ 
+         }
+       
+         echo "</table>";
+   ?>
+   
+
+ 
+        <!-- Footer -->
+        <!-- Footer -->
   
-  <footer class="bg-dark text-center text-white"id="footer">
+  <footer class="bg-dark text-center text-white "style="margin-top:70px;"id="footer">
  
-  <h4 style="padding:20px;font-size:30px;font-weight:bold;" >About Us</h4>
-    <p>
-    We are trying to give books from our book cafe very easily and at low cost.<br> Since people are
-     not interested in reading books now, we have taken this initiative.<br> Hopefully we will be
-                    able to deliver books to everyone's doorsteps
-    </p>
- 
- 
-  <!-- Grid container -->
-  <div class="container p-4 pb-0">
-    <!-- Section: Social media -->
-    <section class="mb-4">
-      <!-- Facebook -->
-      <a
-        class="btn btn-primary btn-floating m-1"
-        style="background-color: #3b5998;"
-        href="#!"
-        role="button"
-        ><i class="fa fa-facebook-f"></i
-      ></a>
+ <h4 style="padding:20px;font-size:30px;font-weight:bold;" >About Us</h4>
+   <p>
+   We are trying to give books from our book cafe very easily and at low cost.<br> Since people are
+    not interested in reading books now, we have taken this initiative.<br> Hopefully we will be
+                   able to deliver books to everyone's doorsteps
+   </p>
 
-      <!-- Twitter -->
-      <a
-        class="btn btn-primary btn-floating m-1"
-        style="background-color: #55acee;"
-        href="#!"
-        role="button"
-        ><i class="fa fa-twitter"></i
-      ></a>
 
-      <!-- Google -->
-      <a
-        class="btn btn-primary btn-floating m-1"
-        style="background-color: #dd4b39;"
-        href="#!"
-        role="button"
-        ><i class="fa fa-google"></i
-      ></a>
+ <!-- Grid container -->
+ <div class="container p-4 pb-0" >
+   <!-- Section: Social media -->
+   <section class="mb-4">
+     <!-- Facebook -->
+     <a
+       class="btn btn-primary btn-floating m-1"
+       style="background-color: #3b5998;"
+       href="#!"
+       role="button"
+       ><i class="fa fa-facebook-f"></i
+     ></a>
 
-      <!-- Instagram -->
-      <a
-        class="btn btn-primary btn-floating m-1"
-        style="background-color: #ac2bac;"
-        href="#!"
-        role="button"
-        ><i class="fa fa-instagram"></i
-      ></a>
+     <!-- Twitter -->
+     <a
+       class="btn btn-primary btn-floating m-1"
+       style="background-color: #55acee;"
+       href="#!"
+       role="button"
+       ><i class="fa fa-twitter"></i
+     ></a>
 
-      <!-- Linkedin -->
-      <a
-        class="btn btn-primary btn-floating m-1"
-        style="background-color: #0082ca;"
-        href="#!"
-        role="button"
-        ><i class="fa fa-linkedin"></i
-      ></a>
-      <!-- Github -->
-      <a
-        class="btn btn-primary btn-floating m-1"
-        style="background-color:  #ac2bac;"
-        href="#!"
-        role="button"
-        ><i class="fa fa-github"></i
-      ></a>
-    </section>
-    <!-- Section: Social media -->
-  </div>
-  <!-- Grid container -->
-  <p>Made With <i class="fa fa-heart-o"></i> By Books & Souls</p>
-  <!-- Copyright -->
-  <div class="text-center p-3" style="background-color: rgba(0, 0, 0, 0.2);">
+     <!-- Google -->
+     <a
+       class="btn btn-primary btn-floating m-1"
+       style="background-color: #dd4b39;"
+       href="#!"
+       role="button"
+       ><i class="fa fa-google"></i
+     ></a>
+
+     <!-- Instagram -->
+     <a
+       class="btn btn-primary btn-floating m-1"
+       style="background-color: #ac2bac;"
+       href="#!"
+       role="button"
+       ><i class="fa fa-instagram"></i
+     ></a>
+
+     <!-- Linkedin -->
+     <a
+       class="btn btn-primary btn-floating m-1"
+       style="background-color: #0082ca;"
+       href="#!"
+       role="button"
+       ><i class="fa fa-linkedin"></i
+     ></a>
+     <!-- Github -->
+     <a
+       class="btn btn-primary btn-floating m-1"
+       style="background-color:  #ac2bac;"
+       href="#!"
+       role="button"
+       ><i class="fa fa-github"></i
+     ></a>
+   </section>
+   <!-- Section: Social media -->
+ </div>
+ <!-- Grid container -->
+ <p>Made With <i class="fa fa-heart-o"></i> By Books & Souls</p>
+ <!-- Copyright -->
+ <div class="text-center p-3" style="background-color: rgba(0, 0, 0, 0.2);">
     © 2021 Copyright : 
     <a class="text-white" href="https://github.com/Istiak60/bookcafe">Git Hub</a>
   </div>
@@ -340,16 +461,5 @@ session_start();
    
  <!-- Copyright -->
 </footer>
-
-      <!-- Javascript for toggole menu  -->
-    <script>
-        var navlinks = document.getElementById("navlinks");
-        function showmenu() {
-          navlinks.style.right = "0";
-        }
-        function hidemenu() {
-          navlinks.style.right = "-200px";
-        }
-      </script>
-</body>
+    </body>
 </html>

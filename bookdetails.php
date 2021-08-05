@@ -5,7 +5,78 @@ session_start();
 	include("functions.php");
 
 	$user_data = check_login($con);
-
+  $book_name=$_GET['item'];
+  $localhost = "localhost"; #localho
+  $dbusername = "root"; #username of phpmyadmin
+  $dbpassword = "";  #password of phpmyadmin
+  $dbname = "bookcafe1_db";  #database name
+  
+  #conection string
+  $con = mysqli_connect($localhost,$dbusername,$dbpassword,$dbname);
+  $user_data = check_login($con); 
+  if(isset($_POST["add_to_cart"]))
+  { $t=0;    
+    $un =$user_data['user_name'];
+        $u =$user_data['user_id'];
+      $t=(string)$_POST['book_name'];
+      $p =$_POST['price'];
+      $rq =$_POST['rquantity'];
+      $q =$_POST['quantity'];
+      $tp=($p*$rq);
+      $uq=$q-$rq;
+  
+      if(!empty($rq)){
+      $sql ="insert into orders (user_name,user_id,book_name,price,rquantity,total_price)  values ('$un','$u','$t','$p','$rq','$tp') ";
+     $r1 = mysqli_query($con,$sql);
+     $query = "UPDATE books SET quantity ='$uq'WHERE book_name='$t'; ";
+    $result = mysqli_query($con, $query);
+   
+    
+    
+    if(($result&&$r1))
+    {
+      
+      
+        header("location:".$_SERVER['HTTP_REFERER']);
+    }
+  
+  
+     else if(($r1&&$result))
+      {
+        
+        
+          header("location:".$_SERVER['HTTP_REFERER']);
+      }
+      else{
+          echo 'error';
+          
+      }
+    } 
+  }
+  if(isset($_POST["comment"]))
+  {   
+    $un =$user_data['user_name'];
+        $u =$user_data['user_id'];
+        $cm=$_POST['cmt'];
+        $book_name=$_POST['bkn'];
+  
+      if(!empty($cm)){
+      $sql ="insert into reviews (user_name,user_id,book_name,comment)  values ('$un','$u','$book_name','$cm') ";
+     $r1 = mysqli_query($con,$sql);
+     
+    if(($r1))
+    {
+      
+      
+        header("location:".$_SERVER['HTTP_REFERER']);
+    }
+   
+  
+    }
+    
+    
+    
+  }
 ?>
 
 
@@ -17,7 +88,7 @@ session_start();
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
         <link rel="icon" type="image/png"  href="img/logo4.png" sizes="16x4">
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <title>Dashboard</title>
+        <title>Book Details</title>
        <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous">
         <!-- <script src="https://kit.fontawesome.com/yourcode.js" crossorigin="anonymous"></script> -->	
   <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css" rel="stylesheet">	
@@ -75,16 +146,27 @@ session_start();
 <style>
   ::placeholder{
     color: black;
-    /* border-radius:10px;
-     background-color: rgb(60,170,144,0.5);	 */
-     /* border: none; */
+   
   }
+  .container{
+    background-color:rgba(255,255,255,0.6);
+  }
+  .col-4{
+ margin-top:5px;
+ margin-bottom:5px;
+  }
+  .col-8{
+ margin-top:40px;
+ margin-bottom:20px;
+ font-size:25px;
+  }
+
 </style> 
 
 
     </head>
     <body>
-<section class="header"style="height:120vh">
+<section class="header"style="height:200vh">
    <nav>
    <div class="book_icon">
                 <!-- <i class="fas fa-book-open"></i> -->
@@ -154,6 +236,119 @@ session_start();
 
                 <i class="fa fa-bars" onclick="showmenu()"></i>
             </nav>
+
+
+<!-- test -->
+
+<div class="container mb-10">
+<?php
+$res=mysqli_query($con,"SELECT * FROM `books` where book_name='$book_name'");
+if(mysqli_num_rows($res)>0)
+{
+ while($row= mysqli_fetch_array($res))
+ 
+      {    
+          ?>
+     <form method="post" action="bookdetails.php?action=add&id=<?php echo $row["id"]; ?>" ecntype="multipart/form-data">
+     <div class="row"> 
+     <div class="col-4">  
+      <?php  echo '<a href="temp.php?item='.$row['book_name'].' " ><img src="data:image;base64,'.base64_encode($row['image']).' " "width="350" height="500"></a>';?>
+      </div>
+      <div class="col-8 " >
+        
+        <input type="text" id="country" name="book_name" style="border-style: none;background:none;font-size:40px;" value="<?php echo ($row['book_name']);?>" readonly>
+        
+ 
+        <p>Author  Name  :   <?php echo $row['author_name'];?></p>
+         
+         
+   <p>Category : <?php echo $row['categories'];?></p>    
+  
+  <p>Price (৳) : <input type="text" id="country" name="price" style="border-style: none;background:none;" value=<?php echo $row['price'];?> readonly></p>
+   <p>Description : <?php echo $row['description'];?></p>   
+  
+  <?php if($row['quantity']>0&&$user_data['user_type'] =="User"){ ?> 
+     <p>Available Quantity : <input type="text" id="country" name="quantity" style="border-style: none;background:none;" value=<?php echo $row['quantity'];?> readonly></p>
+     <p>Required Quantity : <?php echo '<input  type="number" name="rquantity"max="'.$row['quantity'].'"min="1" style="width: 70px; height: 20px;background:none;">';?></p> 
+      <?php echo'<input type="submit" name="add_to_cart" value="Add to cart" class="btn btn-success">';?>
+      <?php} ?>
+<?php }else{
+} ?>
+
+  <?php if($row['quantity']<=0&&$user_data['user_type'] =="User"){ ?> 
+        <p style="color:red;font-weight:bold; font-size:20px;" ; >Available Quantity :  <?php echo 'Out of Stock';?></p> 
+        <p>Required Quantity : <?php echo '<input type="number" name="rquantity" style="width: 70px; height: 20px;background:none;" disabled>';?></p> 
+      <?php echo'<input type="submit" name="add_to_cart" value="Unavailable " class="btn btn-danger" disabled>';?>  
+<?php} ?>
+<?php }else{
+} ?>
+</form>
+<?php if($row['quantity']>0&&$user_data['user_type'] =="Admin"){ ?> 
+  <p>Available Quantity : <input type="text" id="country" name="quantity" style="border-style: none;background:none;" value=<?php echo $row['quantity'];?> readonly></p>
+
+      <?php} ?>
+<?php }else{
+} ?>
+
+  <?php if($row['quantity']<=0&&$user_data['user_type'] =="Admin"){ ?> 
+    <form method="POST" action="bookupload.php">
+
+        <p style="color:red;font-weight:bold; font-size:20px;" >Available Quantity :  <?php echo 'Out of Stock<br><input type="submit" ahref="bookupload.php" value="Like to Upload " class="btn btn-info">';?></p > 
+        
+</form>
+
+<?php} ?>
+<?php }else{
+} ?>
+
+</div>
+</div>
+<h2>Reviews & Rating<h2>
+ <?php if($user_data['user_type'] =="User"){?>
+<form method="POST" action="bookdetails.php?action=add&id=<?php echo $row["id"]; ?>" ecntype="multipart/form-data">
+<textarea class="form-control" id="js--review-writing" name="cmt" required rows="3" placeholder="Please write your honest opinion and give a rating"></textarea>
+<input type="submit" name="comment" value="Submit " class="btn btn-secondary"style="position:absolute; left:1410px; top:800px;" ><br>
+<input type="hidden" id="custId" name="bkn" value="<?php echo ($row['book_name']);?>">
+</form>
+<?php} ?>
+    <?php }else{
+} ?>
+
+<?php 
+$res1=mysqli_query($con,"SELECT * FROM `reviews` where book_name='$book_name'");
+if(mysqli_num_rows($res1)>0)
+{
+ while($row= mysqli_fetch_array($res1))
+ 
+      {    
+          ?>
+  
+      <h4><?php  echo ($row['user_name']);?></h4>
+      
+   
+      
+      <h5><?php  echo ($row['comment']);?></h5>
+      <br>
+      <br>
+   
+     
+     
+     <?php
+     } 
+  
+ }
+?>
+
+ <?php
+     } 
+  
+ }
+?>
+
+</div>
+
+
+
              <!-- Footer -->
   
   <footer class="bg-dark text-center text-white"id="footer">
@@ -167,7 +362,7 @@ session_start();
 
 
  <!-- Grid container -->
- <div class="container p-4 pb-0">
+ <div class="container p-4 pb-0 bg-dark">
    <!-- Section: Social media -->
    <section class="mb-4">
      <!-- Facebook -->
