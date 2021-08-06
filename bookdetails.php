@@ -223,16 +223,18 @@ session_start();
     opacity: 0.4
 }
 
-
-
+.rating {
+    display: flex;
+    flex-direction: row-reverse;
+    justify-content: left;
+}
 
 </style> 
 
 
     </head>
     <body>
-<section class="header"style="height:200vh">
-   <nav>
+    <section class="header"style=" background-attachment: fixed">   <nav>
    <div class="book_icon">
                 <!-- <i class="fas fa-book-open"></i> -->
                 <!-- <h2 style="margin-bottom: 50px">Book Cafee</h2> -->
@@ -324,7 +326,7 @@ if(mysqli_num_rows($res)>0)
         
         <input type="text" id="country" name="book_name" style="border-style: none;background:none;font-size:40px;" value="<?php echo ($row['book_name']);?>" readonly>   
         
-        <p>Rating : <?php echo $row['rating'];?></p>
+        <p>Rating : <?php echo number_format((float) $row['rating'],2,'.', '');?> / 5</p>
         <p>Author  Name  :   <?php echo $row['author_name'];?></p>
          
          
@@ -374,17 +376,34 @@ if(mysqli_num_rows($res)>0)
 </div>
 <?php 
 $res1=mysqli_query($con,"SELECT * FROM `reviews` where book_name='$book_name'");?>
-<h2>Reviews & Rating<h2>
+
+<h2 style="margin-top: 50px;margin-bottom: 25px; font-size:30px">Drop Your Review <h2>
  <?php if($user_data['user_type'] =="User"){?>
 <form method="POST" action="bookdetails.php?action=add&id=<?php echo $row["id"]; ?>" ecntype="multipart/form-data">
-<textarea class="form-control" style="background-color:rgba(255,255,255,0.8);" id="js--review-writing" name="cmt" required rows="3" placeholder="Please write your honest opinion and give a rating"></textarea>
+<textarea class="form-control " style=" width: 50%;background-color:rgba(255,255,255,0.8);" id="js--review-writing" name="cmt" required rows="3" placeholder="Please write your honest opinion and give a rating"></textarea>
 
-<p>Rating </p>
-<div class="rating"> <input type="radio" name="rating" value="5" id="5"><label for="5">☆</label> <input type="radio" name="rating" value="4" id="4"><label for="4">☆</label> <input type="radio" name="rating" value="3" id="3"><label for="3">☆</label> <input type="radio" name="rating" value="2" id="2"><label for="2">☆</label> <input type="radio" name="rating" value="1" id="1"><label for="1">☆</label>
+
+<!-- rating -->
+<p style="margin-top: 50px;margin-bottom: 25px; font-size:30px">Rating </p>
+<!-- <div style="text-align: left; font-size:15px"> -->
+
+<div class="rating"  > 
+  <input type="radio" name="rating" value="5" id="5">
+  <label for="5"style="color: #dd4b39; font-size:60px; text-align: left">☆</label>
+   <input type="radio" name="rating" value="4" id="4">
+   <label for="4" style="color: #dd4b39;font-size:60px">☆</label> 
+   <input type="radio" name="rating" value="3" id="3">
+   <label for="3" style="color: #dd4b39;font-size:60px">☆</label>
+    <input type="radio" name="rating" value="2" id="2">
+    <label for="2" style="color: #dd4b39;font-size:60px">☆</label>
+     <input type="radio" name="rating" value="1" id="1">
+     <label for="1" style="color: #dd4b39; font-size:60px">☆</label>
 </div>
-<input type="text" id="custId" name="tr" value="<?php echo mysqli_num_rows($res1);?>">
 
-<input type="submit" name="comment" value="Submit " class="btn btn-secondary"style="position:absolute; left:1410px; top:960px;" ><br>
+<!-- </div> -->
+<input type="hidden" id="custId" name="tr" value="<?php echo mysqli_num_rows($res1);?>">
+
+<input style="text-align: left;" type="submit" name="comment" value="Submit " class="btn btn-success btn-lg mb-5"style="position:absolute;left:1410px; top:960px;" ><br>
 <input type="hidden" id="custId" name="bkn" value="<?php echo ($row['book_name']);?>">
 
 
@@ -392,7 +411,7 @@ $res1=mysqli_query($con,"SELECT * FROM `reviews` where book_name='$book_name'");
 <?php} ?>
     <?php }else{
 } ?>
-
+<h2 style="margin-top: 50px;margin-bottom: 25px; font-size:30px">Reviews & Ratings of Others<h2>
 <?php 
 // $res1=mysqli_query($con,"SELECT * FROM `reviews` where book_name='$book_name'");
 if(mysqli_num_rows($res1)>0)
@@ -405,7 +424,8 @@ if(mysqli_num_rows($res1)>0)
       
    
       
-      <h5><?php  echo ($row['comment']);?></h5>
+      <h5>Commented : <?php  echo ($row['comment']);?></h5>
+      <h5>Rated : <?php  echo  ($row['rating']); ?></h5>
       <br>
       <br>
    

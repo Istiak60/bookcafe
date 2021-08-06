@@ -244,7 +244,8 @@ session_start();
             echo '<div class="'.$col_class.'">
             <a href="dashboard2.php?item='.$row['categories'].' "> <img src="data:image;base64,'.base64_encode($row['image']).' "width="150" height="160" ></a>
              <h3>'.$row['book_name'].'</h3>
-                  <p3>'.$row['author_name'].'</p3>         
+                  <p3>'.$row['author_name'].'</p3><br>
+                  <p3>Rating : '.ceil($row['rating']).'</p3>         
                   <p3><br><br><br></p3>
                   </div>';   
             }
