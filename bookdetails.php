@@ -61,14 +61,34 @@ session_start();
         $book_name=$_POST['bkn'];
         $rating=$_POST['rating'];
         $tr=$_POST['tr'];
+        $ro= mysqli_query($con,"SELECT SUM(rating) AS total FROM reviews where book_name='$book_name'");
         
-  
+      
+      while ($row = mysqli_fetch_assoc($ro))
+    { 
+         $sum=$sum+ $row['total'];
+    }
+
+      
+       
+       $sum=$sum+$rating;
+  $av_rating=$sum/($tr+1);
       if(!empty($cm)){
       $sql ="insert into reviews (user_name,user_id,book_name,comment,rating)  values ('$un','$u','$book_name','$cm','$rating') ";
      $r1 = mysqli_query($con,$sql);
 
-     $query = "UPDATE reviews SET total_review =$tr   WHERE book_name='$book_name'; ";
+     $query = "UPDATE reviews SET total_review =$tr+1   WHERE book_name='$book_name'; ";
   $result = mysqli_query($con, $query);
+
+  
+  $query1 = "UPDATE reviews SET total_rating = '$sum'   WHERE book_name='$book_name'; ";
+  $result1 = mysqli_query($con, $query1);
+  $query2 = "UPDATE reviews SET average_rating = '$av_rating'   WHERE book_name='$book_name'; ";
+  $result2 = mysqli_query($con, $query2);
+  $query3 = "UPDATE books SET   rating = '$av_rating'   WHERE book_name='$book_name'; ";
+  $result3 = mysqli_query($con, $query3);
+  
+
   
     if(($r1&&$result))
     {
@@ -298,12 +318,13 @@ if(mysqli_num_rows($res)>0)
      <div class="row"> 
      <div class="col-4">  
       <?php  echo '<a href="temp.php?item='.$row['book_name'].' " ><img src="data:image;base64,'.base64_encode($row['image']).' " "width="350" height="500"></a>';?>
-      </div>
+      
+    </div>
       <div class="col-8 " >
         
-        <input type="text" id="country" name="book_name" style="border-style: none;background:none;font-size:40px;" value="<?php echo ($row['book_name']);?>" readonly>
+        <input type="text" id="country" name="book_name" style="border-style: none;background:none;font-size:40px;" value="<?php echo ($row['book_name']);?>" readonly>   
         
- 
+        <p>Rating : <?php echo $row['rating'];?></p>
         <p>Author  Name  :   <?php echo $row['author_name'];?></p>
          
          
@@ -345,6 +366,9 @@ if(mysqli_num_rows($res)>0)
 <?php} ?>
 <?php }else{
 } ?>
+
+
+
 
 </div>
 </div>
