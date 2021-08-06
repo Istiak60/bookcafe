@@ -234,7 +234,8 @@ session_start();
 
     </head>
     <body>
-    <section class="header"style=" background-attachment: fixed">   <nav>
+    <section class="header"style=" background-attachment: fixed">  
+     <nav>
    <div class="book_icon">
                 <!-- <i class="fas fa-book-open"></i> -->
                 <!-- <h2 style="margin-bottom: 50px">Book Cafee</h2> -->

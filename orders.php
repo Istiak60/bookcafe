@@ -135,13 +135,15 @@ h5{
     color:black;
 }
 .text-box1 {
-  width: 90%;
-  color: #fff;
-  position: absolute;
-  top:15%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  text-align: center;
+    width: 90%;
+    height:20%;
+    color: #fff;
+    position: absolute;
+    top: 20%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+    padding-bottom:100px;
 }
 
 .text-box1 h1 {
@@ -171,7 +173,7 @@ h5{
 
 </head>
 <body>
-<section class="header"style="height:220vh;">
+<section class="header"style=" background-attachment: fixed">  
    <nav>
    <div class="book_icon">
                 <i class="fas fa-book-open"></i>
@@ -232,7 +234,7 @@ h5{
     
         <!-- Cart items detailes -->
         <center>
-        <div class="small-container cart-page">
+        <div class="small-container cart-page"style="padding-bottom:40px;margin-bottom:-10px;">
             <table>
                 <tr>
                 <th >User ID</th>

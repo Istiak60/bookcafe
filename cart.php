@@ -65,6 +65,7 @@ if(isset($_POST["delete"]))
 /* .cart-items */
 .small-container cart-page table{
     width:50%;
+   
 }
 .cart-page {
     margin: 80px auto;
@@ -135,13 +136,14 @@ h5{
     color:black;
 }
 .text-box1 {
-  width: 90%;
-  color: #fff;
-  position: absolute;
-  top:15%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  text-align: center;
+    width: 90%;
+    color: #fff;
+    position: absolute;
+    top: 30%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+   margin-bottom:20px;
 }
 
 .text-box1 h1 {
@@ -171,7 +173,7 @@ h5{
 
 </head>
 <body>
-<section class="header"style="height:220vh;">
+<section class="header"style=" background-attachment: fixed">  
    <nav>
    <div class="book_icon">
                 <i class="fas fa-book-open"></i>
@@ -215,7 +217,7 @@ h5{
     </div>
       <i class="fa fa-bars" onclick="showmenu()"></i>
     </nav>
-    <div class="text-box1">
+    <div class="text-box1" >
           <h1>Book Cafee</h1>
           
            <p1> Cart of </p1> <br />
@@ -232,7 +234,7 @@ h5{
     
         <!-- Cart items detailes -->
         <center>
-        <div class="small-container cart-page">
+        <div class="small-container cart-page" style=" padding-top:50px;;margin-bottom:0px;">
             <table>
                 <tr>
                 <th >Cancle order</th>
