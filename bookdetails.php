@@ -103,6 +103,65 @@ session_start();
     
     
   }
+  if(isset($_POST["delete"]))
+{
+  $un =$_GET['id'];
+  $cmn=$_POST['cmnt'];
+  $book_name=$_POST['bkn'];
+  $rating=$_POST['rtg'];
+  $tr=$_POST['tr'];
+
+  $sql = "DELETE FROM reviews WHERE id = $un ";
+  
+    $result=mysqli_query($con,$sql);
+  //   $query = "UPDATE reviews SET total_rating = total_rating - '$rating' WHERE book_name='$book_name'; ";
+  //   $result1 = mysqli_query($con, $query);
+  //   $query2 = "UPDATE reviews SET average_rating = (total_rating/('$tr'-1))   WHERE book_name='$book_name'; ";
+  // $result2 = mysqli_query($con, $query2);
+  
+  $ro= mysqli_query($con,"SELECT SUM(rating) AS total FROM reviews where book_name='$book_name'");
+        
+      
+  while ($row = mysqli_fetch_assoc($ro))
+{ 
+     $sum=$sum+ $row['total'];
+}
+
+  
+   
+  //  $sum=$sum-$rating;
+$av_rating=$sum/($tr-1);
+ 
+
+ $query = "UPDATE reviews SET total_review =$tr-1   WHERE book_name='$book_name'; ";
+$result = mysqli_query($con, $query);
+
+
+$query1 = "UPDATE reviews SET total_rating = '$sum'   WHERE book_name='$book_name'; ";
+$result1 = mysqli_query($con, $query1);
+$query2 = "UPDATE reviews SET average_rating = '$av_rating'   WHERE book_name='$book_name'; ";
+$result2 = mysqli_query($con, $query2);
+$query3 = "UPDATE books SET   rating = '$av_rating'   WHERE book_name='$book_name'; ";
+$result3 = mysqli_query($con, $query3);
+
+
+
+
+
+        if($result&&$result1&&$result2){
+   
+       
+           
+        header("location:".$_SERVER['HTTP_REFERER']);
+       
+    }
+
+
+
+
+
+}
+    
 ?>
 
 
@@ -228,7 +287,76 @@ session_start();
     flex-direction: row-reverse;
     justify-content: left;
 }
+.addtxt {
+    padding-top: 10px;
+    padding-bottom: 10px;
+    text-align: center;
+    font-size: 13px;
+    width: 350px;
+    background-color: #e5e8ed;
+    font-weight: 500
+}
 
+.form-control: focus {
+    color: #000
+}
+
+.second {
+    width: 100%;
+    background-color: #68b7f0ba;
+    border-radius: 4px;
+    box-shadow: 10px 10px 5px #aaaaaa;
+}
+
+.text1 {
+    font-size: 30px;
+    font-weight: 500;
+    color: rgb(171, 1, 1);
+}
+
+.text2 {
+    font-size: 25px;
+    font-weight: 500;
+    /* margin-left: 6px; */
+    color: #012ac8de;
+    /* padding-left:10px;
+    align:justify; */
+}
+
+.text3 {
+    font-size: 20px;
+    font-weight: 500;
+    margin-right: 4px;
+    color: rgb(171, 1, 1);
+}
+
+.text3o {
+    color: blue;
+}
+
+.text4 {
+    font-size: 20px;
+    font-weight: 500;
+    color: rgb(171, 1, 1);
+}
+
+.text4i {
+    color: #00a5f4
+}
+
+.text4o {
+    color: white
+}
+
+.thumbup {
+    font-size: 13px;
+    font-weight: 500;
+    margin-right: 5px
+}
+
+.thumbupo {
+    color: #17a2b8
+}
 </style> 
 
 
@@ -378,8 +506,9 @@ if(mysqli_num_rows($res)>0)
 <?php 
 $res1=mysqli_query($con,"SELECT * FROM `reviews` where book_name='$book_name'");?>
 
-<h2 style="margin-top: 50px;margin-bottom: 25px; font-size:30px">Drop Your Review <h2>
+
  <?php if($user_data['user_type'] =="User"){?>
+  <h2 style="margin-top: 50px;margin-bottom: 25px; font-size:30px">Drop Your Review <h2>
 <form method="POST" action="bookdetails.php?action=add&id=<?php echo $row["id"]; ?>" ecntype="multipart/form-data">
 <textarea class="form-control " style=" width: 50%;background-color:rgba(255,255,255,0.8);" id="js--review-writing" name="cmt" required rows="3" placeholder="Please write your honest opinion and give a rating"></textarea>
 
@@ -421,20 +550,41 @@ if(mysqli_num_rows($res1)>0)
       {    $tr++;
           ?>
 
-      <h4><?php  echo ($row['user_name']);?></h4>
-      
-   
-      
-      <h5>Commented : <?php  echo ($row['comment']);?></h5>
-      <h5>Rated : <?php  echo  ($row['rating']); ?></h5>
-      <br>
-      <br>
-   
+<!-- <div class="container justify-content-center mt-5 border-left border-right"> -->
+      <div class="d-flex justify-content-center py-2">
+        <div class="second py-2 px-2"> <span class="text1"><?php  echo ($row['user_name']);?> </span>
+            <div class="d-flex justify-content-between py-1 pt-2">
+                <div><span class="text2"style="padding-left:10px;"><?php  echo ($row['comment']);?></span></div>
+            </div>
+            <div class="d-flex justify-content-between py-1 pt-2">
+            <div><span class="text3">Rated : </span><span class="text4"><?php  echo  ($row['rating']); ?></span></div>            </div>
+        
+        <?php if($user_data['user_type'] =="Admin"){?>
+          <form method="POST" action="bookdetails.php?action=add&id=<?php echo $row["id"]; ?>" ecntype="multipart/form-data">
+
+        
+        <input type="hidden" id="custId" name="bkn" value="<?php echo ($row['book_name']);?>">
+        <input type="hidden" id="custId" name="cmnt" value="<?php echo ($row['comment']);?>">
+        <input type="hidden" id="custId" name="rtg" value="<?php echo ($row['rating']);?>">
+        <input type="hidden" id="custId" name="unm" value="<?php echo ($row['user_name']);?>">
+        <input type="hidden" id="custId" name="tr" value="<?php echo mysqli_num_rows($res1);?>">
+
+        <input style ="margin-left:93%;"type="submit" name="delete" value="Remove" class="btn btn-danger">
+
+
+
+        </form>
+<?php} ?>
+    <?php }else{
+} ?>
+
+</div>
+    </div>
      
      
      <?php
      } 
-  
+    
  }
 ?>
 

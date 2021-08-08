@@ -201,7 +201,7 @@ img{height:100%;
 
     </head>
     <body>
-<section class="header"style="height:120vh">
+<section class="header"style=" min-height: 55vh;">
    <nav>
    <div class="book_icon">
                 <!-- <i class="fas fa-book-open"></i> -->

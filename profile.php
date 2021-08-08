@@ -40,7 +40,7 @@ session_start();
 
 </head>
 <body>
-<section class="header"style="height:120vh">
+<section class="header"style=" min-height: 75vh;">
    <nav>
    <div class="book_icon">
                 <!-- <i class="fas fa-book-open"></i> -->
